@@ -46,8 +46,9 @@ abstract class AbstractDockerfilesMojo extends AbstractDockerMojo {
         write(containerIdFile(dockerFolder), imageId);
     }
 
-    protected String getContainer(File dockerFolder) throws IOException {
-        return readFileToString(containerIdFile(dockerFolder));
+    protected String getContainerId(File dockerFolder) throws IOException {
+        final File file = containerIdFile(dockerFolder);
+        return file.exists() ? readFileToString(file) : null;
     }
 
     private File containerIdFile(File dockerFolder) {

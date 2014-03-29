@@ -20,6 +20,7 @@
                 <executions>
                     <execution>
                         <goals>
+                            <goal>clean</goal>
                             <goal>package</goal>
                             <goal>start</goal>
                             <goal>stop</goal>

@@ -12,11 +12,16 @@ public class StopMojo extends AbstractDockerfilesMojo {
 
     @Override
     protected void doExecute(File dockerFolder, String tag) throws Exception {
-        try {
-            docker.stopContainer(getContainer(dockerFolder), 5);
-        } catch (DockerException e) {
-            getLog().warn(e);
-            docker.kill(getContainer(dockerFolder));
+        final String containerId = getContainerId(dockerFolder);
+        if (containerId != null) {
+            try {
+                docker.stopContainer(containerId, 1);
+            } catch (DockerException e) {
+                getLog().warn(e);
+                docker.kill(containerId);
+            }
+        } else {
+            getLog().info(dockerFolder.getName() + " does not exist");
         }
     }
 
