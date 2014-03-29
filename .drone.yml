@@ -1,6 +1,6 @@
-image: mischief/docker-golang
+image: openjdk7
 script:
-  - mvn verify -Prun-its
+  - mvn -q verify -Prun-its
 notify:
   email:
     recipients:
