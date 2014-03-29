@@ -57,7 +57,7 @@
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <goalPrefix>maven-docker-plugin</goalPrefix>
+                    <goalPrefix>docker</goalPrefix>
                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
                 </configuration>
                 <executions>
@@ -88,7 +88,8 @@
                         <artifactId>maven-invoker-plugin</artifactId>
                         <version>1.7</version>
                         <configuration>
-                            <debug>true</debug>
+                            <debug>false</debug>
+                            <streamLogs>true</streamLogs>
                             <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                             <pomIncludes>
                                 <pomInclude>*/pom.xml</pomInclude>

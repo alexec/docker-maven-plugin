@@ -2,3 +2,8 @@
 
 Docker Maven Plugin
 ===
+
+Goals:
+
+* Run containers prior to integration tests, and tear-down afterwards.
+* Package your app into a container.
