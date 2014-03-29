@@ -27,7 +27,6 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         try {
             doExecute(new DockerClient(host.toString()), new File(project.getBuild().getDirectory(), "docker"));
         } catch (Exception e) {
-            e.printStackTrace();
             throw new MojoExecutionException("failed", e);
         }
     }
