@@ -11,26 +11,42 @@ import org.apache.maven.project.MavenProject;
 import java.io.File;
 import java.net.URI;
 
+import static org.apache.commons.io.FileUtils.touch;
+
 abstract class AbstractDockerMojo extends AbstractMojo {
     /**
      * The host, e.g. -Ddocker.host=http://127.0.0.1:4243
      */
-    @Parameter(defaultValue = "http://127.0.0.1:4243", property = "docker.host")
+    @Parameter(defaultValue = "http://127.0.0.1:4243", property = "docker.host", required = true)
     private URI host;
+
+    /**
+     * A prefix to namespace scope machine. Important for isolating machines.
+     */
+    @Parameter(defaultValue = "${project.artifactId}", property = "docker.prefix", required = true)
+    protected String prefix;
+
     @Component
-    private MavenProject project;
+    protected MavenProject project;
+
+    protected DockerClient docker;
+    protected File workDir;
 
     @Override
     public final void execute() throws MojoExecutionException, MojoFailureException {
         MavenLogAppender.setLog(getLog());
 
         try {
-            doExecute(new DockerClient(host.toString()), new File(project.getBuild().getDirectory(), "docker"));
+            docker = new DockerClient(host.toString());
+            workDir = new File(project.getBuild().getDirectory(), "docker");
+            doExecute();
+            touch(new File(workDir, name()));
         } catch (Exception e) {
             throw new MojoExecutionException("failed", e);
         }
     }
 
-    abstract void doExecute(DockerClient dockerClient, File workDir) throws Exception;
+    protected abstract void doExecute() throws Exception;
 
+    protected abstract String name();
 }

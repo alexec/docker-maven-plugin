@@ -20,7 +20,9 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>build-test</goal>
+                            <goal>package</goal>
+                            <goal>start</goal>
+                            <goal>stop</goal>
                         </goals>
                     </execution>
                 </executions>
