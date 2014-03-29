@@ -1,0 +1,15 @@
+<configuration>
+
+    <appender name="STDOUT" class="com.alexecollins.docker.MavenLogAppender">
+        <encoder>
+            <pattern>%-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <root level="info" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+
+</configuration>
