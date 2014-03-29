@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.alexecollins.docker.it</groupId>
-    <artifactId>version-it</artifactId>
+    <artifactId>build-test-it</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -20,12 +20,8 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>version</goal>
+                            <goal>build-test</goal>
                         </goals>
-                        <phase>compile</phase>
-                        <configuration>
-                            <host>http://localhost:4243</host>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

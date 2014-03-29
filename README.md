@@ -8,14 +8,22 @@ Project Goals:
 * Run containers prior to integration tests, and tear-down afterwards.
 * Package your app into a container.
 
-Usage:
+Pre-requisites
+---
+Docker installed and Docker daemon running.
+
+Usage
+---
 
 ```xml
 <plugin>
     <groupId>com.alexecollins.docker</groupId>
     <artifactId>docker-maven-plugin</artifactId>
-    <version>LATEST</version>
 </plugin>
+```
+
+```sh
+mvn docker:help
 ```
 
 ```sh
