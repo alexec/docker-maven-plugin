@@ -3,7 +3,21 @@
 Docker Maven Plugin
 ===
 
-Goals:
+Project Goals:
 
 * Run containers prior to integration tests, and tear-down afterwards.
 * Package your app into a container.
+
+Usage:
+
+```xml
+<plugin>
+    <groupId>com.alexecollins.docker</groupId>
+    <artifactId>docker-maven-plugin</artifactId>
+    <version>LATEST</version>
+</plugin>
+```
+
+```sh
+mvn docker:version
+```
