@@ -1,0 +1,7 @@
+image: mischief/docker-golang
+script:
+  - mvn verify -Prun-its
+notify:
+  email:
+    recipients:
+      - alex.e.c@gmail.com
