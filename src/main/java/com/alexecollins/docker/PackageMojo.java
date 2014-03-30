@@ -3,7 +3,6 @@ package com.alexecollins.docker;
 import com.alexecollins.docker.model.Id;
 import com.kpelykh.docker.client.DockerException;
 import com.sun.jersey.api.client.ClientResponse;
-import org.apache.commons.io.IOUtils;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -15,6 +14,7 @@ import java.io.StringWriter;
 import static org.apache.commons.io.FileUtils.copyDirectory;
 import static org.apache.commons.io.FileUtils.copyFileToDirectory;
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.commons.io.IOUtils.copyLarge;
 import static org.apache.commons.lang.StringUtils.substringBetween;
 
 
@@ -40,7 +40,14 @@ public class PackageMojo extends AbstractDockersMojo {
             getLog().info(" - add " + file);
             copyFileToDirectory(new File(file), destDir);
         }
+
+        filter(destDir);
+
         return destDir;
+    }
+
+    private void filter(File destDir) {
+        // TODO
     }
 
     private String build(File dockerFolder, Id name) throws DockerException, IOException {
@@ -49,7 +56,7 @@ public class PackageMojo extends AbstractDockersMojo {
 
         final StringWriter out = new StringWriter();
         try {
-            IOUtils.copyLarge(new InputStreamReader(response.getEntityInputStream()), out);
+            copyLarge(new InputStreamReader(response.getEntityInputStream()), out);
         } finally {
             closeQuietly(response.getEntityInputStream());
         }
