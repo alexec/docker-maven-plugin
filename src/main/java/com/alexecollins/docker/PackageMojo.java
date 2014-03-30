@@ -23,8 +23,12 @@ import static org.apache.commons.lang.StringUtils.substringBetween;
 public class PackageMojo extends SetUpMojo {
 
     @Override
-    protected void doExecute(final Id name) throws Exception {
-        build(prepare(name), name);
+    protected void doExecute(final Id id) throws Exception {
+        packag(id);
+    }
+
+    private void packag(Id id) throws DockerException, IOException {
+        build(prepare(id), id);
     }
 
     private File prepare(Id name) throws IOException {
@@ -38,13 +42,7 @@ public class PackageMojo extends SetUpMojo {
             copyFileToDirectory(new File(file), destDir);
         }
 
-        filter(destDir);
-
         return destDir;
-    }
-
-    private void filter(File destDir) {
-        // TODO
     }
 
     private String build(File dockerFolder, Id name) throws DockerException, IOException {

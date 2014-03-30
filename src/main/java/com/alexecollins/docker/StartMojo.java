@@ -1,6 +1,7 @@
 package com.alexecollins.docker;
 
 import com.alexecollins.docker.model.Id;
+import com.kpelykh.docker.client.DockerException;
 import com.kpelykh.docker.client.model.*;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -10,28 +11,39 @@ import java.util.List;
 
 @Mojo(name = "start", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST)
 @SuppressWarnings("unused")
-public class StartMojo extends SetUpMojo {
+public class StartMojo extends PackageMojo {
 
     @Override
     protected void doExecute(Id id) throws Exception {
+        if (findImage(id) == null) {
+            super.doExecute(id);
+        }
+        start(id);
+    }
+
+    private void start(Id id) throws DockerException, IOException {
         final ContainerConfig containerConfig = new ContainerConfig();
         final Image imageId = findImage(id);
         if (imageId == null) {
-            throw new IllegalStateException("unable to find image for " + id);
+            throw new IllegalStateException("unable to find image for " + id + " "  + docker.getImages());
         }
         containerConfig.setImage(imageId.getId());
-        final ContainerCreateResponse response = docker.createContainer(containerConfig);
+        final ContainerCreateResponse response = docker.createContainer(containerConfig, imageName(id));
 
         final String containerId = response.getId();
         docker.startContainer(containerId, newHostConfig(id));
     }
 
-    private HostConfig newHostConfig(Id ids) throws IOException {
+    private HostConfig newHostConfig(Id id) throws IOException {
         final HostConfig config = new HostConfig();
+
         config.setPublishAllPorts(true);
-        //config.setLinks(links(ids));
+        config.setLinks(links(id));
+
+        getLog().info(" - links " + conf(id).links);
+
         final Ports portBindings = new Ports();
-        for (String e : conf(ids).ports) {
+        for (String e : conf(id).ports) {
 
             final String[] split = e.split(" ");
 
@@ -43,7 +55,9 @@ public class StartMojo extends SetUpMojo {
             getLog().info(" - port " + e);
             portBindings.addPort(new Ports.Port("tcp", String.valueOf(a), null, String.valueOf(b)));
         }
+
         config.setPortBindings(portBindings);
+
         return config;
     }
 
@@ -52,7 +66,8 @@ public class StartMojo extends SetUpMojo {
         final List<Id> links = conf(id).links;
         final String[] out = new String[links.size()];
         for (int i = 0; i < links.size(); i++) {
-            out[i] = links.get(i).toString();
+            final String name = findContainer(links.get(i)).getNames()[0];
+            out[i] = name + ":" + name;
         }
 
         return out;

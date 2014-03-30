@@ -4,9 +4,8 @@
 
     <groupId>com.alexecollins.docker</groupId>
     <artifactId>docker-maven-plugin</artifactId>
-    <version>0.8.1-SNAPSHOT</version>
+    <version>0.8.3-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -48,7 +47,7 @@
         <dependency>
             <groupId>com.kpelykh</groupId>
             <artifactId>docker-java</artifactId>
-            <version>0.8.1</version>
+            <version>0.8.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>

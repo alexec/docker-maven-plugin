@@ -21,4 +21,6 @@ Typically, you build your app, run you standard unit tests and package it as usu
 TODO
 ---
 * Filter resources to add properties (e.g ${project.version}).
+* Set the name of the container.
+* Wait for the service on the container to start.
 * Add support for pushing tested containers.

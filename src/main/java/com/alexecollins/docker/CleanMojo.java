@@ -7,6 +7,9 @@ import com.kpelykh.docker.client.model.Image;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 
 @Mojo(name = "clean", defaultPhase = LifecyclePhase.CLEAN)
 @SuppressWarnings("unused")
@@ -16,8 +19,12 @@ public class CleanMojo extends StopMojo {
     protected void doExecute(Id id) throws Exception {
         super.doExecute(id);
 
-        for (Container container : findContainers(id)) {
-            getLog().info(" - rm " + container.getId());
+        clean(id);
+    }
+
+    private void clean(Id id) throws IOException, DockerException {
+        for (Container container : findContainers(id, true)) {
+            getLog().info(" - rm " + Arrays.toString(container.getNames()));
             docker.removeContainer(container.getId());
         }
         final Image image = findImage(id);

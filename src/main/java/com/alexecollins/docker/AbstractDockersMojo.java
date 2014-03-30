@@ -90,13 +90,13 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
     protected abstract void doExecute(Id name) throws Exception;
 
     protected Image findImage(Id id) throws DockerException {
-        final List<Image> images = docker.getImages(imageName(id));
+        final List<Image> images = docker.getImages(imageName(id), true);
         return images.isEmpty() ? null : images.get(0);
     }
 
-    protected List<Container> findContainers(Id id) throws IOException {
+    protected List<Container> findContainers(Id id, boolean allContainers) throws IOException {
         final List<Container> strings = new ArrayList<Container>();
-        for (Container container : containers()) {
+        for (Container container : docker.listContainers(allContainers)) {
             if (container.getImage().equals(imageName(id) + ":latest")) {
                 strings.add(container);
             }
@@ -105,12 +105,8 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
     }
 
     protected Container findContainer(Id id) throws IOException {
-        final List<Container> containerIds = findContainers(id);
+        final List<Container> containerIds = findContainers(id, true);
         return containerIds.isEmpty() ? null : containerIds.get(0);
-    }
-
-    List<Container> containers() {
-        return docker.listContainers(true);
     }
 
 }
