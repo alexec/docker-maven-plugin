@@ -9,6 +9,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
 import java.io.IOException;
+import java.util.List;
 
 @Mojo(name = "start", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST)
 @SuppressWarnings("unused")
@@ -26,11 +27,12 @@ public class StartMojo extends AbstractDockersMojo {
         storeContainerId(name, containerId);
     }
 
-    private HostConfig newHostConfig(Id name) throws IOException {
+    private HostConfig newHostConfig(Id ids) throws IOException {
         final HostConfig config = new HostConfig();
         config.setPublishAllPorts(true);
+        config.setLinks(links(ids));
         final Ports portBindings = new Ports();
-        for (String e : conf(name).ports) {
+        for (String e : conf(ids).ports) {
 
             final String[] split = e.split(" ");
 
@@ -39,11 +41,22 @@ public class StartMojo extends AbstractDockersMojo {
             final int a = Integer.parseInt(split[0]);
             final int b = split.length == 2 ? Integer.parseInt(split[1]) : a;
 
-            getLog().info("port " + e);
+            getLog().info(" - port " + e);
             portBindings.addPort(new Ports.Port("tcp", String.valueOf(a), null, String.valueOf(b)));
         }
         config.setPortBindings(portBindings);
         return config;
+    }
+
+    private String[] links(Id id) throws IOException {
+
+        final List<Id> links = conf(id).links;
+        final String[] out = new String[links.size()];
+        for (int i = 0; i < links.size(); i++) {
+            out[i] = links.get(i).toString();
+        }
+
+        return out;
     }
 
     @Override

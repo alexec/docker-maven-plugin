@@ -37,7 +37,7 @@ public class PackageMojo extends AbstractDockersMojo {
         copyDirectory(dockerFolder, destDir);
         // copy files
         for (String file : conf(name).packaging.add) {
-            getLog().info("copying " + file);
+            getLog().info(" - add " + file);
             copyFileToDirectory(new File(file), destDir);
         }
         return destDir;
