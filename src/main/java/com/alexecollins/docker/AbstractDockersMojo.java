@@ -34,13 +34,13 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
 
     private static ObjectMapper MAPPER = new ObjectMapper(new YAMLFactory());
 
-    static Conf conf(File dockerFolder) throws IOException {
-        final File confFile = new File(dockerFolder, "conf.yml");
+    static Conf conf(String name) throws IOException {
+        final File confFile = new File(new File("src/main/docker", name), "conf.yml");
         return MAPPER.readValue(confFile, Conf.class);
     }
 
-    private String tag(File dockerFolder) {
-        return prefix + "-" + dockerFolder.getName();
+    String tag(String name) {
+        return prefix + "-" + name;
     }
 
     protected abstract void doExecute(String name) throws Exception;

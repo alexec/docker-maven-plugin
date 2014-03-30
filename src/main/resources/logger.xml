@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <appender name="STDOUT" class="com.alexecollins.docker.MavenLogAppender">
-        <encoder>
+    <appender name="MAVEN" class="com.alexecollins.docker.MavenLogAppender">
+    <encoder>
             <pattern>%-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
+    <!-- TODO -->
+    <appender name="DEBUG" class="ch.qos.logback.core.FileAppender">
+        <file>target/docker/debug.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>%-5relative %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="" level="debug" additivity="false">
+        <appender-ref ref="DEBUG"/>
+    </logger>
+
     <root level="info" additivity="false">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="MAVEN"/>
     </root>
 
 </configuration>

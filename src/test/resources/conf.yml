@@ -2,3 +2,5 @@ packaging:
   add:
     - target/example-1.0-SNAPSHOT.jar
     - hello-world.yml
+ports:
+  - 8080 8080

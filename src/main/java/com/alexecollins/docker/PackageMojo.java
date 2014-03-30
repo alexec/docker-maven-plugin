@@ -35,7 +35,7 @@ public class PackageMojo extends AbstractDockersMojo {
         // copy template
         copyDirectory(dockerFolder, destDir);
         // copy files
-        for (String file : conf(dockerFolder).packaging.add) {
+        for (String file : conf(name).packaging.add) {
             getLog().info("copying " + file);
             copyFileToDirectory(new File(file), destDir);
         }
@@ -46,10 +46,9 @@ public class PackageMojo extends AbstractDockersMojo {
         return new File("src/main/docker", name);
     }
 
-    private String build(File dockerFolder, String tag) throws DockerException, IOException {
+    private String build(File dockerFolder, String name) throws DockerException, IOException {
 
-
-        final ClientResponse response = docker.build(dockerFolder, tag);
+        final ClientResponse response = docker.build(dockerFolder, tag(name));
 
         final StringWriter out = new StringWriter();
         try {
