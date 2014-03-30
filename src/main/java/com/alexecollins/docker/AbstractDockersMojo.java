@@ -1,9 +1,16 @@
 package com.alexecollins.docker;
 
+import com.alexecollins.docker.model.Conf;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 import java.io.File;
 import java.io.IOException;
 
-import static org.apache.commons.io.FileUtils.*;
+import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.commons.io.FileUtils.write;
+
+;
 
 abstract class AbstractDockersMojo extends AbstractDockerMojo {
 
@@ -18,42 +25,49 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
 
         for (File dockerFolder : dir.listFiles()) {
             final String name = dockerFolder.getName();
-            final File destDir = new File(workDir, name);
-            copyDirectory(dockerFolder, destDir);
+
             getLog().info(name() + " " + name);
-            doExecute(destDir, tag(dockerFolder));
+
+            doExecute(name);
         }
+    }
+
+    private static ObjectMapper MAPPER = new ObjectMapper(new YAMLFactory());
+
+    static Conf conf(File dockerFolder) throws IOException {
+        final File confFile = new File(dockerFolder, "conf.yml");
+        return MAPPER.readValue(confFile, Conf.class);
     }
 
     private String tag(File dockerFolder) {
         return prefix + "-" + dockerFolder.getName();
     }
 
-    protected abstract void doExecute(File dockerFolder, String tag) throws Exception;
+    protected abstract void doExecute(String name) throws Exception;
 
-    protected void storeImageId(File dockerFolder, String imageId) throws IOException {
-        write(imageIdFile(dockerFolder), imageId);
+    protected void storeImageId(String name, String imageId) throws IOException {
+        write(imageIdFile(name), imageId);
     }
 
-    protected String getImageId(File dockerFolder) throws IOException {
-        return readFileToString(imageIdFile(dockerFolder));
+    protected String getImageId(String name) throws IOException {
+        return readFileToString(imageIdFile(name));
     }
 
-    private File imageIdFile(File dockerFolder) {
-        return new File(workDir, dockerFolder.getName() + "/imageId");
+    private File imageIdFile(String name) {
+        return new File(workDir, name + "/.imageId");
     }
 
 
-    protected void storeContainerId(File dockerFolder, String imageId) throws IOException {
-        write(containerIdFile(dockerFolder), imageId);
+    protected void storeContainerId(String name, String imageId) throws IOException {
+        write(containerIdFile(name), imageId);
     }
 
-    protected String getContainerId(File dockerFolder) throws IOException {
-        final File file = containerIdFile(dockerFolder);
+    protected String getContainerId(String name) throws IOException {
+        final File file = containerIdFile(name);
         return file.exists() ? readFileToString(file) : null;
     }
 
-    private File containerIdFile(File dockerFolder) {
-        return new File(workDir, dockerFolder.getName() + "/containerId");
+    private File containerIdFile(String name) {
+        return new File(workDir, name + "/.containerId");
     }
 }

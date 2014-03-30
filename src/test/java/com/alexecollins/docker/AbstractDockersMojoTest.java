@@ -12,7 +12,7 @@ public class AbstractDockersMojoTest {
 
     private AbstractDockersMojo sut = new AbstractDockersMojo() {
         @Override
-        protected void doExecute(File dockerFolder, String tag) throws Exception {
+        protected void doExecute(String name) throws Exception {
 
         }
 
@@ -25,14 +25,12 @@ public class AbstractDockersMojoTest {
     @Before
     public void setUp() throws Exception {
         sut.workDir = new File("target/docker");
-
     }
 
     @Test
     public void testImageIdStore() throws Exception {
-        sut.storeImageId(new File("."), "alex");
+        sut.storeImageId("alex", "alex1");
 
-        assertEquals("alex", sut.getImageId(new File(".")));
-
+        assertEquals("alex1", sut.getImageId("alex"));
     }
 }

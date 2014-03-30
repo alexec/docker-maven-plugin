@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 
+import static org.apache.commons.io.FileUtils.copyDirectory;
+import static org.apache.commons.io.FileUtils.copyFileToDirectory;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang.StringUtils.substringBetween;
 
@@ -20,13 +22,33 @@ import static org.apache.commons.lang.StringUtils.substringBetween;
 public class PackageMojo extends AbstractDockersMojo {
 
     @Override
-    protected void doExecute(File dockerFolder, String tag) throws Exception {
-        String imageId = build(dockerFolder, tag);
+    protected void doExecute(final String name) throws Exception {
+        final File buildDir = prepare(name);
+        String imageId = build(buildDir, name);
 
-        storeImageId(dockerFolder, imageId);
+        storeImageId(name, imageId);
+    }
+
+    private File prepare(String name) throws IOException {
+        final File dockerFolder = dockerFolder(name);
+        final File destDir = new File(workDir, dockerFolder.getName());
+        // copy template
+        copyDirectory(dockerFolder, destDir);
+        // copy files
+        for (String file : conf(dockerFolder).packaging.add) {
+            getLog().info("copying " + file);
+            copyFileToDirectory(new File(file), destDir);
+        }
+        return destDir;
+    }
+
+    private File dockerFolder(String name) {
+        return new File("src/main/docker", name);
     }
 
     private String build(File dockerFolder, String tag) throws DockerException, IOException {
+
+
         final ClientResponse response = docker.build(dockerFolder, tag);
 
         final StringWriter out = new StringWriter();
