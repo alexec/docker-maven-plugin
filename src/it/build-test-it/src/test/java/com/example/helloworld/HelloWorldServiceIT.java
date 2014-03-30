@@ -12,7 +12,7 @@ public class HelloWorldServiceIT {
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
         // sleep to allow container to start
-        Thread.sleep(3000);
+        Thread.sleep(10000);
     }
 
     @Test
