@@ -8,9 +8,9 @@ import java.io.File;
 import static org.junit.Assert.assertEquals;
 
 
-public class AbstractDockerfilesMojoTest {
+public class AbstractDockersMojoTest {
 
-    private AbstractDockerfilesMojo sut = new AbstractDockerfilesMojo() {
+    private AbstractDockersMojo sut = new AbstractDockersMojo() {
         @Override
         protected void doExecute(File dockerFolder, String tag) throws Exception {
 

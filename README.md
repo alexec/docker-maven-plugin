@@ -14,18 +14,4 @@ Docker installed and Docker daemon running.
 
 Usage
 ---
-
-```xml
-<plugin>
-    <groupId>com.alexecollins.docker</groupId>
-    <artifactId>docker-maven-plugin</artifactId>
-</plugin>
-```
-
-```sh
-mvn docker:help
-```
-
-```sh
-mvn docker:version
-```
+The best example to look at is the (src/it/build-test-it)[one from the tests] which creates a Drop-Wizard app and builds a container.

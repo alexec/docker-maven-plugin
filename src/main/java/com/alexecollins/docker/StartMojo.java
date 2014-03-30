@@ -9,7 +9,7 @@ import java.io.File;
 
 @Mojo(name = "start", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST)
 @SuppressWarnings("unused")
-public class StartMojo extends AbstractDockerfilesMojo {
+public class StartMojo extends AbstractDockersMojo {
 
     @Override
     protected void doExecute(File dockerFolder, String tag) throws Exception {

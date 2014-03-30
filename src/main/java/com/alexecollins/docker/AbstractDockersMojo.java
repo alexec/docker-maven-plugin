@@ -3,14 +3,13 @@ package com.alexecollins.docker;
 import java.io.File;
 import java.io.IOException;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.commons.io.FileUtils.write;
+import static org.apache.commons.io.FileUtils.*;
 
-abstract class AbstractDockerfilesMojo extends AbstractDockerMojo {
+abstract class AbstractDockersMojo extends AbstractDockerMojo {
 
     protected final void doExecute() throws Exception {
 
-        final File dir = new File("src/main/docker/dockerfiles");
+        final File dir = new File("src/main/docker");
 
         if (!dir.isDirectory()) {
             getLog().warn(dir.getAbsolutePath() + " does not exist, or is not dir, skipping");
@@ -18,8 +17,11 @@ abstract class AbstractDockerfilesMojo extends AbstractDockerMojo {
         }
 
         for (File dockerFolder : dir.listFiles()) {
-            getLog().info(name() + " " + dockerFolder.getName());
-            doExecute(dockerFolder, tag(dockerFolder));
+            final String name = dockerFolder.getName();
+            final File destDir = new File(workDir, name);
+            copyDirectory(dockerFolder, destDir);
+            getLog().info(name() + " " + name);
+            doExecute(destDir, tag(dockerFolder));
         }
     }
 

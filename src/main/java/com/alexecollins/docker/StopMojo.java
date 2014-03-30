@@ -8,7 +8,7 @@ import java.io.File;
 
 @Mojo(name = "stop", defaultPhase = LifecyclePhase.POST_INTEGRATION_TEST)
 @SuppressWarnings("unused")
-public class StopMojo extends AbstractDockerfilesMojo {
+public class StopMojo extends AbstractDockersMojo {
 
     @Override
     protected void doExecute(File dockerFolder, String tag) throws Exception {
