@@ -13,7 +13,7 @@ public class StopMojo extends TearDownMojo {
     @Override
     protected void doExecute(Id id) throws Exception {
         for (Container container : findContainers(id)) {
-            getLog().info(" - " + container.getId());
+            getLog().info(" - stop " + container.getId());
             try {
                 docker.stopContainer(container.getId(), 1);
             } catch (DockerException e) {

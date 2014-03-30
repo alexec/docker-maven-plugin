@@ -29,7 +29,7 @@ public class StartMojo extends SetUpMojo {
     private HostConfig newHostConfig(Id ids) throws IOException {
         final HostConfig config = new HostConfig();
         config.setPublishAllPorts(true);
-        // config.setLinks(links(ids));
+        //config.setLinks(links(ids));
         final Ports portBindings = new Ports();
         for (String e : conf(ids).ports) {
 

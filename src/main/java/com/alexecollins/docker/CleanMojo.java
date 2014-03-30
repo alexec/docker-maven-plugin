@@ -1,6 +1,7 @@
 package com.alexecollins.docker;
 
 import com.alexecollins.docker.model.Id;
+import com.kpelykh.docker.client.DockerException;
 import com.kpelykh.docker.client.model.Container;
 import com.kpelykh.docker.client.model.Image;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -15,13 +16,18 @@ public class CleanMojo extends StopMojo {
     protected void doExecute(Id id) throws Exception {
         super.doExecute(id);
 
-        final Container container = findContainer(id);
-        if (container != null) {
+        for (Container container : findContainers(id)) {
+            getLog().info(" - rm " + container.getId());
             docker.removeContainer(container.getId());
         }
         final Image image = findImage(id);
         if (image != null) {
-            docker.removeImage(image.getId());
+            getLog().info(" - rmi " + image.getId());
+            try {
+                docker.removeImage(image.getId());
+            } catch (DockerException e) {
+                getLog().warn(" - " + e.getMessage());
+            }
         }
     }
 
