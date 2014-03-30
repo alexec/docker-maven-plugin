@@ -14,4 +14,4 @@ Docker installed and Docker daemon running.
 
 Usage
 ---
-The best example to look at is the (src/it/build-test-it)[one from the tests] which creates a Drop-Wizard app and builds a container.
+The best example to look at is the (src/it/build-test-it)[one from the tests] which creates a Drop-Wizard app and builds a container, and then runs an integration test against it.
