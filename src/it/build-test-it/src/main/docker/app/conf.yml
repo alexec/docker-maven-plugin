@@ -1,8 +1,12 @@
+# additional data require to create the Docker image
 packaging:
+  # files to add to the build, usually used with ADD in the Dockerfile
   add:
     - target/example-1.0-SNAPSHOT.jar
     - hello-world.yml
+# optional list of port to expose on the host
 ports:
   - 8080
+# containers that this should be linked to, started before this one and stopped afterwards
 links:
   - mysql
