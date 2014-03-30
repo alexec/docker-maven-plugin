@@ -39,56 +39,56 @@ public class AbstractDockersMojoTest {
 
     @Test
     public void testEmptyDependencies() throws Exception {
-        assertEquals(Collections.<Id>emptyList(), AbstractDockersMojo.sortByDependencies(new HashMap<Id, List<Id>>()));
+        assertEquals(Collections.<Id>emptyList(), AbstractDockersMojo.sort(new HashMap<Id, List<Id>>()));
     }
 
     @Test
     public void testSingleDependencies() throws Exception {
-        final Map<Id, List<Id>> deps = new HashMap<Id, List<Id>>();
+        final Map<Id, List<Id>> links = new HashMap<Id, List<Id>>();
         final Id a = new Id("a"), b = new Id("b");
-        deps.put(b, Collections.singletonList(a));
-        deps.put(a, Collections.<Id>emptyList());
+        links.put(b, Collections.singletonList(a));
+        links.put(a, Collections.<Id>emptyList());
         final ArrayList<Id> expected = new ArrayList<Id>();
         expected.add(a);
         expected.add(b);
         assertEquals(
                 expected,
-                AbstractDockersMojo.sortByDependencies(deps));
+                AbstractDockersMojo.sort(links));
     }
 
     @Test
     public void testDoubleDependencies() throws Exception {
-        final Map<Id, List<Id>> deps = new HashMap<Id, List<Id>>();
+        final Map<Id, List<Id>> links = new HashMap<Id, List<Id>>();
         final Id a = new Id("a"), b = new Id("b"), c = new Id("c");
-        deps.put(c, Collections.singletonList(b));
-        deps.put(b, Collections.singletonList(a));
-        deps.put(a, Collections.<Id>emptyList());
+        links.put(c, Collections.singletonList(b));
+        links.put(b, Collections.singletonList(a));
+        links.put(a, Collections.<Id>emptyList());
         final ArrayList<Id> expected = new ArrayList<Id>();
         expected.add(a);
         expected.add(b);
         expected.add(c);
         assertEquals(
                 expected,
-                AbstractDockersMojo.sortByDependencies(deps));
+                AbstractDockersMojo.sort(links));
     }
 
     @Test(expected = IllegalStateException.class)
     public void testCircularDependencies() throws Exception {
-        final Map<Id, List<Id>> deps = new HashMap<Id, List<Id>>();
+        final Map<Id, List<Id>> links = new HashMap<Id, List<Id>>();
         final Id a = new Id("a"), b = new Id("b"), c = new Id("c"), d = new Id("d"), e = new Id("e");
-        deps.put(c, Collections.singletonList(b));
-        deps.put(b, Collections.singletonList(a));
-        deps.put(a, Collections.singletonList(c));
-        deps.put(d, Collections.singletonList(e));
-        deps.put(e, Collections.<Id>emptyList());
-        AbstractDockersMojo.sortByDependencies(deps);
+        links.put(c, Collections.singletonList(b));
+        links.put(b, Collections.singletonList(a));
+        links.put(a, Collections.singletonList(c));
+        links.put(d, Collections.singletonList(e));
+        links.put(e, Collections.<Id>emptyList());
+        AbstractDockersMojo.sort(links);
     }
 
     @Test(expected = IllegalStateException.class)
     public void testSelfCircularDependencies() throws Exception {
-        final Map<Id, List<Id>> deps = new HashMap<Id, List<Id>>();
+        final Map<Id, List<Id>> links = new HashMap<Id, List<Id>>();
         final Id a = new Id("a");
-        deps.put(a, Collections.singletonList(a));
-        AbstractDockersMojo.sortByDependencies(deps);
+        links.put(a, Collections.singletonList(a));
+        AbstractDockersMojo.sort(links);
     }
 }

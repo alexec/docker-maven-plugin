@@ -15,7 +15,7 @@ public class ConfTest {
     public void test() throws Exception {
         final Conf conf = MAPPER.readValue(getClass().getResource("/conf.yml"), Conf.class);
 
-        assertNotNull(conf.dependencies);
+        assertNotNull(conf.links);
         assertNotNull(conf.packaging);
         assertNotNull(conf.ports);
     }

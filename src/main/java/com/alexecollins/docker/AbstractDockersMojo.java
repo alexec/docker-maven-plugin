@@ -17,23 +17,24 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
 
     protected final void doExecute() throws Exception {
 
-        final File dir = src();
+        final File src = src();
 
-        if (!dir.isDirectory()) {
-            getLog().warn(dir.getAbsolutePath() + " does not exist, or is not dir, skipping");
+        if (!src.isDirectory()) {
+            getLog().warn(src.getAbsolutePath() + " does not exist, or is not dir, skipping");
             return;
         }
 
         final List<Id> in = new LinkedList<Id>();
-        for (File file : src().listFiles()) {
+        for (File file : src.listFiles()) {
             in.add(new Id(file.getName()));
         }
-        final Map<Id, List<Id>> deps = new HashMap<Id, List<Id>>();
+
+        final Map<Id, List<Id>> links = new HashMap<Id, List<Id>>();
         for (Id id : in) {
-            deps.put(id, conf(id).dependencies);
+            links.put(id, conf(id).links);
         }
 
-        for (Id id : sortByDependencies(deps)) {
+        for (Id id : sort(links)) {
 
             getLog().info(name() + " " + id);
 
@@ -49,7 +50,7 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
         return new File(project.getBasedir(), "src/main/docker");
     }
 
-    static List<Id> sortByDependencies(final Map<Id, List<Id>> deps) {
+    static List<Id> sort(final Map<Id, List<Id>> deps) {
         final List<Id> in = new LinkedList<Id>(deps.keySet());
         final List<Id> out = new LinkedList<Id>();
 
@@ -64,7 +65,7 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
                 }
             }
             if (!hit) {
-                throw new IllegalStateException("dependency error (e.g. circular dependency) " + in + " -> " + out);
+                throw new IllegalStateException("dependency error (e.g. circular dependency) amongst " + in);
             }
         }
 
@@ -77,8 +78,8 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
 
     private static ObjectMapper MAPPER = new ObjectMapper(new YAMLFactory());
 
-    String tag(Id name) {
-        return prefix + "-" + name;
+    String name(Id id) {
+        return prefix + "-" + id;
     }
 
     protected abstract void doExecute(Id name) throws Exception;

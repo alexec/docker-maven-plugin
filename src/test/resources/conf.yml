@@ -1,5 +1,3 @@
-dependencies:
-  - mysql
 packaging:
   add:
     - target/example-1.0-SNAPSHOT.jar

@@ -9,7 +9,7 @@ import static java.util.Collections.emptyList;
 
 public class Conf {
     @JsonProperty(required = false)
-    public List<Id> dependencies = emptyList();
+    public List<Id> links = emptyList();
     @JsonProperty(required = false)
     public Packaging packaging = new Packaging();
     @JsonProperty(required = false)

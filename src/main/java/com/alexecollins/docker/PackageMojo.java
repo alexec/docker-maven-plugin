@@ -45,7 +45,7 @@ public class PackageMojo extends AbstractDockersMojo {
 
     private String build(File dockerFolder, Id name) throws DockerException, IOException {
 
-        final ClientResponse response = docker.build(dockerFolder, tag(name));
+        final ClientResponse response = docker.build(dockerFolder, name(name));
 
         final StringWriter out = new StringWriter();
         try {
