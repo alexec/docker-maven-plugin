@@ -1,20 +1,19 @@
 package com.alexecollins.docker;
 
 import com.alexecollins.docker.model.Conf;
+import com.alexecollins.docker.model.Id;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.commons.io.FileUtils.write;
 
-;
-
 abstract class AbstractDockersMojo extends AbstractDockerMojo {
+
 
     protected final void doExecute() throws Exception {
 
@@ -25,7 +24,16 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
             return;
         }
 
-        for (Id id : ids()) {
+        final List<Id> in = new LinkedList<Id>();
+        for (File file : src().listFiles()) {
+            in.add(new Id(file.getName()));
+        }
+        final Map<Id, List<Id>> deps = new HashMap<Id, List<Id>>();
+        for (Id id : in) {
+            deps.put(id, conf(id).dependencies);
+        }
+
+        for (Id id : sortByDependencies(deps)) {
 
             getLog().info(name() + " " + id);
 
@@ -33,16 +41,34 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
         }
     }
 
+    protected Conf conf(Id id) throws IOException {
+        return MAPPER.readValue(new File(src(id), "conf.yml"), Conf.class);
+    }
+
     private File src() {
         return new File(project.getBasedir(), "src/main/docker");
     }
 
-    private List<Id> ids() {
-        final List<Id> ids = new ArrayList<Id>();
-        for (File file : src().listFiles()) {
-            ids.add(new Id(file.getName()));
+    static List<Id> sortByDependencies(final Map<Id, List<Id>> deps) {
+        final List<Id> in = new LinkedList<Id>(deps.keySet());
+        final List<Id> out = new LinkedList<Id>();
+
+        while (!in.isEmpty()) {
+            boolean hit = false;
+            for (Iterator<Id> iterator = in.iterator(); iterator.hasNext(); ) {
+                final Id id = iterator.next();
+                if (out.containsAll(deps.get(id))) {
+                    out.add(id);
+                    iterator.remove();
+                    hit = true;
+                }
+            }
+            if (!hit) {
+                throw new IllegalStateException("dependency error (e.g. circular dependency) " + in + " -> " + out);
+            }
         }
-        return ids;
+
+        return out;
     }
 
     File src(Id id) {
@@ -50,11 +76,6 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
     }
 
     private static ObjectMapper MAPPER = new ObjectMapper(new YAMLFactory());
-
-    Conf conf(Id name) throws IOException {
-        final File confFile = new File(src(name), "conf.yml");
-        return MAPPER.readValue(confFile, Conf.class);
-    }
 
     String tag(Id name) {
         return prefix + "-" + name;

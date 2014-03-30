@@ -1,5 +1,6 @@
 package com.alexecollins.docker;
 
+import com.alexecollins.docker.model.Id;
 import com.kpelykh.docker.client.model.ContainerConfig;
 import com.kpelykh.docker.client.model.ContainerCreateResponse;
 import com.kpelykh.docker.client.model.HostConfig;

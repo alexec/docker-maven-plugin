@@ -4,3 +4,5 @@ packaging:
     - hello-world.yml
 ports:
   - 8080
+dependencies:
+  - mysql

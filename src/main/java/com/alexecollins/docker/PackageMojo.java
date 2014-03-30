@@ -1,5 +1,6 @@
 package com.alexecollins.docker;
 
+import com.alexecollins.docker.model.Id;
 import com.kpelykh.docker.client.DockerException;
 import com.sun.jersey.api.client.ClientResponse;
 import org.apache.commons.io.IOUtils;

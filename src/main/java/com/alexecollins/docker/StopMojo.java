@@ -1,5 +1,6 @@
 package com.alexecollins.docker;
 
+import com.alexecollins.docker.model.Id;
 import com.kpelykh.docker.client.DockerException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
