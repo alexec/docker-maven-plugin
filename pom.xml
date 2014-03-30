@@ -162,6 +162,7 @@
                         <configuration>
                             <debug>false</debug>
                             <streamLogs>true</streamLogs>
+                            <showErrors>true</showErrors>
                             <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                             <pomIncludes>
                                 <pomInclude>*/pom.xml</pomInclude>

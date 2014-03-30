@@ -1,2 +1,10 @@
 template: Hello, %s!
-defaultName: Stranger
+defaultId: 1
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: root
+  url: jdbc:mysql://localhost:3306/test
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.MySQLDialect
+  validationQuery: SELECT 1

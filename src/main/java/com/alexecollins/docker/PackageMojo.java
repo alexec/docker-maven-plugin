@@ -20,14 +20,11 @@ import static org.apache.commons.lang.StringUtils.substringBetween;
 
 @Mojo(name = "package", defaultPhase = LifecyclePhase.PACKAGE)
 @SuppressWarnings("unused")
-public class PackageMojo extends AbstractDockersMojo {
+public class PackageMojo extends SetUpMojo {
 
     @Override
     protected void doExecute(final Id name) throws Exception {
-        final File buildDir = prepare(name);
-        String imageId = build(buildDir, name);
-
-        storeImageId(name, imageId);
+        build(prepare(name), name);
     }
 
     private File prepare(Id name) throws IOException {
@@ -52,7 +49,7 @@ public class PackageMojo extends AbstractDockersMojo {
 
     private String build(File dockerFolder, Id name) throws DockerException, IOException {
 
-        final ClientResponse response = docker.build(dockerFolder, name(name));
+        final ClientResponse response = docker.build(dockerFolder, imageName(name));
 
         final StringWriter out = new StringWriter();
         try {

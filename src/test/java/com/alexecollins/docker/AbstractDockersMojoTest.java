@@ -30,16 +30,8 @@ public class AbstractDockersMojoTest {
     }
 
     @Test
-    public void testImageIdStore() throws Exception {
-        final Id id = new Id("alex");
-        sut.storeImageId(id, "alex1");
-
-        assertEquals("alex1", sut.getImageId(id));
-    }
-
-    @Test
     public void testEmptyDependencies() throws Exception {
-        assertEquals(Collections.<Id>emptyList(), AbstractDockersMojo.sort(new HashMap<Id, List<Id>>()));
+        assertEquals(Collections.<Id>emptyList(), sut.sort(new HashMap<Id, List<Id>>()));
     }
 
     @Test
@@ -53,7 +45,7 @@ public class AbstractDockersMojoTest {
         expected.add(b);
         assertEquals(
                 expected,
-                AbstractDockersMojo.sort(links));
+                sut.sort(links));
     }
 
     @Test
@@ -69,7 +61,7 @@ public class AbstractDockersMojoTest {
         expected.add(c);
         assertEquals(
                 expected,
-                AbstractDockersMojo.sort(links));
+                sut.sort(links));
     }
 
     @Test(expected = IllegalStateException.class)
@@ -81,7 +73,7 @@ public class AbstractDockersMojoTest {
         links.put(a, Collections.singletonList(c));
         links.put(d, Collections.singletonList(e));
         links.put(e, Collections.<Id>emptyList());
-        AbstractDockersMojo.sort(links);
+        sut.sort(links);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -89,6 +81,6 @@ public class AbstractDockersMojoTest {
         final Map<Id, List<Id>> links = new HashMap<Id, List<Id>>();
         final Id a = new Id("a");
         links.put(a, Collections.singletonList(a));
-        AbstractDockersMojo.sort(links);
+        sut.sort(links);
     }
 }

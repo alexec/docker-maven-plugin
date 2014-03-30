@@ -9,6 +9,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <dropwizard.version>0.6.2</dropwizard.version>
     </properties>
 
     <build>
@@ -67,6 +68,16 @@
                 <version>@project.version@</version>
                 <executions>
                     <execution>
+                        <id>version</id>
+                        <goals>
+                            <goal>version</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <host>http://localhost:4243</host>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <goals>
                             <goal>clean</goal>
                             <goal>package</goal>
@@ -95,7 +106,22 @@
         <dependency>
             <groupId>com.yammer.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-            <version>0.6.2</version>
+            <version>${dropwizard.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yammer.dropwizard</groupId>
+            <artifactId>dropwizard-hibernate</artifactId>
+            <version>${dropwizard.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yammer.dropwizard</groupId>
+            <artifactId>dropwizard-migrations</artifactId>
+            <version>${dropwizard.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.12</version>
         </dependency>
         <!-- test -->
         <dependency>

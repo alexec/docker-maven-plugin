@@ -1,10 +1,7 @@
 package com.alexecollins.docker;
 
 import com.alexecollins.docker.model.Id;
-import com.kpelykh.docker.client.model.ContainerConfig;
-import com.kpelykh.docker.client.model.ContainerCreateResponse;
-import com.kpelykh.docker.client.model.HostConfig;
-import com.kpelykh.docker.client.model.Ports;
+import com.kpelykh.docker.client.model.*;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -13,24 +10,26 @@ import java.util.List;
 
 @Mojo(name = "start", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST)
 @SuppressWarnings("unused")
-public class StartMojo extends AbstractDockersMojo {
+public class StartMojo extends SetUpMojo {
 
     @Override
-    protected void doExecute(Id name) throws Exception {
+    protected void doExecute(Id id) throws Exception {
         final ContainerConfig containerConfig = new ContainerConfig();
-        containerConfig.setImage(getImageId(name));
+        final Image imageId = findImage(id);
+        if (imageId == null) {
+            throw new IllegalStateException("unable to find image for " + id);
+        }
+        containerConfig.setImage(imageId.getId());
         final ContainerCreateResponse response = docker.createContainer(containerConfig);
 
         final String containerId = response.getId();
-        docker.startContainer(containerId, newHostConfig(name));
-
-        storeContainerId(name, containerId);
+        docker.startContainer(containerId, newHostConfig(id));
     }
 
     private HostConfig newHostConfig(Id ids) throws IOException {
         final HostConfig config = new HostConfig();
         config.setPublishAllPorts(true);
-        config.setLinks(links(ids));
+        // config.setLinks(links(ids));
         final Ports portBindings = new Ports();
         for (String e : conf(ids).ports) {
 

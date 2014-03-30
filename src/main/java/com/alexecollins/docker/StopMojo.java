@@ -2,28 +2,26 @@ package com.alexecollins.docker;
 
 import com.alexecollins.docker.model.Id;
 import com.kpelykh.docker.client.DockerException;
+import com.kpelykh.docker.client.model.Container;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
 @Mojo(name = "stop", defaultPhase = LifecyclePhase.POST_INTEGRATION_TEST)
 @SuppressWarnings("unused")
-public class StopMojo extends AbstractDockersMojo {
+public class StopMojo extends TearDownMojo {
 
     @Override
-    protected void doExecute(Id name) throws Exception {
-        final String containerId = getContainerId(name);
-        if (containerId != null) {
+    protected void doExecute(Id id) throws Exception {
+        for (Container container : findContainers(id)) {
+            getLog().info(" - " + container.getId());
             try {
-                docker.stopContainer(containerId, 1);
+                docker.stopContainer(container.getId(), 1);
             } catch (DockerException e) {
                 getLog().warn(e);
-                docker.kill(containerId);
+                docker.kill(container.getId());
             }
-        } else {
-            getLog().info(name + " does not exist");
         }
     }
-
     @Override
     protected String name() {
         return "stop";

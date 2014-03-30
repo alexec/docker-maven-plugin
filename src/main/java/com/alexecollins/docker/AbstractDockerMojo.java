@@ -47,7 +47,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
             doExecute();
             touch(new File(workDir, name()));
         } catch (Exception e) {
-            throw new MojoExecutionException(e.getMessage(), e);
+            throw (e instanceof MojoExecutionException ? (MojoExecutionException) e : new MojoExecutionException(e.getMessage(), e));
         }
     }
 
