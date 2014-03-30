@@ -14,7 +14,7 @@ import java.io.IOException;
 public class StartMojo extends AbstractDockersMojo {
 
     @Override
-    protected void doExecute(String name) throws Exception {
+    protected void doExecute(Id name) throws Exception {
         final ContainerConfig containerConfig = new ContainerConfig();
         containerConfig.setImage(getImageId(name));
         final ContainerCreateResponse response = docker.createContainer(containerConfig);
@@ -25,7 +25,7 @@ public class StartMojo extends AbstractDockersMojo {
         storeContainerId(name, containerId);
     }
 
-    private HostConfig newHostConfig(String name) throws IOException {
+    private HostConfig newHostConfig(Id name) throws IOException {
         final HostConfig config = new HostConfig();
         config.setPublishAllPorts(true);
         final Ports portBindings = new Ports();

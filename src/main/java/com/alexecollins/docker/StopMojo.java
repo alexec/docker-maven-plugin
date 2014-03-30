@@ -9,7 +9,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 public class StopMojo extends AbstractDockersMojo {
 
     @Override
-    protected void doExecute(String name) throws Exception {
+    protected void doExecute(Id name) throws Exception {
         final String containerId = getContainerId(name);
         if (containerId != null) {
             try {

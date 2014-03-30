@@ -12,7 +12,7 @@ public class AbstractDockersMojoTest {
 
     private AbstractDockersMojo sut = new AbstractDockersMojo() {
         @Override
-        protected void doExecute(String name) throws Exception {
+        protected void doExecute(Id name) throws Exception {
 
         }
 
@@ -29,8 +29,9 @@ public class AbstractDockersMojoTest {
 
     @Test
     public void testImageIdStore() throws Exception {
-        sut.storeImageId("alex", "alex1");
+        final Id id = new Id("alex");
+        sut.storeImageId(id, "alex1");
 
-        assertEquals("alex1", sut.getImageId("alex"));
+        assertEquals("alex1", sut.getImageId(id));
     }
 }

@@ -22,15 +22,15 @@ import static org.apache.commons.lang.StringUtils.substringBetween;
 public class PackageMojo extends AbstractDockersMojo {
 
     @Override
-    protected void doExecute(final String name) throws Exception {
+    protected void doExecute(final Id name) throws Exception {
         final File buildDir = prepare(name);
         String imageId = build(buildDir, name);
 
         storeImageId(name, imageId);
     }
 
-    private File prepare(String name) throws IOException {
-        final File dockerFolder = dockerFolder(name);
+    private File prepare(Id name) throws IOException {
+        final File dockerFolder = src(name);
         final File destDir = new File(workDir, dockerFolder.getName());
         // copy template
         copyDirectory(dockerFolder, destDir);
@@ -42,11 +42,7 @@ public class PackageMojo extends AbstractDockersMojo {
         return destDir;
     }
 
-    private File dockerFolder(String name) {
-        return new File("src/main/docker", name);
-    }
-
-    private String build(File dockerFolder, String name) throws DockerException, IOException {
+    private String build(File dockerFolder, Id name) throws DockerException, IOException {
 
         final ClientResponse response = docker.build(dockerFolder, tag(name));
 
