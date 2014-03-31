@@ -13,6 +13,7 @@ public class MavenLogAppender<E> extends AppenderBase<E> {
 
     @Override
     protected void append(E eventObject) {
-        log.info(eventObject.toString());
+        //log.info(eventObject.toString())
+        // ;
     }
 }

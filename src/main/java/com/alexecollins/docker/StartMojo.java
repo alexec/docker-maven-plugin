@@ -22,16 +22,15 @@ public class StartMojo extends PackageMojo {
     }
 
     private void start(Id id) throws DockerException, IOException {
-        final ContainerConfig containerConfig = new ContainerConfig();
-        final Image imageId = findImage(id);
-        if (imageId == null) {
-            throw new IllegalStateException("unable to find image for " + id + " "  + docker.getImages());
-        }
-        containerConfig.setImage(imageId.getId());
-        final ContainerCreateResponse response = docker.createContainer(containerConfig, imageName(id));
 
-        final String containerId = response.getId();
-        docker.startContainer(containerId, newHostConfig(id));
+        // only start
+        if (findContainer(id) == null) {
+            final ContainerConfig config = new ContainerConfig();
+            config.setImage(findImage(id).getId());
+            final ContainerCreateResponse response = docker.createContainer(config, imageName(id));
+        }
+
+        docker.startContainer(findContainer(id).getId(), newHostConfig(id));
     }
 
     private HostConfig newHostConfig(Id id) throws IOException {

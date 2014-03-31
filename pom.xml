@@ -29,6 +29,11 @@
             <version>${slf4j.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.0.1</version>
@@ -47,7 +52,7 @@
         <dependency>
             <groupId>com.kpelykh</groupId>
             <artifactId>docker-java</artifactId>
-            <version>0.8.2-SNAPSHOT</version>
+            <version>0.8.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
@@ -111,6 +116,7 @@
                                 <exclude>commmons-logging:commons-logging</exclude>
                                 <exclude>junit:junit</exclude>
                                 <exclude>org.testng:testng</exclude>
+                                <exclude>log4j:log4j</exclude>
                             </excludes>
                         </bannedDependencies>
                     </rules>
