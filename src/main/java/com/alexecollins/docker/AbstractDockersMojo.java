@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.*;
 
 abstract class AbstractDockersMojo extends AbstractDockerMojo {
-
+    protected final Map<Id,Conf> confs = new HashMap<Id, Conf>();
 
     protected final void doExecute() throws Exception {
 
@@ -32,7 +32,8 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
 
         final Map<Id, List<Id>> links = new HashMap<Id, List<Id>>();
         for (Id id : in) {
-            links.put(id, conf(id).links);
+            confs.put(id, MAPPER.readValue(new File(src(id), "conf.yml"), Conf.class));
+            links.put(id, confs.get(id).links);
         }
 
         for (Id id : sort(links)) {
@@ -45,10 +46,6 @@ abstract class AbstractDockersMojo extends AbstractDockerMojo {
                 throw new MojoExecutionException("failed to " + name() + " " + id, e);
             }
         }
-    }
-
-    protected Conf conf(Id id) throws IOException {
-        return MAPPER.readValue(new File(src(id), "conf.yml"), Conf.class);
     }
 
     private File src() {

@@ -27,6 +27,7 @@ public class StartMojo extends PackageMojo {
         if (findContainer(id) == null) {
             final ContainerConfig config = new ContainerConfig();
             config.setImage(findImage(id).getId());
+            //config.setVolumesFrom(confs.get(id).volumsFrom)
             final ContainerCreateResponse response = docker.createContainer(config, imageName(id));
         }
 
@@ -39,10 +40,10 @@ public class StartMojo extends PackageMojo {
         config.setPublishAllPorts(true);
         config.setLinks(links(id));
 
-        getLog().info(" - links " + conf(id).links);
+        getLog().info(" - links " + confs.get(id).links);
 
         final Ports portBindings = new Ports();
-        for (String e : conf(id).ports) {
+        for (String e : confs.get(id).ports) {
 
             final String[] split = e.split(" ");
 
@@ -62,7 +63,7 @@ public class StartMojo extends PackageMojo {
 
     private String[] links(Id id) throws IOException {
 
-        final List<Id> links = conf(id).links;
+        final List<Id> links = confs.get(id).links;
         final String[] out = new String[links.size()];
         for (int i = 0; i < links.size(); i++) {
             final String name = findContainer(links.get(i)).getNames()[0];

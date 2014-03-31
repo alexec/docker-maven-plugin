@@ -31,13 +31,13 @@ public class PackageMojo extends SetUpMojo {
         build(prepare(id), id);
     }
 
-    private File prepare(Id name) throws IOException {
-        final File dockerFolder = src(name);
+    private File prepare(Id id) throws IOException {
+        final File dockerFolder = src(id);
         final File destDir = new File(workDir, dockerFolder.getName());
         // copy template
         copyDirectory(dockerFolder, destDir);
         // copy files
-        for (String file : conf(name).packaging.add) {
+        for (String file : confs.get(id).packaging.add) {
             getLog().info(" - add " + file);
             copyFileToDirectory(new File(file), destDir);
         }

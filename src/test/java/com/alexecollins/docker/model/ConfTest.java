@@ -18,5 +18,6 @@ public class ConfTest {
         assertNotNull(conf.links);
         assertNotNull(conf.packaging);
         assertNotNull(conf.ports);
+        assertNotNull(conf.volumesFrom);
     }
 }

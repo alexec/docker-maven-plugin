@@ -14,4 +14,6 @@ public class Conf {
     public Packaging packaging = new Packaging();
     @JsonProperty(required = false)
     public List<String> ports = emptyList();
+    @JsonProperty(required = false)
+    public List<Id> volumesFrom = emptyList();
 }
