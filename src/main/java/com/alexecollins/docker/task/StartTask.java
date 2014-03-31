@@ -27,7 +27,7 @@ public class StartTask {
 
         // only start
         if (repo.findContainer(id) == null) {
-            LOGGER.info("creating container");
+            LOGGER.info("creating " + id);
             final ContainerConfig config = new ContainerConfig();
             config.setImage(repo.findImage(id).getId());
             //config.setVolumesFrom(confs.get(id).volumesFrom.toString().replaceAll("[ \\[\\]]", ""));

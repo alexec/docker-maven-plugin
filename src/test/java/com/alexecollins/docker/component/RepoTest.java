@@ -1,6 +1,6 @@
-package com.alexecollins.docker.model;
+package com.alexecollins.docker.component;
 
-import com.alexecollins.docker.component.Repo;
+import com.alexecollins.docker.model.Id;
 import org.junit.Before;
 import org.junit.Test;
 

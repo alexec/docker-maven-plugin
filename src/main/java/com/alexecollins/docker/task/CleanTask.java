@@ -26,12 +26,12 @@ public class CleanTask {
     public void execute(Id id) throws IOException, DockerException {
         LOGGER.info("clean " + id);
         for (Container container : repo.findContainers(id, true)) {
-            LOGGER.info(" - rm " + Arrays.toString(container.getNames()));
+            LOGGER.info("rm " + Arrays.toString(container.getNames()));
             docker.removeContainer(container.getId());
         }
         final Image image = repo.findImage(id);
         if (image != null) {
-            LOGGER.info(" - rmi " + image.getId());
+            LOGGER.info("rmi " + image.getId());
             try {
                 docker.removeImage(image.getId());
             } catch (DockerException e) {
