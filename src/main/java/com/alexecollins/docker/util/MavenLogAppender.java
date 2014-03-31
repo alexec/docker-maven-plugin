@@ -1,4 +1,4 @@
-package com.alexecollins.docker;
+package com.alexecollins.docker.util;
 
 import ch.qos.logback.core.AppenderBase;
 import org.apache.maven.plugin.logging.Log;

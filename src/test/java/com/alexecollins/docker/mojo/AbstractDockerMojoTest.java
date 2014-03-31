@@ -1,4 +1,4 @@
-package com.alexecollins.docker;
+package com.alexecollins.docker.mojo;
 
 import org.junit.Test;
 

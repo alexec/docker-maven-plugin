@@ -1,6 +1,6 @@
-package com.alexecollins.docker;
+package com.alexecollins.docker.model;
 
-import com.alexecollins.docker.model.Id;
+import com.alexecollins.docker.component.Repo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,28 +10,13 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 
-public class AbstractDockersMojoTest {
+public class RepoTest {
 
-    private AbstractDockersMojo sut = new AbstractDockersMojo() {
-        @Override
-        protected void doExecute(Id name) throws Exception {
-
-        }
-
-        @Override
-        protected String name() {
-            return null;
-        }
-    };
+    private Repo sut;
 
     @Before
     public void setUp() throws Exception {
-        sut.workDir = new File("target/docker");
-    }
-
-    @Test
-    public void testEmptyDependencies() throws Exception {
-        assertEquals(Collections.<Id>emptyList(), sut.sort(new HashMap<Id, List<Id>>()));
+        sut = new Repo(null, null, new File("src/test/docker"));
     }
 
     @Test

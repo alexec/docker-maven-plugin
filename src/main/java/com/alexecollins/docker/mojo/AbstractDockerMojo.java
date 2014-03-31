@@ -1,5 +1,7 @@
-package com.alexecollins.docker;
+package com.alexecollins.docker.mojo;
 
+import com.alexecollins.docker.util.MavenLogAppender;
+import com.alexecollins.docker.component.Repo;
 import com.kpelykh.docker.client.DockerClient;
 import com.kpelykh.docker.client.utils.JsonClientFilter;
 import com.sun.jersey.api.client.Client;
@@ -13,8 +15,6 @@ import org.apache.maven.project.MavenProject;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.net.URI;
-
-import static org.apache.commons.io.FileUtils.touch;
 
 abstract class AbstractDockerMojo extends AbstractMojo {
     static final String DEFAULT_HOST = "http://127.0.0.1:4243";
@@ -36,6 +36,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 
     protected DockerClient docker;
     protected File workDir;
+    protected Repo repo;
 
     @Override
     public final void execute() throws MojoExecutionException, MojoFailureException {
@@ -43,12 +44,24 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 
         try {
             docker = createDocker(host);
+            repo = new Repo(docker, prefix, src());
+
+            final File src = repo.src();
+
+            if (!src.isDirectory()) {
+                getLog().warn(src.getAbsolutePath() + " does not exist, or is not dir, skipping");
+                return;
+            }
+
             workDir = new File(project.getBuild().getDirectory(), "docker");
             doExecute();
-            touch(new File(workDir, name()));
         } catch (Exception e) {
             throw (e instanceof MojoExecutionException ? (MojoExecutionException) e : new MojoExecutionException(e.getMessage(), e));
         }
+    }
+
+    private File src() {
+        return new File(project.getBasedir(), "src/main/docker");
     }
 
     static DockerClient createDocker(URI host) throws NoSuchFieldException, IllegalAccessException {
@@ -65,6 +78,4 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     }
 
     protected abstract void doExecute() throws Exception;
-
-    protected abstract String name();
 }

@@ -1,10 +1,12 @@
-package com.alexecollins.docker;
+package com.alexecollins.docker.task;
 
 import com.alexecollins.docker.model.Id;
+import com.alexecollins.docker.component.Repo;
+import com.kpelykh.docker.client.DockerClient;
 import com.kpelykh.docker.client.DockerException;
 import com.sun.jersey.api.client.ClientResponse;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,30 +19,32 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.io.IOUtils.copyLarge;
 import static org.apache.commons.lang.StringUtils.substringBetween;
 
+public class PackageTask {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PackageTask.class);
 
-/**
- * Build containers from their {@code Dockerfile} and {@code conf.yml} files.
- */
-@Mojo(name = "package", defaultPhase = LifecyclePhase.PACKAGE)
-public class PackageMojo extends SetUpMojo {
+    private final DockerClient docker;
+    private final Repo repo;
+    private final File workDir;
 
-    @Override
-    protected void doExecute(final Id id) throws Exception {
-        packag(id);
+    public PackageTask(DockerClient docker, Repo repo, File workDir) {
+        this.docker = docker;
+        this.repo = repo;
+        this.workDir = workDir;
     }
 
-    private void packag(Id id) throws DockerException, IOException {
+    public void execute(Id id) throws DockerException, IOException {
+        LOGGER.info("package " + id);
         build(prepare(id), id);
     }
 
     private File prepare(Id id) throws IOException {
-        final File dockerFolder = src(id);
+        final File dockerFolder = repo.src(id);
         final File destDir = new File(workDir, dockerFolder.getName());
         // copy template
         copyDirectory(dockerFolder, destDir);
         // copy files
-        for (String file : confs.get(id).packaging.add) {
-            getLog().info(" - add " + file);
+        for (String file : repo.conf(id).packaging.add) {
+            LOGGER.info(" - add " + file);
             copyFileToDirectory(new File(file), destDir);
         }
 
@@ -49,7 +53,7 @@ public class PackageMojo extends SetUpMojo {
 
     private String build(File dockerFolder, Id name) throws DockerException, IOException {
 
-        final ClientResponse response = docker.build(dockerFolder, imageName(name));
+        final ClientResponse response = docker.build(dockerFolder, repo.imageName(name));
 
         final StringWriter out = new StringWriter();
         try {
@@ -67,8 +71,4 @@ public class PackageMojo extends SetUpMojo {
         return substringBetween(log, "Successfully built ", "\\n\"}").trim();
     }
 
-    @Override
-    protected String name() {
-        return "package";
-    }
 }

@@ -1,4 +1,4 @@
-package com.alexecollins.docker;
+package com.alexecollins.docker.mojo;
 
 import com.kpelykh.docker.client.DockerException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -17,8 +17,4 @@ public class VersionMojo extends AbstractDockerMojo {
         getLog().info(docker.version().toString());
     }
 
-    @Override
-    protected String name() {
-        return "version";
-    }
 }

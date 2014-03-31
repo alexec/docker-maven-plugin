@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <appender name="MAVEN" class="com.alexecollins.docker.MavenLogAppender">
+    <appender name="MAVEN" class="com.alexecollins.docker.util.MavenLogAppender">
     <encoder>
             <pattern>%msg%n</pattern>
         </encoder>
