@@ -18,8 +18,10 @@ import static org.apache.commons.io.IOUtils.copyLarge;
 import static org.apache.commons.lang.StringUtils.substringBetween;
 
 
+/**
+ * Build containers from their {@code Dockerfile} and {@code conf.yml} files.
+ */
 @Mojo(name = "package", defaultPhase = LifecyclePhase.PACKAGE)
-@SuppressWarnings("unused")
 public class PackageMojo extends SetUpMojo {
 
     @Override

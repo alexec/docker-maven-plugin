@@ -9,8 +9,10 @@ import org.apache.maven.plugins.annotations.Mojo;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * Stop all the containers.
+ */
 @Mojo(name = "stop", defaultPhase = LifecyclePhase.POST_INTEGRATION_TEST)
-@SuppressWarnings("unused")
 public class StopMojo extends TearDownMojo {
 
     @Override
@@ -20,13 +22,8 @@ public class StopMojo extends TearDownMojo {
 
     private void stop(Id id) throws IOException, DockerException {
         for (Container container : findContainers(id, false)) {
-            getLog().info(" - stop " + Arrays.toString(container.getNames()));
-            try {
-                docker.stopContainer(container.getId(), 1);
-            } catch (DockerException e) {
-                getLog().warn(e);
-                docker.kill(container.getId());
-            }
+            getLog().info("stopping " + Arrays.toString(container.getNames()));
+            docker.stopContainer(container.getId(), 1);
         }
     }
 

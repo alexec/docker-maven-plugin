@@ -9,8 +9,10 @@ import org.apache.maven.plugins.annotations.Mojo;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Start all the containers.
+ */
 @Mojo(name = "start", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST)
-@SuppressWarnings("unused")
 public class StartMojo extends PackageMojo {
 
     @Override
@@ -25,10 +27,14 @@ public class StartMojo extends PackageMojo {
 
         // only start
         if (findContainer(id) == null) {
+            getLog().info("creating container");
             final ContainerConfig config = new ContainerConfig();
             config.setImage(findImage(id).getId());
-            //config.setVolumesFrom(confs.get(id).volumsFrom)
-            final ContainerCreateResponse response = docker.createContainer(config, imageName(id));
+            //config.setVolumesFrom(confs.get(id).volumesFrom.toString().replaceAll("[ \\[\\]]", ""));
+
+            //getLog().info(" - volumes from " + confs.get(id).volumesFrom);
+
+            docker.createContainer(config, imageName(id));
         }
 
         docker.startContainer(findContainer(id).getId(), newHostConfig(id));

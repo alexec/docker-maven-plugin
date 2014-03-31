@@ -45,3 +45,7 @@ TODO
 * Set the name of the container.
 * Wait for the service on the container to start.
 * Add support for pushing tested containers.
+
+Notes to self:
+
+	docker ps -a -q | xargs docker rm

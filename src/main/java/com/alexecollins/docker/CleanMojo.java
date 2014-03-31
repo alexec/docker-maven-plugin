@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.util.Arrays;
 
 
+/**
+ * Clean up containers, stopping them in necessary and there removing their images.
+ */
 @Mojo(name = "clean", defaultPhase = LifecyclePhase.CLEAN)
-@SuppressWarnings("unused")
 public class CleanMojo extends StopMojo {
 
     @Override
