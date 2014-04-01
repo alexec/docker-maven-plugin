@@ -49,3 +49,7 @@ TODO
 Notes to self:
 
 	docker ps -a -q | xargs docker rm
+
+References
+---
+* http://www.alexecollins.com/tags/docker/
