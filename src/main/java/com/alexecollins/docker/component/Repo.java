@@ -38,8 +38,8 @@ public class Repo {
         }
     }
 
-    String imageName(Id id) {
-        return "/" + prefix + "_" + id;
+    public String imageName(Id id) {
+        return prefix + "_" + id;
     }
 
     public String containerName(Id id) {

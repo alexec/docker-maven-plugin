@@ -54,7 +54,7 @@ public class PackageTask {
     @SuppressWarnings(("DM_DEFAULT_ENCODING"))
     private void build(File dockerFolder, Id id) throws DockerException, IOException {
 
-        final ClientResponse response = docker.build(dockerFolder, repo.containerName(id));
+        final ClientResponse response = docker.build(dockerFolder, repo.imageName(id));
 
         final StringWriter out = new StringWriter();
         try {
