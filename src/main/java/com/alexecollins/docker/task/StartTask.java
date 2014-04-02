@@ -30,9 +30,9 @@ public class StartTask {
             LOGGER.info("creating " + id);
             final ContainerConfig config = new ContainerConfig();
             config.setImage(repo.findImage(id).getId());
-            //config.setVolumesFrom(confs.get(id).volumesFrom.toString().replaceAll("[ \\[\\]]", ""));
+            config.setVolumesFrom(repo.conf(id).volumesFrom.toString().replaceAll("[ \\[\\]]", ""));
 
-            //LOGGER.info(" - volumes from " + confs.get(id).volumesFrom);
+            LOGGER.info(" - volumes from " + repo.conf(id).volumesFrom);
 
             docker.createContainer(config, repo.imageName(id));
         }
