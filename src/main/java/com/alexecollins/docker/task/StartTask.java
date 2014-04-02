@@ -1,7 +1,7 @@
 package com.alexecollins.docker.task;
 
-import com.alexecollins.docker.model.Id;
 import com.alexecollins.docker.component.Repo;
+import com.alexecollins.docker.model.Id;
 import com.kpelykh.docker.client.DockerClient;
 import com.kpelykh.docker.client.DockerException;
 import com.kpelykh.docker.client.model.ContainerConfig;
@@ -10,7 +10,6 @@ import com.kpelykh.docker.client.model.Ports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.List;
 
 public class StartTask {
@@ -23,7 +22,7 @@ public class StartTask {
         this.repo = repo;
     }
 
-    public void execute(Id id) throws DockerException, IOException {
+    public void execute(Id id) throws DockerException {
 
         // only start
         if (repo.findContainer(id) == null) {
@@ -34,14 +33,14 @@ public class StartTask {
 
             LOGGER.info(" - volumes from " + repo.conf(id).volumesFrom);
 
-            docker.createContainer(config, repo.imageName(id));
+            docker.createContainer(config, repo.containerName(id));
         }
 
         LOGGER.info("starting " + id);
         docker.startContainer(repo.findContainer(id).getId(), newHostConfig(id));
     }
 
-    private HostConfig newHostConfig(Id id) throws IOException {
+    private HostConfig newHostConfig(Id id) {
         final HostConfig config = new HostConfig();
 
         config.setPublishAllPorts(true);
@@ -68,7 +67,7 @@ public class StartTask {
         return config;
     }
 
-    private String[] links(Id id) throws IOException {
+    private String[] links(Id id) {
 
         final List<Id> links = repo.conf(id).links;
         final String[] out = new String[links.size()];

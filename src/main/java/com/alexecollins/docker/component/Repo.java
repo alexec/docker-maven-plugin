@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import static java.util.Arrays.asList;
+
+@SuppressWarnings("CanBeFinal")
 public class Repo {
 
     private static ObjectMapper MAPPER = new ObjectMapper(new YAMLFactory());
@@ -21,6 +24,7 @@ public class Repo {
     private final File src;
     private final Map<Id, Conf> confs = new HashMap<Id, Conf>();
 
+    @SuppressWarnings("ConstantConditions")
     public Repo(DockerClient docker, String prefix, File src) throws IOException {
         this.docker = docker;
         this.prefix = prefix;
@@ -34,22 +38,27 @@ public class Repo {
         }
     }
 
-
-    public String imageName(Id id) {
-        return prefix + "-" + id;
+    String imageName(Id id) {
+        return "/" + prefix + "-" + id;
     }
 
-    public List<Container> findContainers(Id id, boolean allContainers) throws IOException {
+    public String containerName(Id id) {
+        return "/" + prefix + "-" + id;
+    }
+
+    public List<Container> findContainers(Id id, boolean allContainers) {
         final List<Container> strings = new ArrayList<Container>();
         for (Container container : docker.listContainers(allContainers)) {
-            if (container.getImage().equals(imageName(id) + ":latest")) {
+            System.out.println(container.getImage() + ".equals(" + imageName(id) + ")");
+            System.out.println(asList(container.getNames()) + ".contains(" + containerName(id) + ")");
+            if (container.getImage().equals(imageName(id)) || asList(container.getNames()).contains(containerName(id))) {
                 strings.add(container);
             }
         }
         return strings;
     }
 
-    public Container findContainer(Id id) throws IOException {
+    public Container findContainer(Id id) {
         final List<Container> containerIds = findContainers(id, true);
         return containerIds.isEmpty() ? null : containerIds.get(0);
     }

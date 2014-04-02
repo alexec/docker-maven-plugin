@@ -18,25 +18,34 @@ import java.net.URI;
 
 abstract class AbstractDockerMojo extends AbstractMojo {
     static final String DEFAULT_HOST = "http://127.0.0.1:4243";
-
+    DockerClient docker;
+    File workDir;
+    Repo repo;
     /**
      * The host, e.g. -Ddocker.host=http://127.0.0.1:4243
      */
     @Parameter(defaultValue = DEFAULT_HOST, property = "docker.host", required = true)
     private URI host;
-
     /**
      * A prefix to namespace scope machine. Important for isolating machines.
      */
     @Parameter(defaultValue = "${project.artifactId}", property = "docker.prefix", required = true)
-    protected String prefix;
-
+    private String prefix;
     @Component
-    protected MavenProject project;
+    private MavenProject project;
 
-    protected DockerClient docker;
-    protected File workDir;
-    protected Repo repo;
+    static DockerClient createDocker(URI host) throws NoSuchFieldException, IllegalAccessException {
+        final DockerClient docker = new DockerClient(host.toString());
+
+        // hack logging
+        final Field field = docker.getClass().getDeclaredField("client");
+        field.setAccessible(true);
+        final Client client = (Client) field.get(docker);
+        client.removeAllFilters();
+        client.addFilter(new JsonClientFilter());
+
+        return docker;
+    }
 
     @Override
     public final void execute() throws MojoExecutionException, MojoFailureException {
@@ -56,25 +65,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
             workDir = new File(project.getBuild().getDirectory(), "docker");
             doExecute();
         } catch (Exception e) {
-            throw (e instanceof MojoExecutionException ? (MojoExecutionException) e : new MojoExecutionException(e.getMessage(), e));
+            throw new MojoExecutionException(e.getMessage(), e);
         }
     }
 
     private File src() {
         return new File(project.getBasedir(), "src/main/docker");
-    }
-
-    static DockerClient createDocker(URI host) throws NoSuchFieldException, IllegalAccessException {
-        final DockerClient docker = new DockerClient(host.toString());
-
-        // hack logging
-        final Field field = docker.getClass().getDeclaredField("client");
-        field.setAccessible(true);
-        final Client client = (Client) field.get(docker);
-        client.removeAllFilters();
-        client.addFilter(new JsonClientFilter());
-
-        return docker;
     }
 
     protected abstract void doExecute() throws Exception;

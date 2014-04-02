@@ -5,6 +5,7 @@ import org.apache.maven.plugin.logging.Log;
 
 public class MavenLogAppender<E> extends AppenderBase<E> {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private static Log log;
 
     public static void setLog(Log log) {
@@ -13,7 +14,6 @@ public class MavenLogAppender<E> extends AppenderBase<E> {
 
     @Override
     protected void append(E eventObject) {
-        //log.info(eventObject.toString())
-        // ;
+        log.info(eventObject.toString());
     }
 }

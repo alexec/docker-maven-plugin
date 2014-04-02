@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  */
 public class ConfTest {
-    private static ObjectMapper MAPPER = new ObjectMapper(new YAMLFactory());
+    private static final ObjectMapper MAPPER = new ObjectMapper(new YAMLFactory());
 
     @Test
     public void test() throws Exception {

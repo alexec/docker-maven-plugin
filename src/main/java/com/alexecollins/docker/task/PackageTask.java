@@ -1,7 +1,7 @@
 package com.alexecollins.docker.task;
 
-import com.alexecollins.docker.model.Id;
 import com.alexecollins.docker.component.Repo;
+import com.alexecollins.docker.model.Id;
 import com.kpelykh.docker.client.DockerClient;
 import com.kpelykh.docker.client.DockerException;
 import com.sun.jersey.api.client.ClientResponse;
@@ -12,12 +12,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 
 import static org.apache.commons.io.FileUtils.copyDirectory;
 import static org.apache.commons.io.FileUtils.copyFileToDirectory;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.io.IOUtils.copyLarge;
-import static org.apache.commons.lang.StringUtils.substringBetween;
 
 public class PackageTask {
     private static final Logger LOGGER = LoggerFactory.getLogger(PackageTask.class);
@@ -51,13 +51,14 @@ public class PackageTask {
         return destDir;
     }
 
-    private String build(File dockerFolder, Id name) throws DockerException, IOException {
+    @SuppressWarnings(("DM_DEFAULT_ENCODING"))
+    private void build(File dockerFolder, Id id) throws DockerException, IOException {
 
-        final ClientResponse response = docker.build(dockerFolder, repo.imageName(name));
+        final ClientResponse response = docker.build(dockerFolder, repo.containerName(id));
 
         final StringWriter out = new StringWriter();
         try {
-            copyLarge(new InputStreamReader(response.getEntityInputStream()), out);
+            copyLarge(new InputStreamReader(response.getEntityInputStream(), Charset.defaultCharset()), out);
         } finally {
             closeQuietly(response.getEntityInputStream());
         }
@@ -68,7 +69,7 @@ public class PackageTask {
         }
 
         // imageId
-        return substringBetween(log, "Successfully built ", "\\n\"}").trim();
+        // return substringBetween(log, "Successfully built ", "\\n\"}").trim();
     }
 
 }

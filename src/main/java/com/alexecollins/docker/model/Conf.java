@@ -7,6 +7,7 @@ import java.util.List;
 
 import static java.util.Collections.emptyList;
 
+@SuppressWarnings("CanBeFinal")
 public class Conf {
     @JsonProperty(required = false)
     public List<Id> links = emptyList();

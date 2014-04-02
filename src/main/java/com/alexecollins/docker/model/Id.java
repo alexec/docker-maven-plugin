@@ -19,9 +19,8 @@ public class Id {
 
         Id id = (Id) o;
 
-        if (!value.equals(id.value)) return false;
+        return value.equals(id.value);
 
-        return true;
     }
 
     @Override
