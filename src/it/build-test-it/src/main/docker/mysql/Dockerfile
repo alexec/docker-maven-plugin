@@ -1,6 +1,6 @@
 FROM centos
 
-VOLUME /var/lib/mysql
+#VOLUME /var/lib/mysql
 
 RUN yum -y install mysql-server
 RUN touch /etc/sysconfig/network
