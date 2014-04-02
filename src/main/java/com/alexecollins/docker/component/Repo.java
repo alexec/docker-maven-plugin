@@ -39,18 +39,16 @@ public class Repo {
     }
 
     String imageName(Id id) {
-        return "/" + prefix + "-" + id;
+        return "/" + prefix + "_" + id;
     }
 
     public String containerName(Id id) {
-        return "/" + prefix + "-" + id;
+        return "/" + prefix + "_" + id;
     }
 
     public List<Container> findContainers(Id id, boolean allContainers) {
         final List<Container> strings = new ArrayList<Container>();
         for (Container container : docker.listContainers(allContainers)) {
-            System.out.println(container.getImage() + ".equals(" + imageName(id) + ")");
-            System.out.println(asList(container.getNames()) + ".contains(" + containerName(id) + ")");
             if (container.getImage().equals(imageName(id)) || asList(container.getNames()).contains(containerName(id))) {
                 strings.add(container);
             }

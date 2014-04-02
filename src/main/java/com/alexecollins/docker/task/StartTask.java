@@ -10,6 +10,7 @@ import com.kpelykh.docker.client.model.Ports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StartTask {
@@ -29,15 +30,24 @@ public class StartTask {
             LOGGER.info("creating " + id);
             final ContainerConfig config = new ContainerConfig();
             config.setImage(repo.findImage(id).getId());
-            config.setVolumesFrom(repo.conf(id).volumesFrom.toString().replaceAll("[ \\[\\]]", ""));
+            config.setVolumesFrom(volumesFrom(id).toString().replaceAll("[ \\[\\]]", ""));
 
-            LOGGER.info(" - volumes from " + repo.conf(id).volumesFrom);
+            LOGGER.info(" - volumes from " + volumesFrom(id));
 
             docker.createContainer(config, repo.containerName(id));
         }
 
         LOGGER.info("starting " + id);
         docker.startContainer(repo.findContainer(id).getId(), newHostConfig(id));
+    }
+
+    private List<Id> volumesFrom(Id id) {
+        final List<Id> ids = new ArrayList<Id>();
+        for (Id from : repo.conf(id).volumesFrom) {
+            ids.add(new Id(repo.findContainer(from).getId()));
+        }
+
+        return ids;
     }
 
     private HostConfig newHostConfig(Id id) {
