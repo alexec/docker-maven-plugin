@@ -4,25 +4,29 @@ Docker Maven Plugin
 ===
 Project Goal:
 
-* Make it easy to build an app on a container, test it and push it a Docker repository, even if it relies on other containers (e.g. a database)
+* Make it easy to build an app on a container, test it and push it to a Docker repository, even if it relies on other containers (e.g. a database)
 * Talk "Maven" rather than "Docker" (E.g. "package" rather than "build").
 * Keep it simple.
 
 Pre-requisites
 ---
-Docker installed and Docker daemon running.
+Docker installed and Docker daemon running, see the docker [getting started guide](https://www.docker.io/gettingstarted/).
 
 Usage
 ---
-The best example to look at is the [one from the tests](src/it/build-test-it) which creates a Drop-Wizard app and builds three containers: a data only, a MySQL and an application containers, and then runs an integration test against the deployed app. Et voila a packaged image!
+The best example to look at is the [one from the tests](src/it/build-test-it) which creates a [Drop-Wizard](https://dropwizard.github.io/dropwizard/) app and builds three containers: __app__ (the dropwizard application) __data__ and __mysql__, and then runs an integration test against the deployed app. Et voila a packaged image!
 
-Typically, you build your app, run you standard unit tests and package it as usual. Then, you build a container with your app deployed onto it, and run integration tests against it. If they pass, deploy your jar into the Maven repository, and optionally, your image into a Docker repository.
+Typically, you build your app, run your standard unit tests and package it as usual. Then, you build a container with your app deployed onto it, and run integration tests against it. If they pass, deploy your jar into the Maven repository, and optionally, your image into a Docker repository.
 
-You need the following files:
+To use the plugin, you need to define a docker directory in ${basedir}/src/main which will include a subdirectory for each container that you wish to deploy.
 
-- `src/main/docker/` contains one folder per container.
-    - `Dockerfile` a standard Docker file.
-    - `conf.yml` configuration:
+- `src/main/docker/` contains one folder per container for e.g. the mysql container would have a folder structure as follows:
+    - mysql
+        - `Dockerfile` a standard Docker file.
+        - `conf.yml` configuration:
+    - ...
+        - `Dockerfile` a standard Docker file.
+        - `conf.yml` configuration:
 
 ```yml
 # additional data require to create the Docker image
