@@ -10,7 +10,7 @@ Project Goal:
 
 Pre-requisites
 ---
-Docker installed and Docker daemon running, see the docker [getting started guide](https://www.docker.io/gettingstarted/).
+Docker installed and Docker daemon running, see the docker [getting started guide](https://www.docker.io/gettingstarted/) for e.g. on a mac follow these [instructions](http://docs.docker.io/en/latest/installation/mac/).
 
 Usage
 ---
@@ -42,6 +42,50 @@ ports:
 links:
   - mysql
  ```
+
+
+Trivial Example
+---
+Create a default maven project for e.g.
+
+      mvn archetype:generate -DgroupId=com.example -DartifactId=helloworld -DpackageName=com.example -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -Dversion=1.0-SNAPSHOT
+
+Add the following to the pom.xml
+
+ ```pom
+    <build>
+        ...
+        <plugins>
+            ...
+            <plugin>
+                <groupId>com.alexecollins.docker</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.8.3-SNAPSHOT</version>
+            </plugin>
+        </plugins>
+    </build>
+ ```
+
+Create your ${basedir}/src/main/docker directory and create a subfolder for your application container
+
+     mkdir -p src/main/docker/app
+
+Define your Dockerfile and conf.yml and place in ${basedir}/src/main/docker/app
+
+ ```tree
+    src/main/docker/app
+    ├── Dockerfile
+    └── conf.yml
+ ```
+
+You can now invoke functionality from the plugin, information on the plugin can be found by running the following command
+
+     mvn help:describe -DgroupId=com.alexecollins.docker -DartifactId=docker-maven-plugin -Dversion=0.8.3-SNAPSHOT
+
+For e.g. to build containers from their Dockerfile and conf.yml files, run the following command
+
+     mvn docker:package
+
 
 TODO
 ---
