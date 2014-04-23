@@ -5,6 +5,7 @@ import com.alexecollins.docker.model.Id;
 import com.kpelykh.docker.client.DockerClient;
 import com.kpelykh.docker.client.DockerException;
 import com.sun.jersey.api.client.ClientResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 
+import static org.apache.commons.io.FileUtils.copyDirectoryToDirectory;
 import static org.apache.commons.io.FileUtils.copyDirectory;
 import static org.apache.commons.io.FileUtils.copyFileToDirectory;
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -44,12 +46,24 @@ public class PackageTask {
         copyDirectory(dockerFolder, destDir);
         // copy files
         for (String file : repo.conf(id).packaging.add) {
-            LOGGER.info(" - add " + file);
-            copyFileToDirectory(new File(file), destDir);
+            File fileEntry = new File(file);
+            copyFileEntry(destDir, fileEntry);
         }
 
         return destDir;
     }
+
+    private void copyFileEntry(final File destDir, File fileEntry) throws IOException {
+      if(fileEntry.isDirectory()) {
+        LOGGER.info(" - add (dir) " + fileEntry.getAbsolutePath());
+        copyDirectoryToDirectory(fileEntry, destDir); 
+      }
+      else {
+        LOGGER.info(" - add (file) " + fileEntry.getAbsolutePath());
+        copyFileToDirectory(fileEntry, destDir);
+      }
+    }
+    
 
     @SuppressWarnings(("DM_DEFAULT_ENCODING"))
     private void build(File dockerFolder, Id id) throws DockerException, IOException {
