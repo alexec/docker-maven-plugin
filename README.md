@@ -1,4 +1,4 @@
-[![Build Status](https://drone.io/github.com/alexec/docker-maven-plugin/status.png)](https://drone.io/github.com/alexec/docker-maven-plugin/latest)
+[![Build Status](https://travis-ci.org/alexec/docker-maven-plugin.svg?branch=master)](https://travis-ci.org/alexec/docker-maven-plugin)
 
 Docker Maven Plugin
 ===
@@ -18,7 +18,7 @@ The best example to look at is the [one from the tests](src/it/build-test-it) wh
 
 Typically, you build your app, run your standard unit tests and package it as usual. Then, you build a container with your app deployed onto it, and run integration tests against it. If they pass, deploy your jar into the Maven repository, and optionally, your image into a Docker repository.
 
-To use the plugin, you need to define a docker directory in ${basedir}/src/main which will include a subdirectory for each container that you wish to deploy.
+To use the plugin, you need to define a docker directory in `${basedir}/src/main` which will include a subdirectory for each container that you wish to deploy.
 
 - `src/main/docker/` contains one folder per container for e.g. the mysql container would have a folder structure as follows:
     - mysql
@@ -50,9 +50,23 @@ Create a default maven project for e.g.
 
       mvn archetype:generate -DgroupId=com.example -DartifactId=helloworld -DpackageName=com.example -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -Dversion=1.0-SNAPSHOT
 
-Add the following to the pom.xml
+Add the following to the `pom.xml`
 
  ```pom
+     <repositories>
+         <repository>
+             <id>sonatype-nexus-snapshots</id>
+             <name>Sonatype Nexus Snapshots</name>
+             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+             <releases>
+                 <enabled>false</enabled>
+             </releases>
+             <snapshots>
+                 <enabled>true</enabled>
+             </snapshots>
+         </repository>
+     </repositories>
+     ...
     <build>
         ...
         <plugins>
@@ -60,13 +74,13 @@ Add the following to the pom.xml
             <plugin>
                 <groupId>com.alexecollins.docker</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.8.3-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </plugin>
         </plugins>
     </build>
  ```
 
-Create your ${basedir}/src/main/docker directory and create a subfolder for your application container
+Create your `${basedir}/src/main/docker` directory and create a subfolder for your application container
 
      mkdir -p src/main/docker/app
 
@@ -80,23 +94,26 @@ Define your Dockerfile and conf.yml and place in ${basedir}/src/main/docker/app
 
 You can now invoke functionality from the plugin, information on the plugin can be found by running the following command
 
-     mvn help:describe -DgroupId=com.alexecollins.docker -DartifactId=docker-maven-plugin -Dversion=0.8.3-SNAPSHOT
+     mvn docker:help
 
-For e.g. to build containers from their Dockerfile and conf.yml files, run the following command
+For e.g. to build containers from their `Dockerfile` and `conf.yml` files, run the following command
 
      mvn docker:package
-
 
 TODO
 ---
 * Filter resources to add properties (e.g ${project.version}).
-* Set the name of the container.
 * Wait for the service on the container to start.
 * Add support for pushing tested containers.
 
-Notes to self:
+Tear down Docker:
 
 	docker ps -a -q | xargs docker rm
+	docker images -a -q | xargs docker rmi
+	
+Port forward:
+
+	VBoxManage controlvm boot2docker-vm natpf1 "8080,tcp,127.0.0.1,8080,,8080"
 
 References
 ---

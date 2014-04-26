@@ -1,7 +1,0 @@
-image: openjdk7
-script:
-  - mvn -q verify 
-notify:
-  email:
-    recipients:
-      - alex.e.c@gmail.com
