@@ -1,8 +1,6 @@
 package com.alexecollins.docker.mojo;
 
-import com.alexecollins.docker.model.Id;
-import com.alexecollins.docker.task.PackageTask;
-import com.alexecollins.docker.task.StartTask;
+import com.alexecollins.docker.orchestration.DockerOrchestrator;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -13,14 +11,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 public class StartMojo extends AbstractDockerMojo {
 
     @Override
-    protected void doExecute() throws Exception {
-        final PackageTask packageTask = new PackageTask(docker, repo, workDir);
-        final StartTask startTask = new StartTask(docker, repo);
-        for (Id id : repo.ids(false)) {
-            if (repo.findImage(id) == null) {
-                packageTask.execute(id);
-            }
-            startTask.execute(id);
-        }
+    protected void doExecute(DockerOrchestrator orchestrator) {
+        orchestrator.start();
     }
 }

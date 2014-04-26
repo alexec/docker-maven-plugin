@@ -68,17 +68,8 @@
                 <version>@project.version@</version>
                 <executions>
                     <execution>
-                        <id>version</id>
                         <goals>
-                            <goal>version</goal>
-                        </goals>
-                        <phase>initialize</phase>
-                        <configuration>
-                            <host>http://localhost:4243</host>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <goals>
+                            <goal>help</goal>
                             <goal>clean</goal>
                             <goal>package</goal>
                             <goal>start</goal>

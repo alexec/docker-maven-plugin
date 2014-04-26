@@ -1,7 +1,6 @@
 package com.alexecollins.docker.mojo;
 
-import com.alexecollins.docker.model.Id;
-import com.alexecollins.docker.task.PackageTask;
+import com.alexecollins.docker.orchestration.DockerOrchestrator;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -13,12 +12,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 public class PackageMojo extends AbstractDockerMojo {
 
     @Override
-    protected void doExecute() throws Exception {
-
-        final PackageTask task = new PackageTask(docker, repo, workDir);
-
-        for (Id id : repo.ids(false)) {
-            task.execute(id);
-        }
+    protected void doExecute(DockerOrchestrator orchestrator) {
+	    orchestrator.build();
     }
 }

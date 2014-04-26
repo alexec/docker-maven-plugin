@@ -1,6 +1,7 @@
-package com.alexecollins.docker.component;
+package com.alexecollins.docker.orchestration;
 
-import com.alexecollins.docker.model.Id;
+import com.alexecollins.docker.orchestration.model.Id;
+import com.kpelykh.docker.client.DockerClient;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class RepoTest {
 
     @Before
     public void setUp() throws Exception {
-        sut = new Repo(null, null, new File("src/test/docker"));
+        sut = new Repo(new DockerClient("http://localhost:4240"), "test", new File("."));
     }
 
     @Test

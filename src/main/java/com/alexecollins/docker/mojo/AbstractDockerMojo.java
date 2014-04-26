@@ -1,7 +1,7 @@
 package com.alexecollins.docker.mojo;
 
+import com.alexecollins.docker.orchestration.DockerOrchestrator;
 import com.alexecollins.docker.util.MavenLogAppender;
-import com.alexecollins.docker.component.Repo;
 import com.kpelykh.docker.client.DockerClient;
 import com.kpelykh.docker.client.utils.JsonClientFilter;
 import com.sun.jersey.api.client.Client;
@@ -18,9 +18,7 @@ import java.net.URI;
 
 abstract class AbstractDockerMojo extends AbstractMojo {
     static final String DEFAULT_HOST = "http://127.0.0.1:4243";
-    DockerClient docker;
-    File workDir;
-    Repo repo;
+
     /**
      * The host, e.g. -Ddocker.host=http://127.0.0.1:4243
      */
@@ -52,26 +50,21 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         MavenLogAppender.setLog(getLog());
 
         try {
-            docker = createDocker(host);
-            repo = new Repo(docker, prefix, src());
-
-            final File src = repo.src();
-
-            if (!src.isDirectory()) {
-                getLog().warn(src.getAbsolutePath() + " does not exist, or is not dir, skipping");
-                return;
-            }
-
-            workDir = new File(project.getBuild().getDirectory(), "docker");
-            doExecute();
+	        final DockerClient docker = createDocker(host);
+	        getLog().info("Docker version " + docker.version().getApiVersion());
+	        doExecute(new DockerOrchestrator(docker, src(), workDir(), prefix));
         } catch (Exception e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
     }
 
-    private File src() {
+	private File workDir() {
+		return new File(project.getBuild().getDirectory(), "docker");
+	}
+
+	private File src() {
         return new File(project.getBasedir(), "src/main/docker");
     }
 
-    protected abstract void doExecute() throws Exception;
+    protected abstract void doExecute(DockerOrchestrator orchestrator) throws Exception;
 }

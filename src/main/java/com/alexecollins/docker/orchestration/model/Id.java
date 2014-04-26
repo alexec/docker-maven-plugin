@@ -1,4 +1,4 @@
-package com.alexecollins.docker.model;
+package com.alexecollins.docker.orchestration.model;
 
 public class Id {
     private final String value;

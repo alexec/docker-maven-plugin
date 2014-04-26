@@ -1,4 +1,4 @@
-package com.alexecollins.docker.model;
+package com.alexecollins.docker.orchestration.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
