@@ -1,19 +1,12 @@
 language: java
-before_script:
-  - sudo apt-get install -qy socat
-  - "printf -- '-----BEGIN CERTIFICATE-----\nMIIC+TCCAeGgAwIBAgIJAJexZ2eYgytbMA0GCSqGSIb3DQEBBQUAMBIxEDAOBgNV\nBAMMB3Nub3JrZWwwIBcNMTMxMTI3MTkzODM0WhgPMjExMzExMjgxOTM4MzRaMBIx\nEDAOBgNVBAMMB3Nub3JrZWwwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB\nAQDIlXBfbz4wYEMsqkhb7Gy3K/5Yrf4prI/8iQkr5jxEmA6O7FmfnF1c87/dRSfj\nksCQ1pn01aGWnbIgAfcKDNJIxPuPpXveyqSYq+QIHto5OMLuXVkPuxBgJHM3tyl7\nZZ2nYfzM3WtVeCO44gr75f5qcbwEoUc7t+8mDJ2nS5MTrpk8y5Wc3ax2KoTMEPIA\n0yhvv1LatZvBYpY9bZ6K2ZSM8xN6C8iW7JEcAnXdqM/GsvaXPtR6X5JZW2lvTmUJ\nfWcgTcLho4J7Dnv51H+rxT6vIhTDL57rfj5PivokOFvjeqY/Xz2a9+OlyZA5Wl/g\nNvqpZutKHL5D8u3Rqnvzt01tAgMBAAGjUDBOMB0GA1UdDgQWBBQVf8DP3lBHZwqB\nTU9mEqAgBK83xzAfBgNVHSMEGDAWgBQVf8DP3lBHZwqBTU9mEqAgBK83xzAMBgNV\nHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4IBAQCgOA8ABd+bYi4b2li6KNynPj8A\nJ7Cs3SiDbwS73f2l2EnZIqPUes+GHmFJ9vCGtvXJMrZKbDR4rCS7ecY1qGsSRNvI\nY2DaNl+SEVW1+KJ/2RFPT0k4o+drEtXouAqKoUmynz5Wgqh6vYiepmi4f9csZ7sz\nIL4KxZComj0fxGXjn7srpSZFkWjN5d8LMhSV8vD7tz4Fv39tSp+4W1JNu+lOt0Ry\n1IudLOD6rQGCAtgwUuMAynOcK7wt1DeCJRcD5oPnTC1VjdBHfn2CilF6RdZQd0rl\nsnb6DrWiz1Aj7EdnbuaW4i7MUKZptN9/XsPHbT0oBtSLBlmu71o8bpBRUHvI\n-----END CERTIFICATE-----\n' >/tmp/cert.pem"
-  - "printf -- '-----BEGIN RSA PRIVATE KEY-----\nProc-Type: 4,ENCRYPTED\nDEK-Info: DES-EDE3-CBC,A61C5C811E411D18\n\nQA2FJLBz0ebAbaOLMJ31ve3tSTqxaF68ch38fw1RRQCNpmPoAD7hJmbE7u8T7mK/\nUx71htMFH9E+cakQWy+FwQVlCQQeXfuAO0uz/0epDmD9hNmK9S667OWRM+nc5shu\nc5tTbVj3mEkHO/VXEgUyhZFuRce+1visum2uGNFA7D2GeftG7iPMUqKHP39MHxYC\no+sV7CbZqwEtW0EfywF2xwdnr/TkoDnVmLFK0oE+axj2cDQ5VYlBIVa2769Z8G0G\n4xYLykw6SjYHohzvljJjbS7Y+Od5vywNsfq4DqbLWZPhSaj761bBWkAc8vC5mT3E\nM0ScbHhtV98gVweIyDMOV06yvMHBOnuSOpz0XXCLmIyvpkx19JXFeEBOLNu1fFss\n3mw1c5hXC8RohpZhd214B1jBhMMLgP7KHDmI6tCPxss1/yYSYPAIeJZzt6u0d5Xz\n5HWTjrSSo0OotDge5q23KwjkkKMnDaj1PYeGjNtAhfmZW9YeMqXBT2oFReS7C4/1\nXSS1n+xwoinhimxBnyRf4flhfSIlhUrWJ1qgMvEQ2eRDW4RpAyRMh6xAkEYX2D5Q\nwFLs+SvLc6W7ecOELGjGObKvkBk4H0cHlH9nNXOz20HNo0FxRtK1bUE8dyW+sB2n\nPfoiq8FxDWfVzzqBN9DKSz/UhhXy+dd0nK+nGWwz/hFkKKnqaq/aS9L5gaPYaqKa\n2oBDc1HhX1C4Uyz32Kln3ZjBcRNjK0bvU6tENfhWz0q9OdAKDF6gprUNKAoprDG2\naQIEOjFtzXULmyaxhMdm1PsZJjNKjCJ/iPJi4w+daQi820/HQ22ryXukeLf83gmv\nu5Qz88n3A98R70UKOjIL+zqPS39nAg7+ZfwnqlZDUiHK7hExLNW5xtosaA4wFABP\nXyI6CykvXTSvVJPglt/PIT2SrzDxqZvpmCvVtrD0BYL1WRjDKKeUXAMFOgOsnryi\n54AbyrQq3T36+KrHuG1yGGqQzPYuaXlOomqvSHk92/m6rN7G2bh24MURm+AwGYqv\nO9Rh+EKC+QD2TAsZwyCQqZh7V6bSnlt0b5ofJC7gfjQcBhU/lGkcLpkwdP9wlzcE\nf8ploR3K/bSAKVpiyPscovkauaL1dgorov+xrpqPalYM67jFfeJwI8VgI5p6rgjF\nX1rvPkndlq2an66R1ro1h+0FWSvBjqKlrO2K7FwvMcSTD1Lb76uXesSd0AK1Lv07\nWsFi3cmPLYIH3FqLjrqGqd//t1oLk7a4fJ9fiyyNGuTZdJKodNtYN9bQXbIEeVAn\n/gqrQAHrfxR+lCpmMDytjL2kvR7C5hVdQueW1DBcXramTfGXUID2MUhRtyh5R0YR\nMjRct3a//dA25zm1pEqMcJ37G0DMOec47MMNXxrtRQ4p9FjAy2SxpvLmZQzAdbD/\nsfvw+6VgBiGIoUc6uOjDNW2y17RqRGQT6mFRgJ75GHlNzydYRLfUyeRNWchie2wj\n9Vt1v1ATMKkPFvVAJuiHjAN+GScnRDjvJ6DDmBcVmAeJ/jwFWDyNEkYh9jlhZeKe\nM9uCn/w1dyZmqIQDW6+26qZKDqeReOeuhZ71jqu4TQFPQHunx/mtK3qn2CeOXgms\n-----END RSA PRIVATE KEY-----\n' >/tmp/key.pem.crypt"
-  - openssl rsa -in /tmp/key.pem.crypt -passin env:PASSPHRASE -out /tmp/key.pem
-  - socat UNIX-LISTEN:/tmp/docker.sock,fork OPENSSL:$REMOTE,cert=/tmp/cert.pem,cafile=/tmp/cert.pem,key=/tmp/key.pem & sleep 1
-  - wget https://get.docker.io/builds/Linux/x86_64/docker-latest -O /tmp/docker
-  - chmod +x /tmp/docker
-  - /tmp/docker -H unix:///tmp/docker.sock build -t docker .
-  - /tmp/docker -H unix:///tmp/docker.sock run -i -privileged docker hack/make.sh test | tee /tmp/test.log
+install:
+  - sudo sh -c "wget -qO- https://get.docker.io/gpg | apt-key add -"
+  - sudo sh -c "echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+  - sudo apt-get update
+  - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
+  - sudo chmod +x /usr/sbin/policy-rc.d
+  - sudo apt-get install -qy slirp lxc lxc-docker
 script: mvn verify -Prun-its
 notifications:
   email:
     - alex.e.c@gmail.com
-env:
-  global:
-    - secure: "n6kRDLJaWVmgEyJSs2cxFipzbUnQu4is3z+1If5QhEKiaP8+Md5HAO5TF+pCXwt+4g8/zjH390YZUt+v5ndoS1FyvnaY8e76dbi56hGZucueOFxJ+C9d1OqT2zodvpS9/DZYtyfnBrBqJCEAbCiB+OuCAwFRKINX/F0dDufkxk0="
-    - secure: "fw/MLhIljrejMUUjVFNTPDH0qQ04aDEWEAksxJMxWnNQIaRTCQH0i41CZp6RRTLll2eZ7p90R08oRtSFhM0AHZ95IQnZSEgUiRZUOWn7HZHgIy12CNHZvmodJkB8gnkh94vBDanl3vx45Tvpxfbx3gUyCdVjGYeY0b2GMooH2+w="
