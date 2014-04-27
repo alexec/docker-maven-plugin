@@ -35,7 +35,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 		try {
 			final DockerClient docker = new DockerClient(host.toString());
 			getLog().info("Docker version " + docker.version().getApiVersion());
-			doExecute(new DockerOrchestrator(docker, src(), workDir(), prefix));
+			doExecute(new DockerOrchestrator(docker, src(), workDir(), prefix, null));
 		} catch (Exception e) {
 			throw new MojoExecutionException(e.getMessage(), e);
 		}
