@@ -74,6 +74,7 @@
                             <goal>package</goal>
                             <goal>start</goal>
                             <goal>stop</goal>
+                            <goal>deploy</goal>
                         </goals>
                     </execution>
                 </executions>
