@@ -3,7 +3,7 @@
 <configuration>
 
     <appender name="MAVEN" class="com.alexecollins.docker.util.MavenLogAppender">
-    <encoder>
+        <encoder>
             <pattern>%msg%n</pattern>
         </encoder>
     </appender>
@@ -16,7 +16,7 @@
         </encoder>
     </appender>
 
-    <root level="warn" additivity="false">
+    <root level="info" additivity="false">
         <appender-ref ref="MAVEN"/>
     </root>
 
