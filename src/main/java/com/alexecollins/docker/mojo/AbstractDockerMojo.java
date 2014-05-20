@@ -20,11 +20,19 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = DockerOrchestrator.DEFAULT_HOST, property = "docker.host", required = true)
 	private URI host;
+
 	/**
 	 * A prefix to namespace scope machine. Important for isolating machines.
 	 */
 	@Parameter(defaultValue = "${project.artifactId}", property = "docker.prefix", required = true)
 	private String prefix;
+
+    /**
+     * Where to look for directories containing Dockerfile and conf.yml
+     */
+    @Parameter(defaultValue = "src/main/docker", property = "docker.srcdir", required = true)
+    private String sourcesDirectory;
+
 	@Component
 	private MavenProject project;
 
@@ -46,7 +54,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	}
 
 	private File src() {
-		return new File(project.getBasedir(), "src/main/docker");
+		return new File(project.getBasedir(), sourcesDirectory);
 	}
 
 	protected abstract void doExecute(DockerOrchestrator orchestrator) throws Exception;
