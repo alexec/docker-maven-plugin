@@ -16,6 +16,8 @@
         </encoder>
     </appender>
 
+    <logger name="com.sun.jersey.api.client.filter.LoggingFilter" level="WARN"/>
+
     <root level="info" additivity="false">
         <appender-ref ref="MAVEN"/>
     </root>
