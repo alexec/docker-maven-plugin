@@ -30,8 +30,8 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     /**
      * Where to look for directories containing Dockerfile and conf.yml
      */
-    @Parameter(defaultValue = "src/main/docker", property = "docker.srcdir", required = true)
-    private String sourcesDirectory;
+    @Parameter(defaultValue = "src/main/docker", property = "docker.src", required = true)
+    private String src;
 
 	@Component
 	private MavenProject project;
@@ -54,7 +54,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	}
 
 	private File src() {
-		return new File(project.getBasedir(), sourcesDirectory);
+		return new File(project.getBasedir(), src);
 	}
 
 	protected abstract void doExecute(DockerOrchestrator orchestrator) throws Exception;

@@ -92,7 +92,7 @@ If you want to use generated container configuration files (say using property e
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
                 <configuration>
-                    <dockerSrcDir>target/docker-images</dockerSrcDir>
+                    <src>target/docker-images</src>
                 </configuration>
             </plugin>
  ```
