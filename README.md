@@ -84,6 +84,19 @@ Create your `${basedir}/src/main/docker` directory and create a subfolder for yo
 
      mkdir -p src/main/docker/app
 
+If you want to use generated container configuration files (say using property expansion via the [maven-resources-plugin](http://maven.apache.org/plugins/maven-resources-plugin/)) override the value of the docker container configuration folder with the location of your generated configuration folders.
+
+ ```pom
+            <plugin>
+                <groupId>com.alexecollins.docker</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <configuration>
+                    <dockerSrcDir>target/docker-images</dockerSrcDir>
+                </configuration>
+            </plugin>
+ ```
+ 
 Define your Dockerfile and conf.yml and place in ${basedir}/src/main/docker/app
 
  ```tree
