@@ -84,7 +84,7 @@ Create your `${basedir}/src/main/docker` directory and create a subfolder for yo
 
      mkdir -p src/main/docker/app
 
-If you want to use generated container configuration files (say using property expansion via the [maven-resources-plugin](http://maven.apache.org/plugins/maven-resources-plugin/)) override the value of the docker container configuration folder with the location of your generated configuration folders.
+If you want to use generated container configuration files (say using property expansion via the [maven-resources-plugin](http://maven.apache.org/plugins/maven-resources-plugin/)) override the `src` configuration property with the location of your generated configuration folders.
 
  ```pom
             <plugin>
