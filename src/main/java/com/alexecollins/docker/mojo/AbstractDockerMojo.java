@@ -18,19 +18,19 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	/**
 	 * The host, e.g. -Ddocker.host=http://127.0.0.1:4243
 	 */
-	@Parameter(defaultValue = DockerOrchestrator.DEFAULT_HOST, property = "docker.host", required = true)
+	@Parameter(defaultValue = DockerOrchestrator.DEFAULT_HOST, property = "docker.host")
 	private URI host;
 
 	/**
 	 * A prefix to namespace scope machine. Important for isolating machines.
 	 */
-	@Parameter(defaultValue = "${project.artifactId}", property = "docker.prefix", required = true)
+	@Parameter(defaultValue = "${project.artifactId}", property = "docker.prefix")
 	private String prefix;
 
     /**
      * Where to look for directories containing Dockerfile and conf.yml
      */
-    @Parameter(defaultValue = "src/main/docker", property = "docker.src", required = true)
+    @Parameter(defaultValue = "src/main/docker", property = "docker.src")
     private String src;
 
 	@Component
