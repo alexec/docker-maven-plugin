@@ -2,7 +2,8 @@
 packaging:
   # files to add to the build, usually used with ADD in the Dockerfile
   add:
-    - target/example-1.0-SNAPSHOT.jar
+    # the plugin always filters
+    - target/example-${project.version}.jar
     - hello-world.yml
 # optional list of port to expose on the host
 ports:
