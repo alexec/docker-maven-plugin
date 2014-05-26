@@ -11,3 +11,7 @@ ports:
 # containers that this should be linked to, started before this one and stopped afterwards
 links:
   - mysql
+healthChecks:
+  pings:
+    - url: http://localhost:8080/hello-world
+      timeout: 60000

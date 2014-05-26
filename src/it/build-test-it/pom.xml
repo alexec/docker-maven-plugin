@@ -66,6 +66,13 @@
                 <groupId>@project.groupId@</groupId>
                 <artifactId>@project.artifactId@</artifactId>
                 <version>@project.version@</version>
+                <configuration>
+                    <!-- your installed version -->
+                    <version>1.9</version>
+                    <!-- used for push -->
+                    <username>alexec</username>
+                    <email>alex.e.c@gmail.com</email>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

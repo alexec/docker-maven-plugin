@@ -8,6 +8,14 @@ Project Goal:
 * Talk "Maven" rather than "Docker" (E.g. "package" rather than "build").
 * Keep it simple.
 
+Goals
+---
+* `clean` - delete all containers and images for the project
+* `package` - builds the containers based on YAML configuration
+* `start` - start the containers in order and ensures they are running
+* `stop` - stop all running containers for the project
+* `deploy` - push containers to Docker repository
+
 Pre-requisites
 ---
 Docker installed and Docker daemon running, see the docker [getting started guide](https://www.docker.io/gettingstarted/) for e.g. on a mac follow these [instructions](http://docs.docker.io/en/latest/installation/mac/).
@@ -33,7 +41,7 @@ To use the plugin, you need to define a docker directory in `${basedir}/src/main
 packaging:
   # files to add to the build, usually used with ADD in the Dockerfile
   add:
-    - target/example-1.0-SNAPSHOT.jar
+    - target/example-${project.version}.jar
     - hello-world.yml
 # optional list of port to expose on the host
 ports:
@@ -41,6 +49,10 @@ ports:
 # containers that this should be linked to, started before this one and stopped afterwards
 links:
   - mysql
+healthCheck:
+  ping:
+    - url: http://localhost:8080/health-check
+      timeout: 60000
  ```
 
 
@@ -54,6 +66,17 @@ Add the following to the `pom.xml`
 
  ```pom
     <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype-nexus-releases</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
         <pluginRepository>
             <id>sonatype-nexus-snapshots</id>
             <name>Sonatype Nexus Snapshots</name>
@@ -74,7 +97,13 @@ Add the following to the `pom.xml`
             <plugin>
                 <groupId>com.alexecollins.docker</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <configuration>
+                    <!-- your installed version -->
+                    <version>1.9<version>
+                    <!-- used for push -->
+                    <username>alexec</username>
+                    <email>alex.e.c@gmail.com</email>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -83,19 +112,6 @@ Add the following to the `pom.xml`
 Create your `${basedir}/src/main/docker` directory and create a subfolder for your application container
 
      mkdir -p src/main/docker/app
-
-If you want to use generated container configuration files (say using property expansion via the [maven-resources-plugin](http://maven.apache.org/plugins/maven-resources-plugin/)) override the `src` configuration property with the location of your generated configuration folders.
-
- ```pom
-            <plugin>
-                <groupId>com.alexecollins.docker</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-                <configuration>
-                    <src>target/docker-images</src>
-                </configuration>
-            </plugin>
- ```
  
 Define your Dockerfile and conf.yml and place in ${basedir}/src/main/docker/app
 
@@ -115,7 +131,6 @@ For e.g. to build containers from their `Dockerfile` and `conf.yml` files, run t
 
 TODO
 ---
-* Filter resources to add properties (e.g ${project.version}).
 * Wait for the service on the container to start.
 * Add support for pushing tested containers.
 

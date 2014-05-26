@@ -9,12 +9,6 @@ import static org.hamcrest.CoreMatchers.containsString;
 
 public class HelloWorldServiceIT {
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        // sleep to allow container to start
-        Thread.sleep(60000);
-    }
-
     @Test
     public void test() throws Exception {
 

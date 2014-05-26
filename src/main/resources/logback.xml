@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--suppress XmlUnboundNsPrefix -->
-<configuration>
+<configuration debug="false">
 
     <appender name="MAVEN" class="com.alexecollins.docker.util.MavenLogAppender">
         <encoder>
@@ -16,7 +16,9 @@
         </encoder>
     </appender>
 
-    <logger name="com.sun.jersey.api.client.filter.LoggingFilter" level="WARN"/>
+    <logger name="com.sun.jersey.api.client.filter.LoggingFilter" additivity="false">
+        <appender-ref ref="DEBUG"/>
+    </logger>
 
     <root level="info" additivity="false">
         <appender-ref ref="MAVEN"/>

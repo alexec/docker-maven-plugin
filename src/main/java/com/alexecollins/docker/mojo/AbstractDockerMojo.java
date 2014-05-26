@@ -1,9 +1,11 @@
 package com.alexecollins.docker.mojo;
 
 import com.alexecollins.docker.orchestration.DockerOrchestrator;
+import com.alexecollins.docker.orchestration.model.Credentials;
 import com.alexecollins.docker.orchestration.util.TextFileFilter;
 import com.alexecollins.docker.util.MavenLogAppender;
 import com.kpelykh.docker.client.DockerClient;
+import com.kpelykh.docker.client.DockerException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -35,6 +37,30 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	@Parameter(defaultValue = "src/main/docker", property = "docker.src")
 	private String src;
 
+	/**
+	 * Installed Docker version.
+	 */
+	@Parameter(property = "docker.version")
+	private String version;
+
+	/**
+	 * Docker username (for deploy).
+	 */
+	@Parameter(property = "docker.username")
+	private String username;
+
+	/**
+	 * Docker username (for deploy).
+	 */
+	@Parameter(property = "docker.password")
+	private String password;
+
+	/**
+	 * Docker email (for deploy).
+	 */
+	@Parameter(property = "docker.email")
+	private String email;
+
 	@Component
 	private MavenProject project;
 
@@ -48,12 +74,23 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 		getLog().info("properties filtering supported for " + properties.keySet());
 
 		try {
-			final DockerClient docker = new DockerClient(host.toString());
+			final DockerClient docker = dockerClient();
 			getLog().info("Docker version " + docker.version().getVersion());
-			doExecute(new DockerOrchestrator(docker, src(), workDir(), prefix, null, TextFileFilter.INSTANCE, properties));
+			doExecute(new DockerOrchestrator(docker, src(), workDir(), prefix, credentials(),
+					TextFileFilter.INSTANCE, properties));
 		} catch (Exception e) {
 			throw new MojoExecutionException(e.getMessage(), e);
 		}
+	}
+
+	private DockerClient dockerClient() throws DockerException {
+		return version != null
+				? new DockerClient(host.toString(), version)
+				: new DockerClient(host.toString());
+	}
+
+	private Credentials credentials() {
+		return (username != null || password != null || email != null) ? new Credentials(username, password, email) : null;
 	}
 
 	private Properties properties() {
