@@ -129,11 +129,8 @@ For e.g. to build containers from their `Dockerfile` and `conf.yml` files, run t
 
      mvn docker:package
 
-TODO
+Tips
 ---
-* Wait for the service on the container to start.
-* Add support for pushing tested containers.
-
 Tear down Docker:
 
 	docker ps -a -q | xargs docker rm
