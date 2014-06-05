@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.alexecollins.docker</groupId>
             <artifactId>docker-java-orchestration</artifactId>
-            <version>1.1.0</version>
+            <version>1.2.0-SNAPSHOT</version>
         </dependency>
         <!-- plugin -->
         <dependency>
@@ -155,6 +155,10 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
+            </plugin>
+            <plugin>
+              <artifactId>maven-deploy-plugin</artifactId>
+              <version>2.8.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
