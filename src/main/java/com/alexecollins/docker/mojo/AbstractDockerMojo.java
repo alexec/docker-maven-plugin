@@ -64,65 +64,69 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	@Component
 	private MavenProject project;
 
-	@Override
-	public final void execute() throws MojoExecutionException, MojoFailureException {
-		MavenLogAppender.setLog(getLog());
+    @Override
+    public final void execute() throws MojoExecutionException, MojoFailureException {
 
-		// not great eh
-		final Properties properties = properties();
+        MavenLogAppender.setLog(getLog());
+        // not great eh
+        final Properties properties = properties();
 
-		getLog().info("properties filtering supported for " + properties.keySet());
+        getLog().info("properties filtering supported for " + properties.keySet());
 
-		try {
-			final DockerClient docker = dockerClient();
-			getLog().info("Docker version " + docker.version().getVersion());
-			doExecute(new DockerOrchestrator(docker, src(), workDir(), prefix, credentials(),
-					TextFileFilter.INSTANCE, properties));
-		} catch (Exception e) {
-			throw new MojoExecutionException(e.getMessage(), e);
-		}
-	}
+        try {
+            final DockerClient docker = dockerClient();
+            getLog().info("Docker version " + docker.version().getVersion());
+            doExecute(new DockerOrchestrator(docker, src(), workDir(), projDir(), prefix, credentials(),
+                    TextFileFilter.INSTANCE, properties));
+        } catch (Exception e) {
+            throw new MojoExecutionException(e.getMessage(), e);
+        }
+    }
 
-	private DockerClient dockerClient() throws DockerException {
-		return version != null
-				? new DockerClient(host.toString(), version)
-				: new DockerClient(host.toString());
-	}
+    private DockerClient dockerClient() throws DockerException {
+        return version != null
+                ? new DockerClient(host.toString(), version)
+                : new DockerClient(host.toString());
+    }
 
-	private Credentials credentials() {
-		return (username != null || password != null || email != null) ? new Credentials(username, password, email) : null;
-	}
+    private Credentials credentials() {
+        return (username != null || password != null || email != null) ? new Credentials(username, password, email) : null;
+    }
 
-	private Properties properties() {
-		final Properties p = new Properties();
+    private Properties properties() {
+        final Properties p = new Properties();
 
-		final String[] x = new String[]{
-				"project.groupId", project.getGroupId(),
-				"project.artifactId", project.getArtifactId(),
-				"project.version", project.getVersion(),
-				"project.name", project.getName(),
-				"project.description", project.getDescription(),
-				"project.build.finalName", project.getBuild().getFinalName()
-		};
+        final String[] x = new String[]{
+                "project.groupId", project.getGroupId(),
+                "project.artifactId", project.getArtifactId(),
+                "project.version", project.getVersion(),
+                "project.name", project.getName(),
+                "project.description", project.getDescription(),
+                "project.build.finalName", project.getBuild().getFinalName()
+        };
 
-		for (int i = 0; i < x.length; i += 2) {
-			if (x[i + 1] != null) {
-				p.setProperty(x[i], x[i + 1]);
-			}
-		}
+        for (int i = 0; i < x.length; i += 2) {
+            if (x[i + 1] != null) {
+                p.setProperty(x[i], x[i + 1]);
+            }
+        }
 
-		p.putAll(project.getProperties());
+        p.putAll(project.getProperties());
 
-		return p;
-	}
+        return p;
+    }
 
-	private File workDir() {
-		return new File(project.getBuild().getDirectory(), "docker");
-	}
+    private File workDir() {
+        return new File(project.getBuild().getDirectory(), "docker");
+    }
 
-	private File src() {
-		return new File(project.getBasedir(), src);
-	}
+    private File projDir() {
+        return project.getBasedir();
+    }
 
-	protected abstract void doExecute(DockerOrchestrator orchestrator) throws Exception;
+    private File src() {
+        return new File(projDir(), src);
+    }
+
+    protected abstract void doExecute(DockerOrchestrator orchestrator) throws Exception;
 }
