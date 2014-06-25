@@ -72,15 +72,26 @@
                     <!-- used for push -->
                     <username>alexec</username>
                     <email>alex.e.c@gmail.com</email>
+                    <removeIntermitateImages>true</removeIntermitateImages>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>default-cli</id>
                         <goals>
                             <goal>help</goal>
                             <goal>clean</goal>
                             <goal>package</goal>
                             <goal>start</goal>
                             <goal>stop</goal>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <!-- normally we'd bind to the default deploy phase, but as this is an integration test and we
+                        don't do that phase -->
+                        <id>push</id>
+                        <phase>install</phase>
+                        <goals>
                             <goal>deploy</goal>
                         </goals>
                     </execution>

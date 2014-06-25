@@ -211,7 +211,7 @@
                             <goals>
                                 <goal>clean</goal>
                                 <goal>verify</goal>
-                                <goal>deploy</goal>
+                                <goal>install</goal>
                             </goals>
                         </configuration>
                         <executions>

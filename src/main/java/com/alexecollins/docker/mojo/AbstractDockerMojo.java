@@ -4,6 +4,7 @@ import com.alexecollins.docker.orchestration.DockerOrchestrator;
 import com.alexecollins.docker.orchestration.model.Credentials;
 import com.alexecollins.docker.orchestration.util.TextFileFilter;
 import com.alexecollins.docker.util.MavenLogAppender;
+import com.kpelykh.docker.client.BuildFlag;
 import com.kpelykh.docker.client.DockerClient;
 import com.kpelykh.docker.client.DockerException;
 import org.apache.maven.plugin.AbstractMojo;
@@ -15,7 +16,9 @@ import org.apache.maven.project.MavenProject;
 
 import java.io.File;
 import java.net.URI;
+import java.util.EnumSet;
 import java.util.Properties;
+import java.util.Set;
 
 abstract class AbstractDockerMojo extends AbstractMojo {
 
@@ -61,6 +64,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	@Parameter(property = "docker.email")
 	private String email;
 
+	/**
+	 * Remove intermediate images during build.
+	 */
+	@Parameter(defaultValue = "false", property = "docker.removeIntermediateImages")
+	private boolean removeIntermediateImages;
+
 	@Component
 	private MavenProject project;
 
@@ -77,13 +86,17 @@ abstract class AbstractDockerMojo extends AbstractMojo {
             final DockerClient docker = dockerClient();
             getLog().info("Docker version " + docker.version().getVersion());
             doExecute(new DockerOrchestrator(docker, src(), workDir(), projDir(), prefix, credentials(),
-                    TextFileFilter.INSTANCE, properties));
+                    TextFileFilter.INSTANCE, properties, buildFlags()));
         } catch (Exception e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
     }
 
-    private DockerClient dockerClient() throws DockerException {
+	private Set<BuildFlag> buildFlags() {
+		return removeIntermediateImages ? EnumSet.of(BuildFlag.REMOVE_INTERMEDIATE_IMAGES) : EnumSet.noneOf(BuildFlag.class);
+	}
+
+	private DockerClient dockerClient() throws DockerException {
         return version != null
                 ? new DockerClient(host.toString(), version)
                 : new DockerClient(host.toString());
