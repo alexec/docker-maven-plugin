@@ -72,7 +72,7 @@
                     <!-- used for push -->
                     <username>alexec</username>
                     <email>alex.e.c@gmail.com</email>
-                    <removeIntermitateImages>true</removeIntermitateImages>
+                    <removeIntermediateImages>true</removeIntermediateImages>
                 </configuration>
                 <executions>
                     <execution>
