@@ -70,6 +70,9 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	@Parameter(defaultValue = "false", property = "docker.removeIntermediateImages")
 	private boolean removeIntermediateImages;
 
+	/**
+	 * Skip execution.
+	 */
 	@Parameter(defaultValue = "false", property = "docker.skip")
 	private boolean skip;
 

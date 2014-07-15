@@ -135,6 +135,7 @@ Change Log
 
 * Issue 8 - support removal of intermediate containers
 * Issue 11 - correct spelling in README.md
+* Issue 12 - added skip option
 
 Tips
 ---
