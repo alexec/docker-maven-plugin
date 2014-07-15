@@ -53,6 +53,8 @@ healthChecks:
   pings:
     - url: http://localhost:8080/health-check
       timeout: 60000
+# tag to use for images
+tag: alex.e.c/app:${project.artifactId}-${project.version}
  ```
 
 
