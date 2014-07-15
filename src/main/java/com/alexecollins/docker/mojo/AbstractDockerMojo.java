@@ -70,6 +70,9 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	@Parameter(defaultValue = "false", property = "docker.removeIntermediateImages")
 	private boolean removeIntermediateImages;
 
+	@Parameter(defaultValue = "false", property = "docker.skip")
+	private boolean skip;
+
 	@Component
 	private MavenProject project;
 
@@ -77,6 +80,11 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     public final void execute() throws MojoExecutionException, MojoFailureException {
 
         MavenLogAppender.setLog(getLog());
+
+	    if (skip) {
+		    getLog().info("skipped");
+	    }
+
         // not great eh
         final Properties properties = properties();
 
