@@ -49,8 +49,8 @@ ports:
 # containers that this should be linked to, started before this one and stopped afterwards
 links:
   - mysql
-healthCheck:
-  ping:
+healthChecks:
+  pings:
     - url: http://localhost:8080/health-check
       timeout: 60000
  ```
@@ -128,6 +128,12 @@ You can now invoke functionality from the plugin, information on the plugin can 
 For e.g. to build containers from their `Dockerfile` and `conf.yml` files, run the following command
 
      mvn docker:package
+
+Change Log
+---
+1.2.0 (in progress)
+
+* Issue 11 - correct spelling in README.md
 
 Tips
 ---
