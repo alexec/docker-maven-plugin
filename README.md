@@ -133,6 +133,7 @@ Change Log
 ---
 1.3.0 (in progress)
 
+* Issue 8 - support removal of intermediate containers
 * Issue 11 - correct spelling in README.md
 
 Tips
