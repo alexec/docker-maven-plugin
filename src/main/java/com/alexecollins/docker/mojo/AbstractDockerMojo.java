@@ -86,6 +86,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 
 	    if (skip) {
 		    getLog().info("skipped");
+		    return;
 	    }
 
         // not great eh
