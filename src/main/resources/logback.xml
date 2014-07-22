@@ -8,18 +8,6 @@
         </encoder>
     </appender>
 
-    <appender name="DEBUG" class="ch.qos.logback.core.FileAppender">
-        <file>target/docker/debug.log</file>
-        <append>false</append>
-        <encoder>
-            <pattern>%-5relative %-5level %logger{35} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <logger name="com.sun.jersey.api.client.filter.LoggingFilter" additivity="false">
-        <appender-ref ref="DEBUG"/>
-    </logger>
-
     <root level="info" additivity="false">
         <appender-ref ref="MAVEN"/>
     </root>
