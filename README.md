@@ -133,7 +133,11 @@ For e.g. to build containers from their `Dockerfile` and `conf.yml` files, run t
 
 Change Log
 ---
-1.3.0 (in progress)
+1.3.1
+
+* Issue 5 - removed logging of binary to console 
+
+1.3.0
 
 * Issue 8 - support removal of intermediate containers
 * Issue 11 - correct spelling in README.md
