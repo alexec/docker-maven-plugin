@@ -57,20 +57,9 @@ healthChecks:
 tag: alex.e.c/app:${project.artifactId}-${project.version}
  ```
 
-
-Trivial Example
----
-Create a default maven project for e.g.
-
-      mvn archetype:generate -DgroupId=com.example -DartifactId=helloworld -DpackageName=com.example -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -Dversion=1.0-SNAPSHOT
-
-Add the following to the `pom.xml`
+Add the following to the `pom.xml` plugins section.
 
  ```pom.xml
-    <build>
-        ...
-        <plugins>
-            ...
             <plugin>
                 <groupId>com.alexecollins.docker</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -82,8 +71,6 @@ Add the following to the `pom.xml`
                     <email>alex.e.c@gmail.com</email>
                 </configuration>
             </plugin>
-        </plugins>
-    </build>
  ```
 
 Create your `${basedir}/src/main/docker` directory and create a subfolder for your application container
