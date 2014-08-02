@@ -10,7 +10,7 @@ Project Goal:
 
 Goals
 ---
-* `clean` - delete all containers and images for the project
+* `clean` - delete all containers and images for the project (see know issues)
 * `package` - builds the containers based on YAML configuration
 * `start` - start the containers in order and ensures they are running
 * `stop` - stop all running containers for the project
@@ -69,6 +69,10 @@ Add the following to the `pom.xml` plugins section.
                     <!-- used for push -->
                     <username>alexec</username>
                     <email>alex.e.c@gmail.com</email>
+                    <!-- remove images created by Dockerfile -->
+                    <removeIntermediateImages>true</removeIntermediateImages>
+                    <!-- do/do not cache images (default true), disable to get the freshest images -->
+                    <cache>true</cache>
                 </configuration>
             </plugin>
  ```
@@ -95,6 +99,10 @@ For e.g. to build containers from their `Dockerfile` and `conf.yml` files, run t
 
 Change Log
 ---
+1.4.0
+
+* (https://github.com/alexec/docker-maven-plugin/issues/15)[Issue 15] - support `cache` parameter
+
 1.3.1
 
 * Issue 5 - removed logging of binary to console 
@@ -109,8 +117,8 @@ Tips
 ---
 Tear down Docker:
 
-	docker ps -a -q | xargs docker rm
-	docker images -a -q | xargs docker rmi
+	docker ps -a -q | xargs docker rm -fv
+	docker images -a -q | xargs docker rmi -f
 	
 Port forward:
 

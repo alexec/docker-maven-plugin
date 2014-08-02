@@ -16,7 +16,7 @@ import org.apache.maven.project.MavenProject;
 
 import java.io.File;
 import java.net.URI;
-import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
@@ -71,6 +71,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 	private boolean removeIntermediateImages;
 
 	/**
+	 * Use cached images during build.
+	 */
+	@Parameter(defaultValue = "true", property = "docker.cache")
+	private boolean cache;
+
+	/**
 	 * Skip execution.
 	 */
 	@Parameter(defaultValue = "false", property = "docker.skip")
@@ -105,7 +111,14 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     }
 
 	private Set<BuildFlag> buildFlags() {
-		return removeIntermediateImages ? EnumSet.of(BuildFlag.REMOVE_INTERMEDIATE_IMAGES) : EnumSet.noneOf(BuildFlag.class);
+		final Set<BuildFlag> buildFlags = new HashSet<BuildFlag>();
+		if (removeIntermediateImages) {
+			buildFlags.add(BuildFlag.REMOVE_INTERMEDIATE_IMAGES);
+		}
+		if (!cache) {
+			buildFlags.add(BuildFlag.NO_CACHE);
+		}
+		return buildFlags;
 	}
 
 	private DockerClient dockerClient() throws DockerException {
