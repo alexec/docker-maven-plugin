@@ -102,7 +102,7 @@ Change Log
 2.0.0
 
 * Updated to use port 2375 by default.
-* Issue 8 - incorrect tag names.
+* [Issue 8]](https://github.com/alexec/docker-maven-plugin/issues/8) - incorrect tag names.
 
 1.4.0
 
@@ -126,8 +126,13 @@ Please do! I'd love to make all the changes that people requested, but time eh?
  
 Contributors
 ---
-
-
+* Me
+* Jacob Bay Hansen
+* Dan Jasek
+* Laurie Hallowes 
+* alrighttheresham
+* djsly
+* Vasco Figueira
 
 References
 ---
