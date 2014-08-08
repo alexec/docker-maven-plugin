@@ -106,7 +106,7 @@ Change Log
 
 1.4.0
 
-* (https://github.com/alexec/docker-maven-plugin/issues/15)[Issue 15] - support `cache` parameter
+* [Issue 15](https://github.com/alexec/docker-maven-plugin/issues/15) - support `cache` parameter
 
 1.3.1
 
@@ -122,7 +122,7 @@ Contributing
 ---
 Please do! I'd love to make all the changes that people requested, but time eh?
  
-(https://github.com/alexec/docker-maven-plugin/wiki)[Read the wiki for more.]
+[Read the wiki for more.](https://github.com/alexec/docker-maven-plugin/wiki)
  
 Contributors
 ---
