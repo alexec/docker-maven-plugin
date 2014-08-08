@@ -99,6 +99,11 @@ For e.g. to build containers from their `Dockerfile` and `conf.yml` files, run t
 
 Change Log
 ---
+2.0.0
+
+* Updated to use port 2375 by default.
+* Issue 8 - incorrect tag names.
+
 1.4.0
 
 * (https://github.com/alexec/docker-maven-plugin/issues/15)[Issue 15] - support `cache` parameter
@@ -113,16 +118,16 @@ Change Log
 * Issue 11 - correct spelling in README.md
 * Issue 12 - added skip option
 
-Tips
+Contributing
 ---
-Tear down Docker:
+Please do! I'd love to make all the changes that people requested, but time eh?
+ 
+(https://github.com/alexec/docker-maven-plugin/wiki)[Read the wiki for more.]
+ 
+Contributors
+---
 
-	docker ps -a -q | xargs docker rm -fv
-	docker images -a -q | xargs docker rmi -f
-	
-Port forward:
 
-	VBoxManage controlvm boot2docker-vm natpf1 "8080,tcp,127.0.0.1,8080,,8080"
 
 References
 ---

@@ -1,4 +1,4 @@
-FROM centos
+FROM centos:centos6
 
 #VOLUME /var/lib/mysql
 
