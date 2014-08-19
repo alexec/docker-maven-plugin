@@ -65,7 +65,7 @@ Add the following to the `pom.xml` plugins section.
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
                     <!-- your installed version -->
-                    <version>1.9<version>
+                    <version>1.9</version>
                     <!-- used for push -->
                     <username>alexec</username>
                     <email>alex.e.c@gmail.com</email>
@@ -74,7 +74,7 @@ Add the following to the `pom.xml` plugins section.
                     <!-- do/do not cache images (default true), disable to get the freshest images -->
                     <cache>true</cache>
                     <!-- change here if you are using another port/host, e.g. 4243 -->
-                    <host>http://localhost:2375</hoste>
+                    <host>http://localhost:2375</host>
                 </configuration>
             </plugin>
  ```
