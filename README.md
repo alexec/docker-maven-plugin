@@ -104,7 +104,8 @@ Change Log
 2.0.0
 
 * Updated to use port 2375 by default.
-* [Issue 8]](https://github.com/alexec/docker-maven-plugin/issues/8) - incorrect tag names.
+* [Issue 8](https://github.com/alexec/docker-maven-plugin/issues/8) - incorrect tag names.
+* Back onto the main docker-java version.
 
 1.4.0
 
@@ -128,12 +129,14 @@ Please do! I'd love to make all the changes that people requested, but time eh?
  
 Contributors
 ---
-* Me
-* Jacob Bay Hansen
-* Dan Jasek
-* Laurie Hallowes 
+* Alex Collins 
 * alrighttheresham
+* Dan Jasek
 * djsly
+* Jacob Bay Hansen
+* Lachlan Coote
+* Laurie Hallowes
+* Panu Wetterstrand
 * Vasco Figueira
 
 References
