@@ -103,5 +103,5 @@ Contributing
 ---
 Please do! I'd love to make all the changes that people requested, but time eh?
  
-See (CONTRIB.md)[CONTRIB.md]
+See [CONTRIB.md](CONTRIB.md).
  
