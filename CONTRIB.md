@@ -44,8 +44,6 @@ Set-up a port forward if you're using boot2docker:
 VBoxManage controlvm boot2docker-vm natpf1 "8080,tcp,127.0.0.1,8080,,8080"
 ~~~
 
-If you've not already done so, set DOCKER_HOST.
-
 Now build with password:
 
 ~~~
