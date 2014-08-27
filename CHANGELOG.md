@@ -4,12 +4,13 @@ Change Log
 2.0.0
 
 * Updated to use port 2375 by default.
-* [Issue 8](https://github.com/alexec/docker-maven-plugin/issues/8) - incorrect tag names.
-* Back onto the main docker-java version.
+* [DJO Issue 2][https://github.com/alexec/docker-java-orchestration/issues/2] Support for volumes.
+* [DMP Issue 8](https://github.com/alexec/docker-maven-plugin/issues/8) Correct incorrect tag names.
+* [DMP Issue 22](https://github.com/alexec/docker-maven-plugin/issues/22) Use docker-java.
 
 1.4.0
 
-* [Issue 15](https://github.com/alexec/docker-maven-plugin/issues/15) - support `cache` parameter
+* [DMP Issue 15](https://github.com/alexec/docker-maven-plugin/issues/15) - support `cache` parameter
 
 1.3.1
 
