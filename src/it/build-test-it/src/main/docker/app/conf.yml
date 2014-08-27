@@ -3,7 +3,7 @@ packaging:
   # files to add to the build, usually used with ADD in the Dockerfile
   add:
     # the plugin always filters
-    - target/example-${project.version}.jar
+    - target/${project.build.finalName}.jar
     - hello-world.yml
 # optional list of port to expose on the host
 ports:
@@ -15,4 +15,4 @@ healthChecks:
   pings:
     - url: http://localhost:8080/hello-world
       timeout: 60000
-tag: alex.e.c/app:${project.artifactId}-${project.version}
+tag: alex.e.c/${project.artifactId}-app:${project.version}

@@ -47,7 +47,7 @@ VBoxManage controlvm boot2docker-vm natpf1 "8080,tcp,127.0.0.1,8080,,8080"
 Now build with password:
 
 ```
-mvn install -Prun-its -Ddocker.password=xxx -e
+mvn install -Prun-its -Ddocker.password=yourpassword -e
 ```
 
 Tips
@@ -57,6 +57,10 @@ Tear down Docker:
 	docker ps -a -q | xargs docker rm -fv
 	docker images -a -q | xargs docker rmi -f
 	
+Remove port forward:
+
+    VBoxManage controlvm boot2docker-vm natpf1 delete 8080
+    
 Contributors
 ---
 * Alex Collins 
