@@ -1,8 +1,9 @@
 Change Log
 ===
-2.1.0
+2.0.2
 
 * [DMP Pull 27](https://github.com/alexec/docker-maven-plugin/pull/27) Added environment and system properties.
+
 2.0.1
 
 * [DJO Pull 10](https://github.com/alexec/docker-java-orchestration/pull/10) Correctly preserve line endings on Windows. 
