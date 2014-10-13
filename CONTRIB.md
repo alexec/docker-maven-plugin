@@ -6,7 +6,6 @@ Get the code:
 ```
 mkdir docker
 cd docker
-git clone https://github.com/alexec/docker-java.git
 git clone https://github.com/alexec/docker-java-orchestration.git
 git clone https://github.com/alexec/docker-maven-plugin.git 
 ```
@@ -31,7 +30,6 @@ Create this stub `pom.xml` so you can build all three at once:
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-      <module>docker-java</module>
       <module>docker-java-orchestration</module>
       <module>docker-maven-plugin</module>
     </modules>
@@ -65,11 +63,13 @@ Contributors
 ---
 * Alex Collins 
 * alrighttheresham
+* Christian Heineman
 * Dan Jasek
 * djsly
 * Jacob Bay Hansen
 * Lachlan Coote
 * Laurie Hallowes
 * Panu Wetterstrand
+* Sam Morrison
 * Vasco Figueira
 

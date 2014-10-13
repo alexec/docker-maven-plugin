@@ -6,8 +6,8 @@ import com.alexecollins.docker.orchestration.util.TextFileFilter;
 import com.alexecollins.docker.util.MavenLogAppender;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.DockerException;
+import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
-import com.github.dockerjava.core.DockerClientImpl;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -137,7 +137,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
             builder = builder.withEmail(email);
         }
 
-        return new DockerClientImpl(builder.build());
+        return DockerClientBuilder.getInstance(builder.build()).build();
     }
 
 
