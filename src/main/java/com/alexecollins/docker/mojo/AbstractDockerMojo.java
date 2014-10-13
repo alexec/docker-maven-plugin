@@ -144,6 +144,9 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private Properties properties() {
         final Properties p = new Properties();
 
+        p.putAll(System.getenv());
+        p.putAll(System.getProperties());
+
         final String[] x = new String[]{
                 "project.groupId", project.getGroupId(),
                 "project.artifactId", project.getArtifactId(),
