@@ -46,9 +46,9 @@ packaging:
 # optional list of port to expose on the host
 ports:
   - 8080
-# containers that this should be linked to, started before this one and stopped afterwards
+# containers that this should be linked to, started before this one and stopped afterwards, optional alias after colon
 links:
-  - mysql
+  - mysql:db
 healthChecks:
   pings:
     - url: http://localhost:8080/health-check
@@ -104,7 +104,7 @@ Debugging
 
 `docker:start` can be started manually like this:
 
-    docker run -t -i -link example-project_mysql:example-project_mysql -P -p 8080:8080 alex.e.c/example-project-app:1.0-SNAPSHOT  
+    docker run -t -i -link example-project_mysql:db -P -p 8080:8080 alex.e.c/example-project-app:1.0-SNAPSHOT  
 
 You can see the requests made to Docker using Wireshark. However, if you're using boot2docker, it'll be on a local loop-back interface. 
 

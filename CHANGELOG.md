@@ -1,5 +1,11 @@
 Change Log
 ===
+2.1.0
+
+* Fixed bug preventing correct linking of containers.
+* Support for link alias.
+* Forcibly delete images.
+
 2.0.2
 
 * [DMP Pull 27](https://github.com/alexec/docker-maven-plugin/pull/27) Added environment and system properties.

@@ -10,7 +10,7 @@ ports:
   - 8080
 # containers that this should be linked to, started before this one and stopped afterwards
 links:
-  - mysql
+  - mysql:db
 healthChecks:
   pings:
     - url: http://localhost:8080/hello-world
