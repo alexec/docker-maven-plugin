@@ -3,7 +3,7 @@ Change Log
 2.1.0
 
 * Fixed bug preventing correct linking of containers.
-* Support for link alias.
+* [DMP Issue 26](https://github.com/alexec/docker-maven-plugin/issues/26) Support for link alias.
 * Forcibly delete images.
 
 2.0.2
