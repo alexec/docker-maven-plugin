@@ -2,11 +2,10 @@
 
 Docker Maven Plugin
 ===
-Project Goal:
 
-* Make it easy to build an app on a container, test it and push it to a Docker repository, even if it relies on other containers (e.g. a database)
-* Talk "Maven" rather than "Docker" (E.g. "package" rather than "build").
-* Keep it simple.
+This project aims to make it it easy to build an app on a container, test it and push it to a Docker repository, even if it relies on other containers (e.g. a database). 
+We tend to talk "Maven" rather than "Docker" (E.g. "package" rather than "build"). And we like to keep it simple.
+
 
 * Do you want to know how to get started? Read the [usage](USAGE.md).
 * Having problems? Read about [debugging](DEBUG.md).
