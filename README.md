@@ -13,3 +13,7 @@ We tend to talk "Maven" rather than "Docker" (E.g. "package" rather than "build"
 * What to know what's [changed recently](CHANGELOG.md)? 
 * Read about us in the [press](PRESS.md).
 * What [other plugins](COMPETITORS.md) are out there?
+
+![Docker Logo](https://d3oypxn00j2a10.cloudfront.net/0.11.2/images/pages/brand_guidelines/small_h.png)
+
+Disclaimer: I don't work for docker!
