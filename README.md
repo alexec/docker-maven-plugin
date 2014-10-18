@@ -9,7 +9,7 @@ We tend to talk "Maven" rather than "Docker" (E.g. "package" rather than "build"
 
 * Do you want to know how to [get started](USAGE.md)?
 * [Having problems](DEBUG.md)?
-* What to get (involved or add features)(CONTRIB.md)? 
+* What to get [involved or add features](CONTRIB.md)? 
 * What to know what's [changed recently](CHANGELOG.md)? 
 * Read about us in the [press](PRESS.md).
 * What [other plugins](COMPETITORS.md) are out there?
