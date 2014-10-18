@@ -8,10 +8,8 @@ Project Goal:
 * Talk "Maven" rather than "Docker" (E.g. "package" rather than "build").
 * Keep it simple.
 
-Please read the [usage](USAGE.md) for more information.
-
-* <USAGE.md>
-* <DEBUG.md>
-* <CONTRIB.md>
-* <CHANGELOG.md>
-* <PRESS.md>
+* Do you want to know how to get started? Read the [usage](USAGE.md).
+* Having problems? Read about [debugging](DEBUG.md).
+* What to get involved or add features? Read about [contributing](CONTRIB.md).
+* What to know what's changed recently? Read the [changelog](CHANGELOG.md).
+* Read about us in the [press](PRESS.md).
