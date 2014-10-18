@@ -7,8 +7,9 @@ This project aims to make it it easy to build an app on a container, test it and
 We tend to talk "Maven" rather than "Docker" (E.g. "package" rather than "build"). And we like to keep it simple.
 
 
-* Do you want to know how to get started? Read the [usage](USAGE.md).
-* Having problems? Read about [debugging](DEBUG.md).
-* What to get involved or add features? Read about [contributing](CONTRIB.md).
-* What to know what's changed recently? Read the [changelog](CHANGELOG.md).
+* Do you want to know how to [get started](USAGE.md)?
+* [Having problems](DEBUG.md)?
+* What to get (involved or add features)(CONTRIB.md)? 
+* What to know what's [changed recently](CHANGELOG.md)? 
 * Read about us in the [press](PRESS.md).
+* What [other plugins](COMPETITORS.md) are out there?
