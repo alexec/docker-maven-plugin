@@ -19,7 +19,7 @@ Change Log
 2.0.0
 
 * Updated to use port 2375 by default.
-* [DJO Issue 2][https://github.com/alexec/docker-java-orchestration/issues/2] Support for volumes.
+* [DJO Issue 2](https://github.com/alexec/docker-java-orchestration/issues/2) Support for volumes.
 * [DMP Issue 8](https://github.com/alexec/docker-maven-plugin/issues/8) Correct incorrect tag names.
 * [DMP Issue 22](https://github.com/alexec/docker-maven-plugin/issues/22) Use docker-java.
 
