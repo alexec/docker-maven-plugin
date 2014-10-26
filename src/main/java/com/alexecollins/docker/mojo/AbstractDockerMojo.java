@@ -123,7 +123,8 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     }
 
     private DockerClient dockerClient() throws DockerException {
-        DockerClientConfig.DockerClientConfigBuilder builder = new DockerClientConfig.DockerClientConfigBuilder().withUri(String.valueOf(host));
+        DockerClientConfig.DockerClientConfigBuilder builder = DockerClientConfig.createDefaultConfigBuilder()
+                .withUri(String.valueOf(host));
         if (version != null) {
             builder = builder.withVersion(version);
         }
