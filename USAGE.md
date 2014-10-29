@@ -57,19 +57,23 @@ Add the following to the `pom.xml` plugins section.
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
                     <!-- your installed version -->
-                    <version>1.9</version>
+                    <version>1.13</version>
                     <!-- used for push -->
                     <username>alexec</username>
                     <email>alex.e.c@gmail.com</email>
+                    <!-- change here if you are using another port/host, e.g. 4243 -->
+                    <host>http://localhost:2375</host>
+                    <!-- if you need to run over SSL, change this -->
+                    <dockerCertPath>${user.home}/.docker</dockerCertPath>
                     <!-- remove images created by Dockerfile -->
                     <removeIntermediateImages>true</removeIntermediateImages>
                     <!-- do/do not cache images (default true), disable to get the freshest images -->
                     <cache>true</cache>
-                    <!-- change here if you are using another port/host, e.g. 4243 -->
-                    <host>http://localhost:2375</host>
                 </configuration>
             </plugin>
  ```
+
+There are other [configuration options](https://github.com/docker-java/docker-java#configuration), including via system environment here, which might be preferable if you have a number of builds using the plugin.
 
 Create your `${basedir}/src/main/docker` directory and create a subfolder for your application container
 
