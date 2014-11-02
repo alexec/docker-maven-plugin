@@ -38,11 +38,6 @@ Create this stub `pom.xml` so you can build all three at once:
 </project>
 ```
 
-Set-up a port forward if you're using boot2docker:
-
-```
-VBoxManage controlvm boot2docker-vm natpf1 "8080,tcp,127.0.0.1,8080,,8080"
-```
 
 Now build with password:
 
@@ -57,10 +52,6 @@ Tear down Docker:
 	docker ps -a -q | xargs docker rm -fv
 	docker images -a -q | xargs docker rmi -f
 	
-Remove port forward:
-
-    VBoxManage controlvm boot2docker-vm natpf1 delete 8080
-    
 Contributors
 ---
 * Alex Collins 
