@@ -104,7 +104,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         try {
             final DockerClient docker = dockerClient();
             getLog().info("Docker version " + docker.versionCmd().exec().getVersion());
-            doExecute(new DockerOrchestrator(docker, src(), workDir(), projDir(), prefix,
+            doExecute(new DockerOrchestrator(docker, src(), workDir(), projDir(), username, prefix,
                     TextFileFilter.INSTANCE, properties, buildFlags()));
         } catch (Exception e) {
             throw new MojoExecutionException(e.getMessage(), e);
@@ -123,8 +123,10 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     }
 
     private DockerClient dockerClient() throws DockerException {
-        DockerClientConfig.DockerClientConfigBuilder builder = DockerClientConfig.createDefaultConfigBuilder()
-                .withUri(String.valueOf(host));
+        DockerClientConfig.DockerClientConfigBuilder builder = DockerClientConfig.createDefaultConfigBuilder();
+        if (host != null) {
+            builder = builder.withUri(String.valueOf(host));
+        }
         if (version != null) {
             builder = builder.withVersion(version);
         }

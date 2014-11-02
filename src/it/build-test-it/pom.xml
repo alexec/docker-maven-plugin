@@ -88,6 +88,13 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.alexecollins.docker</groupId>
+                        <artifactId>docker-java-orchestration-plugin-boot2docker</artifactId>
+                        <version>2.1.3-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>

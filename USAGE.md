@@ -52,25 +52,33 @@ tag: alex.e.c/app:${project.artifactId}-${project.version}
 Add the following to the `pom.xml` plugins section.
 
  ```pom.xml
-            <plugin>
-                <groupId>com.alexecollins.docker</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <configuration>
-                    <!-- your installed version -->
-                    <version>1.13</version>
-                    <!-- used for push -->
-                    <username>alexec</username>
-                    <email>alex.e.c@gmail.com</email>
-                    <!-- change here if you are using another port/host, e.g. 4243 -->
-                    <host>http://localhost:2375</host>
-                    <!-- if you need to run over SSL, change this -->
-                    <dockerCertPath>${user.home}/.docker</dockerCertPath>
-                    <!-- remove images created by Dockerfile -->
-                    <removeIntermediateImages>true</removeIntermediateImages>
-                    <!-- do/do not cache images (default true), disable to get the freshest images -->
-                    <cache>true</cache>
-                </configuration>
-            </plugin>
+<plugin>
+    <groupId>com.alexecollins.docker</groupId>
+    <artifactId>docker-maven-plugin</artifactId>
+    <configuration>
+        <!-- your installed version -->
+        <version>1.13</version>
+        <!-- used for push -->
+        <username>alexec</username>
+        <email>alex.e.c@gmail.com</email>
+        <!-- change here if you are using another port/host, e.g. 4243 -->
+        <host>http://localhost:2375</host>
+        <!-- if you need to run over SSL, change this -->
+        <dockerCertPath>${user.home}/.docker</dockerCertPath>
+        <!-- remove images created by Dockerfile -->
+        <removeIntermediateImages>true</removeIntermediateImages>
+        <!-- do/do not cache images (default true), disable to get the freshest images -->
+        <cache>true</cache>
+    </configuration>
+    <dependencies>
+        <dependency>
+            <!-- set-up port forwarding if you're using boot2docker -->
+            <groupId>com.alexecollins.docker</groupId>
+            <artifactId>docker-java-orchestration-plugin-boot2docker</artifactId>
+            <version>???</version>
+        </dependency>
+    </dependencies>
+</plugin>
  ```
 
 There are other [configuration options](https://github.com/docker-java/docker-java#configuration), including via system environment here, which might be preferable if you have a number of builds using the plugin.
