@@ -15,4 +15,4 @@ healthChecks:
   pings:
     - url: http://localhost:8080/hello-world
       timeout: 60000
-tag: alex.e.c/${project.artifactId}-app:${project.version}
+tag: alexec/${project.artifactId}-app:${project.version}
