@@ -66,6 +66,12 @@
                 <groupId>@project.groupId@</groupId>
                 <artifactId>@project.artifactId@</artifactId>
                 <version>@project.version@</version>
+                <configuration>
+                    <username>registry</username>
+                    <password>registry</password>
+                    <email>nobody@nowhere.com</email>
+                    <serverAddress>https://locahost:5443/v1</serverAddress>
+                </configuration>
                 <executions>
                     <execution>
                         <id>default-cli</id>
