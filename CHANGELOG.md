@@ -4,7 +4,7 @@ Change Log
 
 * Used docker-java-orchestrator 2.2.0. See [Changelog](https://github.com/alexec/docker-java-orchestration/)
 
-2.1.0
+2..0
 
 * Fixed bug preventing correct linking of containers.
 * [DMP Issue 26](https://github.com/alexec/docker-maven-plugin/issues/26) Support for link alias.

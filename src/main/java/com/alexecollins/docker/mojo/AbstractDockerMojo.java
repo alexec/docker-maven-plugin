@@ -60,12 +60,6 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private String password;
 
     /**
-     * Docker repository server (for deploy).
-     */
-    @Parameter(property = "docker.serverAddress")
-    private String serverAddress;
-
-    /**
      * Docker email (for deploy).
      */
     @Parameter(property = "docker.email")
@@ -144,9 +138,6 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         }
         if (email != null) {
             builder = builder.withEmail(email);
-        }
-        if (serverAddress != null) {
-            builder = builder.withServerAddress(serverAddress);
         }
 
         return DockerClientBuilder.getInstance(builder.build()).build();
