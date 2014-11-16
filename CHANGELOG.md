@@ -1,5 +1,9 @@
 Change Log
 ===
+2.2.0
+
+* Used docker-java-orchestrator 2.2.0. See [Changelog](https://github.com/alexec/docker-java-orchestration/)
+
 2.1.0
 
 * Fixed bug preventing correct linking of containers.
