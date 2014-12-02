@@ -18,7 +18,7 @@ The best example to look at is the [one from the tests](src/it/build-test-it) wh
 
 Typically, you build your app, run your standard unit tests and package it as usual. Then, you build a container with your app deployed onto it, and run integration tests against it. If they pass, deploy your jar into the Maven repository, and optionally, your image into a Docker repository.
 
-To use the plugin, you need to define a docker directory in `${basedir}/src/main` which will include a subdirectory for each container that you wish to deploy.
+To use the plugin, you need to define a `docker/` directory in `${basedir}/src/main` which will include a subdirectory for each container that you wish to deploy.
 
 - `src/main/docker/` contains one folder per container for e.g. the mysql container would have a folder structure as follows:
     - mysql
