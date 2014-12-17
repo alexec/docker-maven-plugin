@@ -14,12 +14,10 @@ public class StartMojo extends AbstractDockerMojo {
 
     @Override
     protected void doExecute(DockerOrchestrator orchestrator) {
-
-
-        Map<String,String> nameANdIpMap =orchestrator.start();
-
-        for(String containerName: nameANdIpMap.keySet()) {
-            getProject().getProperties().setProperty(containerName.substring(1) + ".ipAddress", nameANdIpMap.get(containerName));
+        orchestrator.start();
+        Map<String, String> idANdIpMap = orchestrator.getIPAddresses();
+        for (String id : idANdIpMap.keySet()) {
+            getProject().getProperties().setProperty("docker." + id + ".ipAddress", idANdIpMap.get(id));
         }
     }
 
