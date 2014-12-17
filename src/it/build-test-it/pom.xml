@@ -106,7 +106,7 @@
                 <version>2.14.1</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <example.app.ip>${example-project_app.ipAddress}</example.app.ip>
+                        <example.app.ip>${docker.app.ipAddress}</example.app.ip>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>
