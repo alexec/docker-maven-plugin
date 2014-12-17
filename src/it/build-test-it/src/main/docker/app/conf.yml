@@ -5,6 +5,7 @@ packaging:
     # the plugin always filters
     - target/${project.build.finalName}.jar
     - hello-world.yml
+
 # optional list of port to expose on the host
 # containers that this should be linked to, started before this one and stopped afterwards
 links:
