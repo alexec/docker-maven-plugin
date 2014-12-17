@@ -86,6 +86,10 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     @Component
     private MavenProject project;
 
+    public MavenProject getProject() {
+        return project;
+    }
+
     @Override
     public final void execute() throws MojoExecutionException, MojoFailureException {
 
