@@ -13,8 +13,6 @@ public class HelloWorldServiceIT {
     public void test() throws Exception {
 	String host = System.getProperty("example.app.ip");
 
-        Thread.sleep(5000); // since I removed healthcheck, the service is not immediately available when the test is started
-        //need some rework on the healthcheck part, so that the healthcheck could also use the ip address of container
         given().
                 log().all().
                 expect().

@@ -12,6 +12,6 @@ links:
   - mysql:db
 healthChecks:
   pings:
-    - url: http://{{app}}:8080/hello-world
+    - url: http://__CONTAINER.IP__:8080/hello-world
       timeout: 60000
 tag: registry/${project.artifactId}-app:${project.version}
