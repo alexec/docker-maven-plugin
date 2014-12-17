@@ -18,6 +18,6 @@ public class HelloWorldServiceIT {
                 statusCode(200).
                 body(containsString("Hello, Stranger!")).
                 when().
-                get("http://"+ host + ":8080/hello-world");
+                get("http://" + host + ":8080/hello-world");
     }
 }
