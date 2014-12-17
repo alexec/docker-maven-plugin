@@ -11,8 +11,7 @@ public class HelloWorldServiceIT {
 
     @Test
     public void test() throws Exception {
-	String host = System.getProperty("example.app.ip");
-
+        String host = System.getProperty("example.app.ip");
         given().
                 log().all().
                 expect().
