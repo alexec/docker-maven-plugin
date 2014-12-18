@@ -109,7 +109,7 @@ Expose container IP as maven properties
 
 By default, the container ip will be exposed as maven properties. This would be helpful for integration test as it doesn't require bind the exposed port of container to a well know port of the host.
 
-The property name is `docker.<CONTAINER ID>.ipAddress`, where <CONTAINER ID> is the folder name of where the Dockerfile is located. For example, by configuring `maven-failsafe-plugin` in the following way:
+The property name is `docker.` + directory name of each Dockerfile + `.ipAddress`. For example, by configuring `maven-failsafe-plugin` in the following way:
 
 ```<plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -131,10 +131,13 @@ The property name is `docker.<CONTAINER ID>.ipAddress`, where <CONTAINER ID> is 
 
 In the test, the ip address can be obtained by:
 ```
-String host = System.getProperty("example.app.ip");
+
+         String host = System.getProperty("example.app.ip");
+
 ```
 
-The plugin can also use the container ip address to do health check just by using `__CONTAINER.IP__` as a placeholder in the pings url. For example: 
+We can also use the container ip address for health check.  This can be done by using `__CONTAINER.IP__` as a placeholder in the pings url. For example: 
+
 
 ```
 healthChecks:
