@@ -127,9 +127,13 @@ The property name is `docker.` + directory name of each Dockerfile + `.ipAddress
                         </goals>
                     </execution>
                 </executions>
-            </plugin>```
+            </plugin>
+```
+
 
 In the test, the ip address can be obtained by:
+
+
 ```
 
          String host = System.getProperty("example.app.ip");
@@ -140,10 +144,12 @@ We can also use the container ip address for health check.  This can be done by 
 
 
 ```
+
 healthChecks:
   pings:
     - url: http://__CONTAINER.IP__:8080/hello-world
       timeout: 60000
+
 ```
 
 This can be turned off by set `exposeContainerIp` to `false` in `conf.yml`
