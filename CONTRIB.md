@@ -57,7 +57,7 @@ Contributors
 * Alex Collins 
 * alrighttheresham
 * Changgeng Li
-Up* Christian Heineman
+* Christian Heineman
 * Dan Jasek
 * djsly
 * Jacob Bay Hansen
