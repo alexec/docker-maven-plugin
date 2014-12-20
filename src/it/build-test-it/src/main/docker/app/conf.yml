@@ -5,14 +5,13 @@ packaging:
     # the plugin always filters
     - target/${project.build.finalName}.jar
     - hello-world.yml
+
 # optional list of port to expose on the host
-ports:
-  - 8080
 # containers that this should be linked to, started before this one and stopped afterwards
 links:
   - mysql:db
 healthChecks:
   pings:
-    - url: http://localhost:8080/hello-world
+    - url: http://__CONTAINER.IP__:8080/hello-world
       timeout: 60000
 tag: registry/${project.artifactId}-app:${project.version}

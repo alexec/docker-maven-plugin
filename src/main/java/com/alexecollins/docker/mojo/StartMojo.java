@@ -4,6 +4,8 @@ import com.alexecollins.docker.orchestration.DockerOrchestrator;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
+import java.util.Map;
+
 /**
  * Start all the containers.
  */
@@ -13,5 +15,10 @@ public class StartMojo extends AbstractDockerMojo {
     @Override
     protected void doExecute(DockerOrchestrator orchestrator) {
         orchestrator.start();
+        Map<String, String> idAndIpMap = orchestrator.getIPAddresses();
+        for (String id : idAndIpMap.keySet()) {
+            getProject().getProperties().setProperty("docker." + id + ".ipAddress", idAndIpMap.get(id));
+        }
     }
+
 }

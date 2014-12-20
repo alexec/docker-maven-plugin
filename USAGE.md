@@ -102,3 +102,55 @@ You can now invoke functionality from the plugin, information on the plugin can 
 For e.g. to build containers from their `Dockerfile` and `conf.yml` files, run the following command
 
      mvn docker:package
+
+
+Expose container IP as maven properties
+---
+
+By default, the container ip will be exposed as maven properties. This would be helpful for integration test as it doesn't require bind the exposed port of container to a well know port of the host.
+
+The property name is `docker.` + directory name of each Dockerfile + `.ipAddress`. For example, by configuring `maven-failsafe-plugin` in the following way:
+
+```<plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.14.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <example.app.ip>${docker.app.ipAddress}</example.app.ip>
+                    </systemPropertyVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+```
+
+
+In the test, the ip address can be obtained by:
+
+
+```
+
+         String host = System.getProperty("example.app.ip");
+
+```
+
+We can also use the container ip address for health check.  This can be done by using `__CONTAINER.IP__` as a placeholder in the pings url. For example: 
+
+
+```
+
+healthChecks:
+  pings:
+    - url: http://__CONTAINER.IP__:8080/hello-world
+      timeout: 60000
+
+```
+
+This can be turned off by set `exposeContainerIp` to `false` in `conf.yml`
+

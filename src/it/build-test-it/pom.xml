@@ -104,6 +104,11 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.14.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <example.app.ip>${docker.app.ipAddress}</example.app.ip>
+                    </systemPropertyVariables>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
