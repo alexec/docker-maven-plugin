@@ -4,6 +4,7 @@ Change Log
 
 * [DMP Pull 38](https://github.com/alexec/docker-maven-plugin/pull/38) Expose container IP address as Maven properties .
 * Changed to Apache 2.0 licence.
+* [DMP Issue 34](https://github.com/alexec/docker-maven-plugin/issues/34) Problem with configuration of host URI is some environments. 
 
 2.2.0
 

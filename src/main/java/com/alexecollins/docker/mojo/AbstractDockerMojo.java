@@ -27,7 +27,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
      * The host, e.g. -Ddocker.host=http://127.0.0.1:2375
      */
     @Parameter(property = "docker.host")
-    private URI host;
+    private String host;
 
     /**
      * A prefix to namespace scope machine. Important for isolating machines.
@@ -129,7 +129,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private DockerClient dockerClient() throws DockerException {
         DockerClientConfig.DockerClientConfigBuilder builder = DockerClientConfig.createDefaultConfigBuilder();
         if (host != null) {
-            builder = builder.withUri(String.valueOf(host));
+            builder = builder.withUri(host);
         }
         if (version != null) {
             builder = builder.withVersion(version);
