@@ -1,5 +1,10 @@
 Change Log
 ===
+2.3.0
+
+* [DMP Pull 38](https://github.com/alexec/docker-maven-plugin/pull/38) Expose container IP address as Maven properties .
+* Changed to Apache 2.0 licence.
+
 2.2.0
 
 * Used docker-java-orchestrator 2.2.0. See [Changelog](https://github.com/alexec/docker-java-orchestration/)
