@@ -16,7 +16,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 import java.io.File;
-import java.net.URI;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -58,6 +57,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
      */
     @Parameter(property = "docker.password")
     private String password;
+
+    /**
+     * Docker repository server (for deploy).
+     */
+    @Parameter(property = "docker.serverAddress")
+    private String serverAddress;
 
     /**
      * Docker email (for deploy).
@@ -142,6 +147,9 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         }
         if (email != null) {
             builder = builder.withEmail(email);
+        }
+        if (serverAddress != null) {
+            builder = builder.withServerAddress(serverAddress);
         }
 
         return DockerClientBuilder.getInstance(builder.build()).build();

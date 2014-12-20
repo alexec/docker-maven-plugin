@@ -61,6 +61,8 @@ Add the following to the `pom.xml` plugins section.
         <!-- used for push -->
         <username>alexec</username>
         <email>alex.e.c@gmail.com</email>
+        <!-- if you want to push to a private repo -->
+        <serverAddress>https://index.docker.io/v1/</serverAddress>
         <!-- change here if you are using another port/host, e.g. 4243 -->
         <host>http://localhost:2375</host>
         <!-- if you need to run over SSL, change this -->

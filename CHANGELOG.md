@@ -4,13 +4,14 @@ Change Log
 
 * [DMP Pull 38](https://github.com/alexec/docker-maven-plugin/pull/38) Expose container IP address as Maven properties .
 * Changed to Apache 2.0 licence.
-* [DMP Issue 34](https://github.com/alexec/docker-maven-plugin/issues/34) Problem with configuration of host URI is some environments. 
+* [DMP Issue 34](https://github.com/alexec/docker-maven-plugin/issues/34) Problem with configuration of host URI is some environments.
+* Added support for private repositories.
 
 2.2.0
 
 * Used docker-java-orchestrator 2.2.0. See [Changelog](https://github.com/alexec/docker-java-orchestration/)
 
-2..0
+2.1.0
 
 * Fixed bug preventing correct linking of containers.
 * [DMP Issue 26](https://github.com/alexec/docker-maven-plugin/issues/26) Support for link alias.
