@@ -1,5 +1,9 @@
 Change Log
 ===
+2.3.1
+
+* Fix splitting of tag name when tag contains port declaration for non-default registry.
+
 2.3.0
 
 * [DMP Pull 38](https://github.com/alexec/docker-maven-plugin/pull/38) Expose container IP address as Maven properties .
