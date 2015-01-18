@@ -1,5 +1,9 @@
 Change Log
 ===
+2.4.0
+
+* Added the ability to verify the body of a ping health-check.
+
 2.3.1
 
 * Fix splitting of tag name when tag contains port declaration for non-default registry.
