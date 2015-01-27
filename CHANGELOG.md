@@ -3,6 +3,7 @@ Change Log
 2.4.0
 
 * Added the ability to verify the body of a ping health-check.
+* [DJO Issue 17](https://github.com/alexec/docker-java-orchestration/issues/17) Can disable filtering on "added" properties.
 
 2.3.1
 

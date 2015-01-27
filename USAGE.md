@@ -34,7 +34,9 @@ packaging:
   # files to add to the build, usually used with ADD in the Dockerfile
   add:
     - target/example-${project.version}.jar
-    - hello-world.yml
+    # you can also disable filtering
+    - path: hello-world.yml
+      filter: false
 # optional list of port to expose on the host
 ports:
   - 8080
