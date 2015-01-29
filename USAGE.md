@@ -7,6 +7,7 @@ Goals
 * `start` - start the containers in order and ensures they are running
 * `stop` - stop all running containers for the project
 * `deploy` - push containers to Docker repository
+* `validate` - validate the format of Dockerfile
 
 Pre-requisites
 ---
