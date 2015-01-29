@@ -18,16 +18,18 @@ import org.apache.maven.plugins.annotations.Mojo;
 @Mojo(name = "validate", defaultPhase = LifecyclePhase.VALIDATE)
 public class ValidateMojo extends AbstractDockerMojo {
 
+    private Logger logger = Logger.getLogger(ValidateMojo.class.getName());
+
     @Override
     protected void doExecute(DockerOrchestrator orchestrator) throws Exception {
-        Logger.getLogger(ValidateMojo.class.getName()).log(Level.INFO, "Starting validate DockerFile");
+        logger.log(Level.INFO, "Starting validate DockerFile");
         try {
             orchestrator.validate();
         } catch (Exception ex)
         {
-            Logger.getLogger(ValidateMojo.class.getName()).log(Level.SEVERE, "invalid DockerFile", ex);
+            logger.log(Level.SEVERE, "invalid DockerFile", ex);
             throw ex;
         }
-        Logger.getLogger(ValidateMojo.class.getName()).log(Level.INFO, "DockerFile validated");
+        logger.log(Level.INFO, "DockerFile validated");
     }
 }

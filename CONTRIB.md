@@ -66,4 +66,4 @@ Contributors
 * Panu Wetterstrand
 * Sam Morrison
 * Vasco Figueira
-
+* Guillaume Dufour
