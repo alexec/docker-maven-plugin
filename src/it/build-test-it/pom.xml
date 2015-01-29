@@ -78,10 +78,10 @@
                         <goals>
                             <goal>help</goal>
                             <goal>clean</goal>
+                            <goal>validate</goal>
                             <goal>package</goal>
                             <goal>start</goal>
                             <goal>stop</goal>
-                            <goal>deploy</goal>
                         </goals>
                     </execution>
                     <execution>
@@ -90,7 +90,9 @@
                         <id>push</id>
                         <phase>install</phase>
                         <goals>
+                            <!--
                             <goal>deploy</goal>
+                            -->
                         </goals>
                     </execution>
                 </executions>
@@ -98,7 +100,7 @@
                     <dependency>
                         <groupId>com.alexecollins.docker</groupId>
                         <artifactId>docker-java-orchestration-plugin-boot2docker</artifactId>
-                        <version>2.2.0</version>
+                        <version>@project.version@</version>
                     </dependency>
                 </dependencies>
             </plugin>

@@ -41,6 +41,8 @@ packaging:
 # optional list of port to expose on the host
 ports:
   - 8080
+  # If you want a different host port used, where the former is the exposed port and the latter the container port.
+  - 8001 1802
 # containers that this should be linked to, started before this one and stopped afterwards, optional alias after colon
 links:
   - mysql:db

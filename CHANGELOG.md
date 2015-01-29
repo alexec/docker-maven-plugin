@@ -4,8 +4,7 @@ Change Log
 
 * Added the ability to verify the body of a ping health-check.
 * [DJO Issue 17](https://github.com/alexec/docker-java-orchestration/issues/17) Can disable filtering on "added" properties.
-
-2.3.1
+* [DMP Pull 42](https://github.com/alexec/docker-maven-plugin/pull/42) Added ability to configure certificates from plugin configuration.
 
 * Fix splitting of tag name when tag contains port declaration for non-default registry.
 

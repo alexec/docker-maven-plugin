@@ -2,7 +2,6 @@ package com.alexecollins.docker.mojo;
 
 import com.alexecollins.docker.orchestration.DockerOrchestrator;
 import com.alexecollins.docker.orchestration.model.BuildFlag;
-import com.alexecollins.docker.orchestration.util.TextFileFilter;
 import com.alexecollins.docker.util.MavenLogAppender;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.DockerException;
@@ -119,11 +118,14 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         try {
             final DockerClient docker = dockerClient();
             getLog().info("Docker version " + docker.versionCmd().exec().getVersion());
-            doExecute(new DockerOrchestrator(docker, src(), workDir(), projDir(), username, prefix,
-                    TextFileFilter.INSTANCE, properties, buildFlags()));
+            doExecute(dockerOrchestrator(properties, docker));
         } catch (Exception e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
+    }
+
+    private DockerOrchestrator dockerOrchestrator(Properties properties, DockerClient docker) {
+        return DockerOrchestrator.builder().docker(docker).src(src()).workDir(workDir()).rootDir(projDir()).user(username).project(prefix).properties(properties).buildFlags(buildFlags()).build();
     }
 
     private Set<BuildFlag> buildFlags() {

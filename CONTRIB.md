@@ -58,12 +58,16 @@ Contributors
 * alrighttheresham
 * Changgeng Li
 * Christian Heineman
+* Cornel Eberle
 * Dan Jasek
 * djsly
+* Guillaume Dufour
 * Jacob Bay Hansen
 * Lachlan Coote
 * Laurie Hallowes
+* Markus Wolf
+* Olivier Adam
 * Panu Wetterstrand
 * Sam Morrison
 * Vasco Figueira
-* Guillaume Dufour
+
