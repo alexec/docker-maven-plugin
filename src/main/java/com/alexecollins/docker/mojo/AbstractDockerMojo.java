@@ -88,6 +88,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     @Parameter(defaultValue = "false", property = "docker.skip")
     private boolean skip;
 
+    /**
+     * Specify docker certificate path. Defaults to not being set
+     */
+    @Parameter(property = "docker.certPath")
+    private String certificatePath;
+
     @Component
     private MavenProject project;
 
@@ -150,6 +156,9 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         }
         if (serverAddress != null) {
             builder = builder.withServerAddress(serverAddress);
+        }
+        if (certificatePath != null) {
+            builder = builder.withDockerCertPath(certificatePath);
         }
 
         return DockerClientBuilder.getInstance(builder.build()).build();
