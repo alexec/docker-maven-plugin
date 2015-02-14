@@ -57,7 +57,7 @@ tag: alex.e.c/app:${project.artifactId}-${project.version}
 
 Add the following to the `pom.xml` plugins section.
 
- ```pom.xml
+ ```xml
 <plugin>
     <groupId>com.alexecollins.docker</groupId>
     <artifactId>docker-maven-plugin</artifactId>
