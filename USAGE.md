@@ -2,12 +2,12 @@ Usage
 ===
 Goals
 ---
-* `clean` - delete all containers and images for the project (see know issues)
+* `clean` - delete all containers and images for the project
+* `validate` - validate the format of Dockerfile
 * `package` - builds the containers based on YAML configuration
 * `start` - start the containers in order and ensures they are running
 * `stop` - stop all running containers for the project
 * `deploy` - push containers to Docker repository
-* `validate` - validate the format of Dockerfile
 
 Pre-requisites
 ---
@@ -57,25 +57,25 @@ tag: alex.e.c/app:${project.artifactId}-${project.version}
 
 Add the following to the `pom.xml` plugins section.
 
- ```xml
+```xml
 <plugin>
     <groupId>com.alexecollins.docker</groupId>
     <artifactId>docker-maven-plugin</artifactId>
     <configuration>
-        <!-- your installed version -->
+        <!-- out of the box, you shoud not need to have these, as they'll use sensible defaults -->
+        <!-- (optional) your installed version -->
         <version>1.13</version>
-        <!-- used for push -->
+        <!-- (optional) if you want to push to a private repo -->
         <username>alexec</username>
         <email>alex.e.c@gmail.com</email>
-        <!-- if you want to push to a private repo -->
         <serverAddress>https://index.docker.io/v1/</serverAddress>
-        <!-- change here if you are using another port/host, e.g. 4243 -->
+        <!-- (optional) change here if you are using another port/host, e.g. 4243 -->
         <host>http://localhost:2375</host>
-        <!-- if you need to run over SSL, change this -->
+        <!-- (optional) if you need to run with configured SSL certificates -->
         <dockerCertPath>${user.home}/.docker</dockerCertPath>
-        <!-- remove images created by Dockerfile -->
+        <!-- (optional) remove images created by Dockerfile -->
         <removeIntermediateImages>true</removeIntermediateImages>
-        <!-- do/do not cache images (default true), disable to get the freshest images -->
+        <!-- (optional) do/do not cache images (default true), disable to get the freshest images -->
         <cache>true</cache>
     </configuration>
     <dependencies>
@@ -111,7 +111,6 @@ For e.g. to build containers from their `Dockerfile` and `conf.yml` files, run t
 
      mvn docker:package
 
-
 Expose container IP as maven properties
 ---
 
@@ -119,7 +118,8 @@ By default, the container ip will be exposed as maven properties. This would be 
 
 The property name is `docker.` + directory name of each Dockerfile + `.ipAddress`. For example, by configuring `maven-failsafe-plugin` in the following way:
 
-```<plugin>
+```
+            <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.14.1</version>
                 <configuration>
@@ -138,21 +138,17 @@ The property name is `docker.` + directory name of each Dockerfile + `.ipAddress
             </plugin>
 ```
 
-
 In the test, the ip address can be obtained by:
 
 
 ```
-
          String host = System.getProperty("example.app.ip");
-
 ```
 
 We can also use the container ip address for health check.  This can be done by using `__CONTAINER.IP__` as a placeholder in the pings url. For example: 
 
 
-```
-
+```yml
 healthChecks:
   pings:
     - url: http://__CONTAINER.IP__:8080/hello-world
@@ -161,40 +157,3 @@ healthChecks:
 ```
 
 This can be turned off by set `exposeContainerIp` to `false` in `conf.yml`
-
-Using with boot2docker
----
-
-Boot2docker runs docker in a Virtualbox VM and (by default) runs the Docker daemon on HTTPS. It exposes it's configuration via environment variables on the host:
-
-```
-$ boot2docker shellinit
-Writing /Users/auser/.boot2docker/certs/boot2docker-vm/ca.pem
-Writing /Users/auser/.boot2docker/certs/boot2docker-vm/cert.pem
-Writing /Users/auser/.boot2docker/certs/boot2docker-vm/key.pem
-    export DOCKER_HOST=tcp://192.168.59.103:2376
-    export DOCKER_CERT_PATH=/Users/auser/.boot2docker/certs/boot2docker-vm
-    export DOCKER_TLS_VERIFY=1
-```
-
-As the certificates are self-signed, the Docker client needs to be told about the location of the certificates. This can be done by specifying
-the certificatePath in the maven plugin configuration
-
-```xml
-    <plugin>
-        <groupId>com.alexecollins.docker</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
-        <version>${docker-maven-plugin.version}</version>
-        <configuration>
-            <certificatePath>${env.DOCKER_CERT_PATH}</certificatePath>
-        </configuration>
-        <dependencies>
-            <dependency>
-                <groupId>com.alexecollins.docker</groupId>
-                <artifactId>docker-java-orchestration-plugin-boot2docker</artifactId>
-                <version>${docker-java-orchestration-plugin-boot2docker.version}</version>
-            </dependency>
-        </dependencies>
-    </plugin>
-
-```
