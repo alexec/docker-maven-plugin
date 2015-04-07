@@ -82,6 +82,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private boolean cache;
 
     /**
+     * Don't output the docker api responses
+     */
+    @Parameter(defaultValue = "false", property = "docker.quiet")
+    private boolean quiet;
+
+    /**
      * Skip execution.
      */
     @Parameter(defaultValue = "false", property = "docker.skip")
@@ -135,6 +141,9 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         }
         if (!cache) {
             buildFlags.add(BuildFlag.NO_CACHE);
+        }
+        if(quiet) {
+            buildFlags.add(BuildFlag.QUIET);
         }
         return buildFlags;
     }
