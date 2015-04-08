@@ -48,7 +48,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     /**
      * Docker username (for deploy).
      */
-    @Parameter(property = "docker.username")
+    @Parameter(property = "docker.username", defaultValue = "${user.name}")
     private String username;
 
     /**
