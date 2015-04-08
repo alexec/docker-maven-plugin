@@ -1,5 +1,9 @@
 Change Log
 ===
+2.4.1
+
+* Reduced logging of properties to debug level.
+
 2.4.0
 
 * Added the ability to verify the body of a ping health-check.

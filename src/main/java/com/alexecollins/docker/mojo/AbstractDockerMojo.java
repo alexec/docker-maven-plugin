@@ -113,7 +113,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         // not great eh
         final Properties properties = properties();
 
-        getLog().info("properties filtering supported for " + properties.keySet());
+        getLog().debug("properties filtering supported for " + properties.keySet());
 
         try {
             final DockerClient docker = dockerClient();
