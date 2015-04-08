@@ -56,11 +56,13 @@ Contributors
 ---
 * Alex Collins 
 * alrighttheresham
+* Ashley Cambrell
 * Changgeng Li
 * Christian Heineman
 * Cornel Eberle
 * Dan Jasek
 * djsly
+* Emir Dizdarevic
 * Guillaume Dufour
 * Jacob Bay Hansen
 * Lachlan Coote
