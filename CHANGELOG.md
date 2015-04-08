@@ -1,8 +1,13 @@
 Change Log
 ===
-2.4.1
+2.5.0
 
 * Reduced logging of properties to debug level.
+* Do not treat files in `src/main/docker` as containers, only directories.
+* Made validation more tolerant to property filtering.
+* Fixed bug so that images are no longer removed by default.
+* Added ability to "quiet" builds.
+* Fixed bug where images were always rebuilt.
 
 2.4.0
 
