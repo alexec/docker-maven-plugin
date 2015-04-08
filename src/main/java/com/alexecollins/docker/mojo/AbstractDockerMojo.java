@@ -82,7 +82,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private boolean cache;
 
     /**
-     * Don't output the docker api responses
+     * Don't output the docker api responses during builds.
      */
     @Parameter(defaultValue = "false", property = "docker.quiet")
     private boolean quiet;
