@@ -1,5 +1,13 @@
 Competitors
---
+---
+
+Why should you use this one in preference to other plugins?
+
+* Avoids XML configuration, uses YAML similar to Fig (aka Docker Compose) so should be easier to learn.
+* Uses docker-java under the hood, so is up to date with latest Docker APIs.
+* Will support Gradle and Ant builds.
+* Focused on building and testing containers.
+* Automatically sets up Boot2Docker port forwarding.
 
 Plugin                                                    | Stars | Forks | Last Updated |
 --------------------------------------------------------- | ----- | ----- | ------------ |
