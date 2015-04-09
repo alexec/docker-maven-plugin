@@ -13,6 +13,12 @@ Pre-requisites
 ---
 Docker installed and Docker daemon running, see the docker [getting started guide](https://www.docker.io/gettingstarted/) for e.g. on a mac follow these [instructions](http://docs.docker.io/en/latest/installation/mac/).
 
+Examples
+---
+
+* [Selenium Visual Testing](https://github.com/alexec/selenium-visual-testing)
+* [Search In A Box](https://github.com/alexec/search-in-a-box)
+
 Usage
 ---
 The best example to look at is the [one from the tests](src/it/build-test-it) which creates a [Drop-Wizard](https://dropwizard.github.io/dropwizard/) app and builds three containers: __app__ (the dropwizard application) __data__ and __mysql__, and then runs an integration test against the deployed app. Et voila a packaged image!
