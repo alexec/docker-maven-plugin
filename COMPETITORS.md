@@ -3,10 +3,7 @@ Competitors
 
 Plugin                                                    | Stars | Forks | Last Updated |
 --------------------------------------------------------- | ----- | ----- | ------------ |
-[https://github.com/alexec/docker-maven-plugin](alexec)   |    52 |    24 |    Jan 27
-[https://github.com/rhuss/docker-maven-plugin](rhuss)     |    71 |    19 |    Jan 27 
-[https://github.com/wouterd/docker-maven-plugin](wouterd) |    36 |    13 |    Dec 20
-[https://github.com/spotify/docker-maven-plugin](spotify) |    52 |    19 |    Jan  5
-[https://github.com/bibryam/docker-maven-plugin](bibryam) |    26 |     3 |    Aug 28
-[https://github.com/Palo-IT/docker-maven-plugin](Dufgui)  |    0  |     0 |    Jan 29
-
+[https://github.com/rhuss/docker-maven-plugin](rhuss)     |    99 |    32 |    Mar 13
+[https://github.com/spotify/docker-maven-plugin](spotify) |    86 |    35 |    Apr  9
+[https://github.com/alexec/docker-maven-plugin](alexec)   |    59 |    24 |    Apr  9
+[https://github.com/wouterd/docker-maven-plugin](wouterd) |    38 |    15 |    Dec 20

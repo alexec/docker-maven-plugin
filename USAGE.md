@@ -81,10 +81,10 @@ Add the following to the `pom.xml` plugins section.
         <host>http://localhost:2375</host>
         <!-- (optional) if you need to run with configured SSL certificates -->
         <dockerCertPath>${user.home}/.docker</dockerCertPath>
-        <!-- (optional) remove images created by Dockerfile -->
+        <!-- (optional) remove images created by Dockerfile (default true) -->
         <removeIntermediateImages>true</removeIntermediateImages>
-        <!-- (optional) do/do not cache images (default true), disable to get the freshest images -->
-        <cache>true</cache>
+        <!-- (optional) do/do not cache images (default false), disable to get the freshest images -->
+        <cache>false</cache>
     </configuration>
     <dependencies>
         <dependency>
