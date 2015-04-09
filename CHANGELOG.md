@@ -8,6 +8,7 @@ Change Log
 * Fixed bug so that images are no longer removed by default.
 * Added ability to "quiet" builds.
 * Fixed bug where images were always rebuilt.
+* Added ability to sleep on starting a container.
 
 2.4.0
 

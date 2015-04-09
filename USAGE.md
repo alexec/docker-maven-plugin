@@ -57,6 +57,8 @@ healthChecks:
     - url: http://localhost:8080/health-check
       timeout: 60000
       pattern: pattern that must be in the body of the return value
+# how long in milliseconds to sleep after start-up (default 0)
+sleep: 1000
 # tag to use for images
 tag: alex.e.c/app:${project.artifactId}-${project.version}
  ```
