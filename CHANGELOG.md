@@ -1,5 +1,10 @@
 Change Log
 ===
+2.6.0
+
+* Upgraded to docker-java-orchestration 2.6.0 ([changelog](https://github.com/alexec/docker-java-orchestration/blob/master/CHANGELOG.md)).
+* Exclude containers using `-Ddocker.exclude=app,other`, or `<exclude>app,other</exclude>`.
+
 2.5.0
 
 * Reduced logging of properties to debug level.

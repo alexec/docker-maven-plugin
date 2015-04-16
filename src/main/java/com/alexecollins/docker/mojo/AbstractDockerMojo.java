@@ -1,6 +1,7 @@
 package com.alexecollins.docker.mojo;
 
 import com.alexecollins.docker.orchestration.DockerOrchestrator;
+import com.alexecollins.docker.orchestration.ExcludeFilter;
 import com.alexecollins.docker.orchestration.model.BuildFlag;
 import com.alexecollins.docker.util.MavenLogAppender;
 import com.github.dockerjava.api.DockerClient;
@@ -94,6 +95,14 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private boolean skip;
 
     /**
+     * Exclude certain definitions, e.g. to not start one container.
+     *
+     * Comma-separated.
+     */
+    @Parameter(defaultValue = "", property = "docker.exclude")
+    private String exclude;
+
+    /**
      * Specify docker certificate path. Defaults to not being set
      */
     @Parameter(property = "docker.certPath")
@@ -131,7 +140,18 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     }
 
     private DockerOrchestrator dockerOrchestrator(Properties properties, DockerClient docker) {
-        return DockerOrchestrator.builder().docker(docker).src(src()).workDir(workDir()).rootDir(projDir()).user(username).project(prefix).properties(properties).buildFlags(buildFlags()).build();
+        return DockerOrchestrator
+                .builder()
+                .docker(docker)
+                .src(src())
+                .workDir(workDir())
+                .rootDir(projDir())
+                .user(username)
+                .project(prefix)
+                .properties(properties)
+                .buildFlags(buildFlags())
+                .definitionFilter(new ExcludeFilter(exclude.split(",")))
+                .build();
     }
 
     private Set<BuildFlag> buildFlags() {
