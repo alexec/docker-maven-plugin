@@ -85,6 +85,8 @@ Add the following to the `pom.xml` plugins section.
         <removeIntermediateImages>true</removeIntermediateImages>
         <!-- (optional) do/do not cache images (default false), disable to get the freshest images -->
         <cache>false</cache>
+        <!-- (optional) exclude certain images -->
+        <exclude>app,other</exclude>
     </configuration>
     <dependencies>
         <dependency>
