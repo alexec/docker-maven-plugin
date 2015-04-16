@@ -9,6 +9,8 @@ We tend to talk "Maven" rather than "Docker" (E.g. "package" rather than "build"
 * Do you want to know how to [get started](USAGE.md)?
 * [Having problems](DEBUG.md)?
 * What to get [involved or add features](CONTRIB.md)? 
-* What to know what's [changed recently](CHANGELOG.md)? 
+* What to know what's [changed recently](CHANGELOG.md)?
 
-There are [4 popular plugins)[COMPETITORS.md] you might wish to look at.
+Using another tool? I have an [Ant version](https://github.com/alexec/docker-ant-tasks), and a [Gradle version](https://github.com/alexec/docker-gradle-plugin) (SBT coming soon...).
+
+There are [4 popular plugins](COMPETITORS.md) you might wish to look at.
