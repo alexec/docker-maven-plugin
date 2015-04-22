@@ -80,7 +80,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
      * Use cached images during build.
      */
     @Parameter(defaultValue = "true", property = "docker.cache")
-    private boolean cache;
+    private boolean cache = true;
 
     /**
      * Don't output the docker api responses during builds.
@@ -100,7 +100,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
      * Comma-separated.
      */
     @Parameter(defaultValue = "", property = "docker.exclude")
-    private String exclude;
+    private String exclude = "";
 
     /**
      * Specify docker certificate path. Defaults to not being set
