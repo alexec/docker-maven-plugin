@@ -1,0 +1,24 @@
+machine:
+ pre:
+  - wget https://github.com/alexec/circleci/archive/1.0.6.tar.gz
+  - tar -xvf 1.0.6.tar.gz
+  - ./circleci-1.0.6/install.sh $CIRCLE_PROJECT_REPONAME
+  - $CIRCLE_PROJECT_REPONAME/circle.sh pre_machine
+ post:
+  - $CIRCLE_PROJECT_REPONAME/circle.sh post_machine
+ services:
+  - docker
+ environment:
+  DOCKER_HOST: tcp://127.0.0.1:2376
+  DOCKER_CERT_PATH: $HOME/.docker
+  DOCKER_TLS_VERIFY: 1
+dependencies:
+ override: 
+  - mvn install -DskipTests -s settings.xml
+test:
+ override:
+  - sudo service mysql stop
+  - mvn deploy -Prun-its -s settings.xml
+ post:
+  - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+  - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
