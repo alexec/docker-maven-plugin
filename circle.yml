@@ -18,7 +18,7 @@ dependencies:
 test:
  override:
   - sudo service mysql stop
-  - sudo mvn deploy -Prun-its -s settings.xml
+  - mvn deploy -Prun-its -s settings.xml
   - ./circle.sh start_build drop-wizard-in-a-box
   - ./circle.sh start_build search-in-a-box
   - ./circle.sh start_build selenium-visual-testing
