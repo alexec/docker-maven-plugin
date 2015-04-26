@@ -1,6 +1,6 @@
-FROM centos:centos6
+FROM dockerfile/java:oracle-java7
 
-RUN yum -y install java-1.7.0-openjdk-devel.x86_64
+WORKDIR /
 
 ADD ${project.build.finalName}.jar /
 ADD hello-world.yml /

@@ -2,7 +2,8 @@ template: Hello, %s!
 defaultId: 1
 database:
   driverClass: com.mysql.jdbc.Driver
-  user: root
+  user: test
+  password: test
   url: jdbc:mysql://localhost:3306/test
   properties:
     charSet: UTF-8
