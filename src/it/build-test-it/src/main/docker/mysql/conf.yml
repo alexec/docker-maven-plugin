@@ -1,3 +1,2 @@
 ports:
   - 3306
-tag: registry/${project.artifactId}-mysql:${project.version}

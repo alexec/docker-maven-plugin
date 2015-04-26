@@ -14,11 +14,14 @@ machine:
   DOCKER_TLS_VERIFY: 1
 dependencies:
  override: 
-  - mvn install -DskipTests -s settings.xml
+  - mvn dependency:resolve -s settings.xml
 test:
  override:
   - sudo service mysql stop
   - mvn deploy -Prun-its -s settings.xml
+  - ./circle.sh start_build drop-wizard-in-a-box
+  - ./circle.sh start_build search-in-a-box
+  - ./circle.sh start_build selenium-visual-testing
  post:
   - mkdir -p $CIRCLE_TEST_REPORTS/junit/
   - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
