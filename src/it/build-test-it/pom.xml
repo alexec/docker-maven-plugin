@@ -71,6 +71,8 @@
                     <password>registry</password>
                     <email>nobody@nowhere.com</email>
                     <serverAddress>https://locahost:5443/v1</serverAddress>
+                    <!-- for CircleCI builds, generally ommitted -->
+                    <permissionErrorTolerant>true</permissionErrorTolerant>
                 </configuration>
                 <executions>
                     <execution>

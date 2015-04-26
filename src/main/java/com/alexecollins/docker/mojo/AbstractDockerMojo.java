@@ -89,6 +89,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private boolean quiet;
 
     /**
+     * Silently ignore permission errors. This is useful if your CI does not support removal of containers.
+     */
+    @Parameter(defaultValue = "false", property = "docker.permissionErrorTolerant")
+    private boolean permissionErrorTolerant;
+
+    /**
      * Skip execution.
      */
     @Parameter(defaultValue = "false", property = "docker.skip")
@@ -151,11 +157,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
                 .properties(properties)
                 .buildFlags(buildFlags())
                 .definitionFilter(new ExcludeFilter(exclude.split(",")))
+                .permissionErrorTolerant(permissionErrorTolerant)
                 .build();
     }
 
     private Set<BuildFlag> buildFlags() {
-        final Set<BuildFlag> buildFlags = new HashSet<BuildFlag>();
+        final Set<BuildFlag> buildFlags = new HashSet<>();
         if (removeIntermediateImages) {
             buildFlags.add(BuildFlag.REMOVE_INTERMEDIATE_IMAGES);
         }
