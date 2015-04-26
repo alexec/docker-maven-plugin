@@ -1,5 +1,11 @@
 Change Log
 ===
+2.8.0
+
+* Skip boot2docker if Unix.
+* Added `permissionErrorTolerant` flag to deal with CircleCI btrfs errors.
+* Migrated to CircleCI.
+
 2.7.0
 
 * Java 1.7
