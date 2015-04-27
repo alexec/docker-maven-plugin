@@ -72,7 +72,7 @@
                     <email>nobody@nowhere.com</email>
                     <serverAddress>https://locahost:5443/v1</serverAddress>
                     <exclude>rubbish</exclude>
-                    <!-- for CircleCI builds, generally ommitted -->
+                    <!-- for CircleCI builds, generally omitted -->
                     <permissionErrorTolerant>true</permissionErrorTolerant>
                 </configuration>
                 <executions>

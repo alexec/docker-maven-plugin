@@ -1,1 +1,1 @@
-rubbish
+FROM dockerfile/java:oracle-java7
