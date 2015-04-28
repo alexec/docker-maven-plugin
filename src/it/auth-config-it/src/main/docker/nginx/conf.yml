@@ -1,0 +1,7 @@
+ports:
+  - 5443 443
+
+links:
+  - registry
+
+sleep: 120000

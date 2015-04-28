@@ -1,0 +1,1 @@
+tag: localhost:5443/registry/${project.artifactId}-app:${project.version}

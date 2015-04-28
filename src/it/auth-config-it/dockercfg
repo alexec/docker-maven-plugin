@@ -1,0 +1,6 @@
+{
+        "localhost:5443": {
+                "auth": "cmVnaXN0cnk6cmVnaXN0cnk=",
+                "email": "nobody@nowhere.com"
+        }
+}

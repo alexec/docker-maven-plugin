@@ -102,7 +102,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 
     /**
      * Exclude certain definitions, e.g. to not start one container.
-     *
+     * <p/>
      * Comma-separated.
      */
     @Parameter(defaultValue = "", property = "docker.exclude")
@@ -113,6 +113,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
      */
     @Parameter(property = "docker.certPath")
     private String certificatePath;
+
+    /**
+     * Specify the docker configuration path. Defaults to not being set
+     */
+    @Parameter(property = "docker.cfgPath")
+    private String cfgPath;
 
     @Component
     private MavenProject project;
@@ -169,7 +175,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         if (!cache) {
             buildFlags.add(BuildFlag.NO_CACHE);
         }
-        if(quiet) {
+        if (quiet) {
             buildFlags.add(BuildFlag.QUIET);
         }
         return buildFlags;
@@ -197,6 +203,9 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         }
         if (certificatePath != null) {
             builder = builder.withDockerCertPath(certificatePath);
+        }
+        if (cfgPath != null) {
+            builder = builder.withDockerCfgPath(cfgPath);
         }
 
         return DockerClientBuilder.getInstance(builder.build()).build();
