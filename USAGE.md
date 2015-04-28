@@ -87,6 +87,8 @@ Add the following to the `pom.xml` plugins section.
         <cache>true</cache>
         <!-- (optional) exclude certain images -->
         <exclude>app,other</exclude>
+        <!-- (optional) ignore problems with permission errors (e.g. if running on CircleCI -->
+        <permissionErrorTolerant>true</permissionErrorTolerant>
     </configuration>
     <dependencies>
         <dependency>
