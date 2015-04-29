@@ -1,7 +1,4 @@
+def actualPos = "docker ps".execute().text
+def expectedSubstring = "0.0.0.0:8888->3306/tcp"
 
-def ps =  "docker ps".execute().text
-
-println "docker ps:"
-println ps
-
-assert ps.contains("0.0.0.0:8888->3306/tcp")
+assert actualPos.contains(expectedSubstring), "\"" + actualPos + "\" contains \"" + expectedSubstring + "\""
