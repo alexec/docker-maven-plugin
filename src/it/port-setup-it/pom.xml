@@ -20,6 +20,7 @@
                 <executions>
                     <execution>
                         <goals>
+                            <goal>clean</goal>
                             <goal>package</goal>
                             <goal>start</goal>
                             <goal>stop</goal>
@@ -33,6 +34,24 @@
                         <version>@project.version@</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <exec executable="docker" failonerror="true" output="${project.basedir}/docker.ps">
+                                    <arg value="ps"/>
+                                </exec>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
