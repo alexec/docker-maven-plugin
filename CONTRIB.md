@@ -20,6 +20,7 @@ Contributors
 * Christian Heineman
 * Cornel Eberle
 * Dan Jasek
+* David Crome
 * djsly
 * Emir Dizdarevic
 * Guillaume Dufour
