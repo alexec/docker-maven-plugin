@@ -63,6 +63,12 @@ sleep: 1000
 tag: alex.e.c/app:${project.artifactId}-${project.version}
  ```
 
+If you only want to use another image as a build dependency, you do not need to provide a `Dockerfile`. Instead, just specfify the images in `conf.yml`:
+
+```yml
+image: mysql
+```
+
 Add the following to the `pom.xml` plugins section.
 
 ```xml
