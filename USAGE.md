@@ -61,6 +61,9 @@ healthChecks:
 sleep: 1000
 # tag to use for images
 tag: alex.e.c/app:${project.artifactId}-${project.version}
+container:
+    # a name for the container (if omitted, we will create an artifical one)
+    name: theName
  ```
 
 If you only want to use another image as a build dependency, you do not need to provide a `Dockerfile`. Instead, just specfify the images in `conf.yml`:
