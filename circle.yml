@@ -14,7 +14,7 @@ machine:
   DOCKER_TLS_VERIFY: 1
 dependencies:
  override: 
-  - mvn test-compile dependency:resolve -s settings.xml
+  - mvn dependency:resolve -s settings.xml
 test:
  override:
   - sudo service mysql stop
