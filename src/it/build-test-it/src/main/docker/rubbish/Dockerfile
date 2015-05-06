@@ -1,1 +1,1 @@
-FROM dockerfile/java:oracle-java7
+FROM java:7
