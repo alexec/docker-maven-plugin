@@ -19,6 +19,7 @@ test:
  override:
   - sudo service mysql stop
   - mvn deploy -Prun-its -s settings.xml
+  - cat target/it/port-setup-it/docker.ps
  post:
   - mkdir -p $CIRCLE_TEST_REPORTS/junit/
   - find . -type f -regex ".*/target/.*-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
