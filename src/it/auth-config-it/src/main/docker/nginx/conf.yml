@@ -4,4 +4,4 @@ ports:
 links:
   - registry
 
-sleep: 120000
+sleep: 180000
