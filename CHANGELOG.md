@@ -1,5 +1,10 @@
 Change Log
 ===
+2.9.0
+
+* Updated to docker-java-orchteration 2.9.0: see all [new features here](https://github.com/alexec/docker-java-orchestration/blob/master/CHANGELOG.md). 
+* [Pull 52](https://github.com/alexec/docker-maven-plugin/pull/52) Enchancement: Added support for cfgPath.
+
 2.8.0
 
 * Skip boot2docker if Unix.
