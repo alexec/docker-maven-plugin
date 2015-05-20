@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>auth-config-it</groupId>
+    <artifactId>auth-config-it</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>@project.groupId@</groupId>
+                <artifactId>@project.artifactId@</artifactId>
+                <version>@project.version@</version>
+                <configuration>
+                    <!-- for CircleCI builds, generally omitted -->
+                    <permissionErrorTolerant>true</permissionErrorTolerant>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>help</goal>
+                            <goal>clean</goal>
+                            <goal>start</goal>
+                            <goal>stop</goal>
+                            <goal>validate</goal>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>push</id>
+                        <phase>integration-test</phase>
+                        <configuration>
+                            <cfgPath>dockercfg</cfgPath>
+                            <exclude>nginx,registry</exclude>
+
+                            <!-- for CircleCI builds, generally omitted -->
+                            <permissionErrorTolerant>true</permissionErrorTolerant>
+                        </configuration>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.alexecollins.docker</groupId>
+                        <artifactId>docker-java-orchestration-plugin-boot2docker</artifactId>
+                        <version>@project.version@</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>
