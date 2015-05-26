@@ -110,6 +110,8 @@ Add the following to the `pom.xml` plugins section.
 </plugin>
  ```
 
+Note: we default to HTTPS. However, on Linux the default is un-secured HTTP. Try `<host>http://localhost:2375</host>`.
+
 There are other [configuration options](https://github.com/docker-java/docker-java#configuration), including via system environment here, which might be preferable if you have a number of builds using the plugin.
 
 Create your `${basedir}/src/main/docker` directory and create a subfolder for your application container
