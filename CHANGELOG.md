@@ -1,5 +1,9 @@
 Change Log
 ===
+2.9.2
+
+* [Issue 62][https://github.com/alexec/docker-maven-plugin/issues/62) Bug fix: system properties now override pom properties.
+
 2.9.0
 
 * Updated to docker-java-orchteration 2.9.0: see all [new features here](https://github.com/alexec/docker-java-orchestration/blob/master/CHANGELOG.md). 

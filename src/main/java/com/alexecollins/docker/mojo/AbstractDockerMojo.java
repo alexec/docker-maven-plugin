@@ -216,7 +216,6 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         final Properties p = new Properties();
 
         p.putAll(System.getenv());
-        p.putAll(System.getProperties());
 
         final String[] x = new String[]{
                 "project.groupId", project.getGroupId(),
@@ -234,6 +233,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         }
 
         p.putAll(project.getProperties());
+        p.putAll(System.getProperties());
 
         return p;
     }

@@ -1,3 +1,3 @@
 ports:
-  - 3306
+  - ${mysql.port}
 sleep: 5000
