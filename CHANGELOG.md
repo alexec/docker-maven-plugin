@@ -1,5 +1,9 @@
 Change Log
 ===
+2.9.3
+
+* [Issue 67](https://github.com/alexec/docker-maven-plugin/issues/67) Enhancement: Support privileged containers.
+
 2.9.2
 
 * [Issue 62][https://github.com/alexec/docker-maven-plugin/issues/62) Bug fix: system properties now override pom properties.
