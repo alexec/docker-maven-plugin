@@ -13,6 +13,10 @@ public class CleanMojo extends AbstractDockerMojo {
 
     @Override
     protected void doExecute(DockerOrchestrator orchestrator) {
-        orchestrator.clean();
+        if (isCleanContainerOnly()) {
+            orchestrator.cleanContainers();
+        } else {
+            orchestrator.clean();
+        }
     }
 }
