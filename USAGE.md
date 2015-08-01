@@ -54,7 +54,7 @@ links:
   - mysql:db
 healthChecks:
   pings:
-     - url: https://${maven.docker.container.ip}:8446/info
+     - url: https://localhost:8446/info
        timeout: 60000
        pattern: pattern that must be in the body of the return value
        sslVerify: false
@@ -99,6 +99,8 @@ Add the following to the `pom.xml` plugins section.
         <exclude>app,other</exclude>
         <!-- (optional) ignore problems with permission errors (e.g. if running on CircleCI -->
         <permissionErrorTolerant>true</permissionErrorTolerant>
+        <!-- (optional) only remove containers on clean, do not remove images -->
+        <cleanContainerOnly>false</cleanContainerOnly>
     </configuration>
     <dependencies>
         <dependency>
