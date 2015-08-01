@@ -54,9 +54,10 @@ links:
   - mysql:db
 healthChecks:
   pings:
-    - url: http://localhost:8080/health-check
-      timeout: 60000
-      pattern: pattern that must be in the body of the return value
+     - url: https://${maven.docker.container.ip}:8446/info
+       timeout: 60000
+       pattern: pattern that must be in the body of the return value
+       sslVerify: false
 # how long in milliseconds to sleep after start-up (default 0)
 sleep: 1000
 # tag to use for images
