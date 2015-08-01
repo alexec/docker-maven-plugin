@@ -1,3 +1,5 @@
 ports:
   - ${mysql.port}
-sleep: 5000
+healthChecks:
+  logPatterns:
+    - "ready for connections"

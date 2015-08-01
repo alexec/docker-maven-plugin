@@ -18,4 +18,6 @@ healthChecks:
     # __CONTAINER.IP__
     - url: http://localhost:8080/hello-world
       timeout: 60000
+  logPatterns:
+    - "Started SocketConnector"
 tag: registry/${project.artifactId}-app:${project.version}

@@ -3,5 +3,6 @@ ports:
 
 links:
   - registry
-
-sleep: 180000
+healthChecks:
+  logPatterns:
+    - "start worker processes"
