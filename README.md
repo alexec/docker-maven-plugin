@@ -16,4 +16,6 @@ We tend to talk "Maven" rather than "Docker" (E.g. "package" rather than "build"
 
 Using another tool? I have an [Ant version](https://github.com/alexec/docker-ant-tasks), and a [Gradle version](https://github.com/alexec/docker-gradle-plugin) (SBT coming soon...).
 
+<!--
 There are [4 popular plugins](COMPETITORS.md) you might wish to look at.
+-->
