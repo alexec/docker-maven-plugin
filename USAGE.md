@@ -58,11 +58,13 @@ healthChecks:
        timeout: 60000
        pattern: pattern that must be in the body of the return value
        sslVerify: false
+  logPatterns:
+     - pattern that must be in log file
 # how long in milliseconds to sleep after start-up (default 0)
 sleep: 1000
 # log failures
 logOnFailure: true
-maxLogLines: true
+maxLogLines: 10
 # volumes to mont from other containers
 volumesFrom: busybox
 # set environment variables
