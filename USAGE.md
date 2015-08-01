@@ -60,8 +60,28 @@ healthChecks:
        sslVerify: false
 # how long in milliseconds to sleep after start-up (default 0)
 sleep: 1000
+# log failures
+logOnFailure: true
+maxLogLines: true
+# volumes to mont from other containers
+volumesFrom: busybox
+# set environment variables
+env:
+    - NAME value
+# volumn to map
+volumes:
+    - /etc /etc
+# if this should be enabled
+enabled: true
+# expose the container's IP (see below)
+exposeContainerIp: true
 # tag to use for images
-tag: alex.e.c/app:${project.artifactId}-${project.version}
+tag: alex.e.c-app:${project.artifactId}-${project.version}
+# or multiple tags
+tags:
+    - alex.e.c-app:${project.artifactId}-${project.version}
+# Run the container in privileged mode.
+privileged: false
 container:
     # a name for the container (if omitted, we will create an artifical one)
     name: theName
