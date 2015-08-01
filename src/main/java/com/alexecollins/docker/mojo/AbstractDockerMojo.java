@@ -120,6 +120,13 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     @Parameter(property = "docker.cfgPath")
     private String cfgPath;
 
+    /**
+     * Clean container only in clean.
+     */
+    @Parameter(defaultValue = "false", property = "docker.cleanContainerOnly")
+    private boolean cleanContainerOnly;
+
+
     @Component
     private MavenProject project;
 
@@ -251,4 +258,8 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     }
 
     protected abstract void doExecute(DockerOrchestrator orchestrator) throws Exception;
+
+    public boolean isCleanContainerOnly() {
+        return cleanContainerOnly;
+    }
 }
