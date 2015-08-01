@@ -1,4 +1,6 @@
+<!--
 [![Build Status](https://travis-ci.org/alexec/docker-maven-plugin.svg?branch=master)](https://travis-ci.org/alexec/docker-maven-plugin)
+-->
 [![Circle CI](https://circleci.com/gh/alexec/docker-maven-plugin.svg?style=svg)](https://circleci.com/gh/alexec/docker-maven-plugin)
 
 Docker Maven Plugin
