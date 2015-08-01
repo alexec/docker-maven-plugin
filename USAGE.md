@@ -67,9 +67,6 @@ logOnFailure: true
 maxLogLines: 10
 # volumes to mont from other containers
 volumesFrom: busybox
-# set environment variables
-env:
-    - NAME value
 # volumn to map
 volumes:
     - /etc /etc
