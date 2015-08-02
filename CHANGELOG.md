@@ -1,19 +1,31 @@
 Change Log
 ===
+2.10.0
+
+* [DJO Pull](https://github.com/alexec/docker-java-orchestration/pull/39) Enhancement: Added a health-check for making sure an expected log line appears.
+* [DJO Pull](https://github.com/alexec/docker-java-orchestration/pull/40) Enhancement: Option to remove just containers on clean.
+* [DJO Pull](https://github.com/alexec/docker-java-orchestration/pull/41) Enhancement: Option to ignore SSL issues on self-signed health-checks.
+* Bug: Correctly validates of `Dockerfile` with periods in variable names.
+
 2.9.3
 
-* [Issue 67](https://github.com/alexec/docker-maven-plugin/issues/67) Enhancement: Support privileged containers.
-
-2.9.2
-
-* [Issue 62][https://github.com/alexec/docker-maven-plugin/issues/62) Bug fix: system properties now override pom properties.
+* [DMP Issue 67](https://github.com/alexec/docker-maven-plugin/issues/67) Enhancement: Support privileged containers.
+* [DMP Issue 70](https://github.com/alexec/docker-maven-plugin/issues/70) Bug: NPE is thrown with nameless containers.
 
 2.9.0
 
-* Updated to docker-java-orchteration 2.9.0: see all [new features here](https://github.com/alexec/docker-java-orchestration/blob/master/CHANGELOG.md). 
-* [Pull 52](https://github.com/alexec/docker-maven-plugin/pull/52) Enchancement: Added support for cfgPath.
+* [DMP Issue 50](https://github.com/alexec/docker-maven-plugin/issues/50) Bug: Container port ordering was reversed.
+* [DMP Issue 51](https://github.com/alexec/docker-maven-plugin/issues/51) Enhancement: ability to set container name.
+* [DMP Issue 54](https://github.com/alexec/docker-maven-plugin/issues/54) Problems with port forwarding on Windows.
+* [DJO Pull 25](https://github.com/alexec/docker-java-orchestration/pull/25) Added support for `src/main/docker/docker.yml` as a single global configuration file.
+* [DJO Pull 27](https://github.com/alexec/docker-java-orchestration/pull/27) Enhancement: Improved logging.
+* [DJO Pull 28](https://github.com/alexec/docker-java-orchestration/pull/28) Enhancement: Enabled/disable containers.
+* [DJO Pull 33](https://github.com/alexec/docker-java-orchestration/pull/33) Enhancement: Image names. 
+* [DJO Pull 34](https://github.com/alexec/docker-java-orchestration/pull/34) Enhancement: Support extra hosts.
+* [DJO Pull 35](https://github.com/alexec/docker-java-orchestration/pull/35) Enhancement: Upgrade to docker-java:1.3.0.
+* Other: removed un-needed code.
 
-2.8.0
+2.8.3
 
 * Skip boot2docker if Unix.
 * Added `permissionErrorTolerant` flag to deal with CircleCI btrfs errors.
