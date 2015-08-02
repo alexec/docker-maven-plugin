@@ -54,23 +54,28 @@ links:
   - mysql:db
 healthChecks:
   pings:
+     # check this URL for 200 OK
+     - https://localhost:8446/info
+     # check another URL with non-default time out, with a pattern, and non checking SSL certificates
      - url: https://localhost:8446/info
        timeout: 60000
        pattern: pattern that must be in the body of the return value
        sslVerify: false
   logPatterns:
      - pattern that must be in log file
-# how long in milliseconds to sleep after start-up (default 0)
+     - pattern: another pattern with non-default timeout
+       timeout: 30000
+# how long in milliseconds to sleep after start-up (default 0), note health checks are usually faster and more reliable
 sleep: 1000
-# log failures
+# log failures (default true, 10)
 logOnFailure: true
 maxLogLines: 10
-# volumes to mont from other containers
+# volumes to mount from other containers
 volumesFrom: busybox
-# volumn to map
+# volume to map
 volumes:
     - /etc /etc
-# if this should be enabled
+# if this should be enabled (default true)
 enabled: true
 # expose the container's IP (see below)
 exposeContainerIp: true
@@ -79,7 +84,7 @@ tag: alex.e.c-app:${project.artifactId}-${project.version}
 # or multiple tags
 tags:
     - alex.e.c-app:${project.artifactId}-${project.version}
-# Run the container in privileged mode.
+# Run the container in privileged mode (default false)
 privileged: false
 container:
     # a name for the container (if omitted, we will create an artifical one)
