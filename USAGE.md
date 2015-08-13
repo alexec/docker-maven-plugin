@@ -74,7 +74,8 @@ maxLogLines: 10
 volumesFrom: busybox
 # volume to map
 volumes:
-    - /etc /etc
+# dir in image to host dir
+  /mnt/target: target/docker
 # if this should be enabled (default true)
 enabled: true
 # expose the container's IP (see below)
