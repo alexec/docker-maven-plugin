@@ -1,5 +1,27 @@
 Change Log
 ===
+2.10.5
+
+* [DJO Pull 50][https://github.com/alexec/docker-java-orchestration/pull/50] Bug: Orchestrator was not honoring quietness and not catching errors when pushing.
+
+2.10.4
+
+* Enhancement: Only check for running VMs in case multiple VMs are created.
+
+2.10.3
+
+* Enhancement: Docker Toolbox support
+
+2.10.2
+
+* [DJO Pull 47](https://github.com/alexec/docker-java-orchestration/pull/47) Bug: Fixed bug that prevented health-checking by IP on multiple containers.
+* Enhancement: Made logging of failures clearer.
+* Enhancement: Support new Docker VirtualBox set-up.
+
+2.10.1
+
+* Bug: Improved reliability of log health-check.
+
 2.10.0
 
 * [DJO Pull](https://github.com/alexec/docker-java-orchestration/pull/39) Enhancement: Added a health-check for making sure an expected log line appears.
