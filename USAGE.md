@@ -8,7 +8,7 @@ Goals
 * `start` - start the containers in order and ensures they are running
 * `stop` - stop all running containers for the project
 * `deploy` - push containers to Docker repository
-* `save` - save images to file
+* `save` - save images to file, optionally deploy to Maven repository
 
 Pre-requisites
 ---
@@ -131,6 +131,8 @@ Add the following to the `pom.xml` plugins section.
         <saveDir>target/docker</saveDir>
         <!-- (optional) save files to reduce disk space usage -->
         <gzipSave>false</gzipSave>
+        <!-- (optional) attached saved files for deployment to local repo or Maven repo -->
+        <attach>false</attach>
     </configuration>
     <dependencies>
         <dependency>

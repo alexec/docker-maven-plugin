@@ -1,5 +1,9 @@
 Change Log
 ===
+2.11.2
+
+* Enhancement: Allow you to attach saved files as artifacts to be installed in you local or remote Maven repository.
+
 2.11.1
 
 * Enhancement: Added new `save` mojo.
