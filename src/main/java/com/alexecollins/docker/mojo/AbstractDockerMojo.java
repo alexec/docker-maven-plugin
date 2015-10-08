@@ -6,8 +6,6 @@ import com.alexecollins.docker.orchestration.model.BuildFlag;
 import com.alexecollins.docker.util.MavenLogAppender;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.DockerException;
-import com.github.dockerjava.api.command.VersionCmd;
-import com.github.dockerjava.api.model.Version;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.DockerClientConfig;
 import org.apache.maven.plugin.AbstractMojo;
@@ -128,11 +126,6 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     @Parameter(defaultValue = "false", property = "docker.cleanContainerOnly")
     private boolean cleanContainerOnly;
 
-    /**
-     * Do auto detection on the docker version.
-     */
-    @Parameter(defaultValue = "true", property = "docker.versionAutoDetect")
-    private boolean versionAutoDetect;
 
     @Component
     private MavenProject project;
@@ -222,17 +215,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
             builder = builder.withDockerCfgPath(cfgPath);
         }
 
-        if (versionAutoDetect) {
-            final DockerClient initialClient = DockerClientBuilder.getInstance(builder.build()).build();
-            final VersionCmd versionCmd = initialClient.versionCmd();
-            final Version version = versionCmd.exec();
-
-            builder = builder.withVersion(version.getApiVersion());
-
-            return DockerClientBuilder.getInstance(builder.build()).build();
-        } else {
-            return DockerClientBuilder.getInstance(builder.build()).build();
-        }
+        return DockerClientBuilder.getInstance(builder.build()).build();
     }
 
 
