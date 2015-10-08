@@ -79,6 +79,7 @@
                     <attach>true</attach>
                 </configuration>
                 <executions>
+
                     <execution>
                         <id>default-cli</id>
                         <goals>
@@ -88,6 +89,7 @@
                             <goal>package</goal>
                             <goal>start</goal>
                             <goal>stop</goal>
+                            <goal>save</goal>
                         </goals>
                     </execution>
                     <execution>

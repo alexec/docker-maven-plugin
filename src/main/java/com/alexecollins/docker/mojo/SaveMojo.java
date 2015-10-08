@@ -16,12 +16,12 @@ import java.util.Map;
 /**
  * Save images to tar/tar.gz files.
  */
-@Mojo(name = "save", defaultPhase = LifecyclePhase.DEPLOY)
+@Mojo(name = "save", defaultPhase = LifecyclePhase.PACKAGE)
 public class SaveMojo extends AbstractDockerMojo {
     /**
      * The directory to save images to.
      */
-    @Parameter(defaultValue = "${project.build.dir}/docker", property = "docker.saveDir")
+    @Parameter(defaultValue = "${project.build.directory}/docker", property = "docker.saveDir")
     private File saveDir;
 
     /**
@@ -52,7 +52,7 @@ public class SaveMojo extends AbstractDockerMojo {
         for (Map.Entry<Id, File> save : saved.entrySet()) {
             File file = save.getValue();
             String extension = FilenameUtils.getExtension(file.getName());
-            mavenProjectHelper.attachArtifact(getProject(), extension, file);
+            mavenProjectHelper.attachArtifact(getProject(), extension, save.getKey().toString(), file);
         }
     }
 }
