@@ -75,6 +75,8 @@
                     <exclude>rubbish</exclude>
                     <!-- for CircleCI builds, generally omitted -->
                     <permissionErrorTolerant>true</permissionErrorTolerant>
+                    <saveDir>/tmp</saveDir>
+                    <gzipSave>true</gzipSave>
                 </configuration>
                 <executions>
                     <execution>
@@ -86,6 +88,7 @@
                             <goal>package</goal>
                             <goal>start</goal>
                             <goal>stop</goal>
+                            <goal>save</goal>
                         </goals>
                     </execution>
                     <execution>

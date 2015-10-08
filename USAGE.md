@@ -8,6 +8,7 @@ Goals
 * `start` - start the containers in order and ensures they are running
 * `stop` - stop all running containers for the project
 * `deploy` - push containers to Docker repository
+* `save` - save images to file
 
 Pre-requisites
 ---
@@ -126,6 +127,10 @@ Add the following to the `pom.xml` plugins section.
         <permissionErrorTolerant>true</permissionErrorTolerant>
         <!-- (optional) only remove containers on clean, do not remove images -->
         <cleanContainerOnly>false</cleanContainerOnly>
+        <!-- (optional) where to same images -->
+        <saveDir>target/docker</saveDir>
+        <!-- (optional) save files to reduce disk space usage -->
+        <gzipSave>false</gzipSave>
     </configuration>
     <dependencies>
         <dependency>

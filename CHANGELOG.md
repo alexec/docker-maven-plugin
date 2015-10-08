@@ -1,5 +1,9 @@
 Change Log
 ===
+2.11.1
+
+* Enhancement: Added new `save` mojo.
+
 2.10.5
 
 * [DJO Pull 50][https://github.com/alexec/docker-java-orchestration/pull/50] Bug: Orchestrator was not honoring quietness and not catching errors when pushing.
