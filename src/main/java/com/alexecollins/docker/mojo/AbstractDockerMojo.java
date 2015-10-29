@@ -91,6 +91,12 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private boolean quiet;
 
     /**
+     * Always pull FROM image when building.
+     */
+    @Parameter(defaultValue = "false", property = "docker.pull")
+    private boolean pull;
+
+    /**
      * Silently ignore permission errors. This is useful if your CI does not support removal of containers.
      */
     @Parameter(defaultValue = "false", property = "docker.permissionErrorTolerant")
@@ -191,6 +197,9 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         }
         if (quiet) {
             buildFlags.add(BuildFlag.QUIET);
+        }
+        if (pull) {
+            buildFlags.add(BuildFlag.PULL);
         }
         return buildFlags;
     }
