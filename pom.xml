@@ -204,7 +204,8 @@
                             <showErrors>true</showErrors>
                             <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                             <pomIncludes>
-                                <pomInclude>*/pom.xml</pomInclude>
+                                <pomInclude>built-test-it/pom.xml</pomInclude>
+                                <pomInclude>port-setup-it/pom.xml</pomInclude>
                             </pomIncludes>
                             <postBuildHookScript>verify</postBuildHookScript>
                             <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
