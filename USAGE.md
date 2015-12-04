@@ -8,6 +8,7 @@ Goals
 * `start` - start the containers in order and ensures they are running
 * `stop` - stop all running containers for the project
 * `deploy` - push containers to Docker repository
+* `save` - save images to file, optionally deploy to Maven repository
 
 Pre-requisites
 ---
@@ -92,10 +93,10 @@ container:
     name: theName
  ```
 
-If you only want to use another image as a build dependency, you do not need to provide a `Dockerfile`. Instead, just specfify the images in `conf.yml`:
+If you only want to use another image as a build dependency, you can provide a simple `Dockerfile` with just the image, e.g.
 
-```yml
-image: mysql
+```
+FROM mysql
 ```
 
 Add the following to the `pom.xml` plugins section.
@@ -126,6 +127,12 @@ Add the following to the `pom.xml` plugins section.
         <permissionErrorTolerant>true</permissionErrorTolerant>
         <!-- (optional) only remove containers on clean, do not remove images -->
         <cleanContainerOnly>false</cleanContainerOnly>
+        <!-- (optional) where to same images -->
+        <saveDir>target/docker</saveDir>
+        <!-- (optional) save files to reduce disk space usage -->
+        <gzipSave>false</gzipSave>
+        <!-- (optional) attached saved files for deployment to local repo or Maven repo -->
+        <attach>false</attach>
     </configuration>
     <dependencies>
         <dependency>

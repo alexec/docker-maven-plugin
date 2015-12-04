@@ -9,7 +9,7 @@
 
     <groupId>com.alexecollins.docker</groupId>
     <artifactId>docker-maven-plugin</artifactId>
-    <version>2.10.5-SNAPSHOT</version>
+    <version>2.11.8-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>Docker Maven Plugin</name>
@@ -86,7 +86,7 @@
         <dependency>
             <groupId>com.alexecollins.docker</groupId>
             <artifactId>docker-java-orchestration-core</artifactId>
-            <version>2.10.5-SNAPSHOT</version>
+            <version>2.11.9-SNAPSHOT</version>
         </dependency>
         <!-- plugin -->
         <dependency>
@@ -204,7 +204,8 @@
                             <showErrors>true</showErrors>
                             <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                             <pomIncludes>
-                                <pomInclude>*/pom.xml</pomInclude>
+                                <pomInclude>built-test-it/pom.xml</pomInclude>
+                                <pomInclude>port-setup-it/pom.xml</pomInclude>
                             </pomIncludes>
                             <postBuildHookScript>verify</postBuildHookScript>
                             <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>

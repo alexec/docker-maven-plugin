@@ -1,5 +1,48 @@
 Change Log
 ===
+2.11.5
+
+* [DJO Pull 64][https://github.com/alexec/docker-java-orchestration/pull/65] Enhancement: Volumes support read-only flag.  
+* [DJO Pull 62][https://github.com/alexec/docker-java-orchestration/pull/62] Enhancement: Updated docker-java version.  
+* [DJO Pull 61][https://github.com/alexec/docker-java-orchestration/pull/61] Enhancement: Introduce PULL flag to builds. 
+
+2.11.4
+
+* [DJO Pull 58][https://github.com/alexec/docker-java-orchestration/pull/58] Bug: Sym-link support. 
+* [DJO Pull 57][https://github.com/alexec/docker-java-orchestration/pull/57] Enhancement: Clearer dependency error report. 
+* [DJO Pull 56][https://github.com/alexec/docker-java-orchestration/pull/56] Enhancement: Support multiple tags on push. 
+* [DJO Pull 55][https://github.com/alexec/docker-java-orchestration/pull/55] Bug: Preserve file permission on copy. 
+
+2.11.2
+
+* Enhancement: Allow you to attach saved files as artifacts to be installed in you local or remote Maven repository.
+
+2.11.1
+
+* Enhancement: Added new `save` mojo.
+
+2.10.5
+
+* [DJO Pull 50][https://github.com/alexec/docker-java-orchestration/pull/50] Bug: Orchestrator was not honoring quietness and not catching errors when pushing.
+
+2.10.4
+
+* Enhancement: Only check for running VMs in case multiple VMs are created.
+
+2.10.3
+
+* Enhancement: Docker Toolbox support
+
+2.10.2
+
+* [DJO Pull 47](https://github.com/alexec/docker-java-orchestration/pull/47) Bug: Fixed bug that prevented health-checking by IP on multiple containers.
+* Enhancement: Made logging of failures clearer.
+* Enhancement: Support new Docker VirtualBox set-up.
+
+2.10.1
+
+* Bug: Improved reliability of log health-check.
+
 2.10.0
 
 * [DJO Pull](https://github.com/alexec/docker-java-orchestration/pull/39) Enhancement: Added a health-check for making sure an expected log line appears.
