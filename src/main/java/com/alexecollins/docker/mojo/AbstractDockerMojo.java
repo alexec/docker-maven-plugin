@@ -129,18 +129,6 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private String cfgPath;
 
     /**
-     * Resource to copy out of the docker container.
-     */
-    @Parameter(property = "docker.resource")
-    private String resource;
-
-    /**
-     * Resource to copy out of the docker container.
-     */
-    @Parameter(property = "docker.targetPath")
-    private String targetPath;
-
-    /**
      * Clean container only in clean.
      */
     @Parameter(defaultValue = "false", property = "docker.cleanContainerOnly")
@@ -299,13 +287,5 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 
     public boolean isCleanContainerOnly() {
         return cleanContainerOnly;
-    }
-
-    public String getResource() {
-        return resource;
-    }
-
-    public String getTargetPath() {
-        return targetPath;
     }
 }
