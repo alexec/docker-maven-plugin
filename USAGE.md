@@ -8,6 +8,7 @@ Goals
 * `start` - start the containers in order and ensures they are running
 * `stop` - stop all running containers for the project
 * `deploy` - push containers to Docker repository
+* `copy` - copy resources from a Docker container
 * `save` - save images to file, optionally deploy to Maven repository
 
 Pre-requisites
@@ -215,3 +216,12 @@ healthChecks:
 ```
 
 This can be turned off by set `exposeContainerIp` to `false` in `conf.yml`
+
+Copy resources from a docker container
+---
+
+The copy command allows you to extract resources from your docker container, allowing you to use docker as a build engine from within maven.
+The resources to copy are specified by `source` and the location to copy to by `dest`. If `source` is a directory then the directory
+contents will be copied. `dest` can be a file or directory, if a directory then the resource names will be preserved.
+
+
