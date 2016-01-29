@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.reflect.Whitebox;
 
+import java.io.File;
 import java.util.Properties;
 
 import static org.mockito.Mockito.mock;
@@ -27,9 +28,17 @@ public class MojoTestSupport {
 
     protected static final String PROJECT_DESCRIPTION = "Project Description";
 
-    protected static final String BUILD_DIRECTORY = "/build/directory";
+    protected static final String BUILD_DIR = "/build/dir";
 
     protected static final String BUILD_FINAL_NAME = "buildFinalName";
+
+    protected static final String BASE_DIR = "src";
+
+    protected static final String SRC = "main";
+
+    protected static final String PREFIX = "prefix";
+
+    protected static final String USERNAME = "username";
 
 
     protected void prepareMojo(
@@ -39,6 +48,9 @@ public class MojoTestSupport {
 
         MavenProject mavenProject = createMavenProject();
         Whitebox.setInternalState(dockerMojo, "project", mavenProject);
+        Whitebox.setInternalState(dockerMojo, "prefix", PREFIX);
+        Whitebox.setInternalState(dockerMojo, "src", SRC);
+        Whitebox.setInternalState(dockerMojo, "username", USERNAME);
 
         // prepare docker client
         if (mockDockerClient != null) {
@@ -72,6 +84,8 @@ public class MojoTestSupport {
         mavenProject.setDescription(PROJECT_DESCRIPTION);
         mavenProject.setBuild(createBuild());
 
+        mavenProject.setFile(new File(new File(BASE_DIR), "file"));
+
         return mavenProject;
     }
 
@@ -79,10 +93,9 @@ public class MojoTestSupport {
 
         Build build = new Build();
 
-        build.setDirectory(BUILD_DIRECTORY);
+        build.setDirectory(BUILD_DIR);
         build.setFinalName(BUILD_FINAL_NAME);
 
         return build;
     }
-
 }
