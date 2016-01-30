@@ -4,18 +4,23 @@ import com.alexecollins.docker.orchestration.DockerOrchestrator;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.VersionCmd;
 import com.github.dockerjava.api.model.Version;
+import com.github.dockerjava.core.DockerClientBuilder;
+import com.github.dockerjava.core.DockerClientConfig;
 import org.apache.maven.model.Build;
 import org.apache.maven.project.MavenProject;
-import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 
 import java.io.File;
 import java.util.Properties;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
+@PrepareForTest(DockerClientBuilder.class)
 public class MojoTestSupport {
 
     protected static final String PROJECT_GROUP_ID = "id.group";
@@ -57,7 +62,11 @@ public class MojoTestSupport {
             VersionCmd mockVersionCmd = mock(VersionCmd.class);
             Version mockVersion = mock(Version.class);
 
-            PowerMockito.doReturn(mockDockerClient).when(dockerMojo, "dockerClient");
+            DockerClientBuilder mockDockerClientBuilder = mock(DockerClientBuilder.class);
+            when(mockDockerClientBuilder.build()).thenReturn(mockDockerClient);
+
+            mockStatic(DockerClientBuilder.class);
+            when(DockerClientBuilder.getInstance(any(DockerClientConfig.class))).thenReturn(mockDockerClientBuilder);
 
             when(mockDockerClient.versionCmd()).thenReturn(mockVersionCmd);
             when(mockVersionCmd.exec()).thenReturn(mockVersion);
@@ -68,8 +77,8 @@ public class MojoTestSupport {
         if (mockDockerOrchestrator != null) {
             PowerMockito.doReturn(mockDockerOrchestrator)
                     .when(dockerMojo, "dockerOrchestrator",
-                            Mockito.any(Properties.class),
-                            Mockito.any(DockerClient.class)
+                            any(Properties.class),
+                            any(DockerClient.class)
                     );
         }
     }

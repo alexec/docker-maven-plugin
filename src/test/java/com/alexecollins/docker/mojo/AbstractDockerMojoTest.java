@@ -64,6 +64,7 @@ public class AbstractDockerMojoTest extends MojoTestSupport {
 
         Set<BuildFlag> buildFlags = Whitebox.getInternalState(capturedOrchestrator, "buildFlags");
         assertNotNull(buildFlags);
+        assertFalse(buildFlags.contains(BuildFlag.REMOVE_INTERMEDIATE_IMAGES));
         assertFalse(buildFlags.contains(BuildFlag.NO_CACHE));
         assertFalse(buildFlags.contains(BuildFlag.PULL));
         assertFalse(buildFlags.contains(BuildFlag.QUIET));
@@ -72,9 +73,11 @@ public class AbstractDockerMojoTest extends MojoTestSupport {
     @Test
     public void testExecutionWithFlags() throws Exception {
         // given
+        Whitebox.setInternalState(dockerMojo, "removeIntermediateImages", true);
         Whitebox.setInternalState(dockerMojo, "cache", false);
         Whitebox.setInternalState(dockerMojo, "quiet", true);
         Whitebox.setInternalState(dockerMojo, "pull", true);
+
 
         ArgumentCaptor<DockerOrchestrator> captor = ArgumentCaptor.forClass(DockerOrchestrator.class);
 
@@ -90,6 +93,7 @@ public class AbstractDockerMojoTest extends MojoTestSupport {
 
         Set<BuildFlag> buildFlags = Whitebox.getInternalState(capturedOrchestrator, "buildFlags");
         assertNotNull(buildFlags);
+        assertTrue(buildFlags.contains(BuildFlag.REMOVE_INTERMEDIATE_IMAGES));
         assertTrue(buildFlags.contains(BuildFlag.NO_CACHE));
         assertTrue(buildFlags.contains(BuildFlag.PULL));
         assertTrue(buildFlags.contains(BuildFlag.QUIET));
