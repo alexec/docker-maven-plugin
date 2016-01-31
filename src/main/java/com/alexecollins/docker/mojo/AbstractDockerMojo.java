@@ -5,7 +5,7 @@ import com.alexecollins.docker.orchestration.ExcludeFilter;
 import com.alexecollins.docker.orchestration.model.BuildFlag;
 import com.alexecollins.docker.util.MavenLogAppender;
 import com.github.dockerjava.api.DockerClient;
-import com.github.dockerjava.api.exception.DockerException;
+import com.github.dockerjava.api.DockerException;
 import com.github.dockerjava.api.command.VersionCmd;
 import com.github.dockerjava.api.model.Version;
 import com.github.dockerjava.core.DockerClientBuilder;

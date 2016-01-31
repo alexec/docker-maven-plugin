@@ -4,17 +4,23 @@ import com.alexecollins.docker.orchestration.DockerOrchestrator;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.VersionCmd;
 import com.github.dockerjava.api.model.Version;
+import com.github.dockerjava.core.DockerClientBuilder;
+import com.github.dockerjava.core.DockerClientConfig;
 import org.apache.maven.model.Build;
 import org.apache.maven.project.MavenProject;
-import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.reflect.Whitebox;
 
+import java.io.File;
 import java.util.Properties;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
+@PrepareForTest(DockerClientBuilder.class)
 public class MojoTestSupport {
 
     protected static final String PROJECT_GROUP_ID = "id.group";
@@ -27,9 +33,17 @@ public class MojoTestSupport {
 
     protected static final String PROJECT_DESCRIPTION = "Project Description";
 
-    protected static final String BUILD_DIRECTORY = "/build/directory";
+    protected static final String BUILD_DIR = "/build/dir";
 
     protected static final String BUILD_FINAL_NAME = "buildFinalName";
+
+    protected static final String BASE_DIR = "src";
+
+    protected static final String SRC = "main";
+
+    protected static final String PREFIX = "prefix";
+
+    protected static final String USERNAME = "username";
 
 
     protected void prepareMojo(
@@ -39,13 +53,20 @@ public class MojoTestSupport {
 
         MavenProject mavenProject = createMavenProject();
         Whitebox.setInternalState(dockerMojo, "project", mavenProject);
+        Whitebox.setInternalState(dockerMojo, "prefix", PREFIX);
+        Whitebox.setInternalState(dockerMojo, "src", SRC);
+        Whitebox.setInternalState(dockerMojo, "username", USERNAME);
 
         // prepare docker client
         if (mockDockerClient != null) {
             VersionCmd mockVersionCmd = mock(VersionCmd.class);
             Version mockVersion = mock(Version.class);
 
-            PowerMockito.doReturn(mockDockerClient).when(dockerMojo, "dockerClient");
+            DockerClientBuilder mockDockerClientBuilder = mock(DockerClientBuilder.class);
+            when(mockDockerClientBuilder.build()).thenReturn(mockDockerClient);
+
+            mockStatic(DockerClientBuilder.class);
+            when(DockerClientBuilder.getInstance(any(DockerClientConfig.class))).thenReturn(mockDockerClientBuilder);
 
             when(mockDockerClient.versionCmd()).thenReturn(mockVersionCmd);
             when(mockVersionCmd.exec()).thenReturn(mockVersion);
@@ -56,8 +77,8 @@ public class MojoTestSupport {
         if (mockDockerOrchestrator != null) {
             PowerMockito.doReturn(mockDockerOrchestrator)
                     .when(dockerMojo, "dockerOrchestrator",
-                            Mockito.any(Properties.class),
-                            Mockito.any(DockerClient.class)
+                            any(Properties.class),
+                            any(DockerClient.class)
                     );
         }
     }
@@ -72,6 +93,8 @@ public class MojoTestSupport {
         mavenProject.setDescription(PROJECT_DESCRIPTION);
         mavenProject.setBuild(createBuild());
 
+        mavenProject.setFile(new File(new File(BASE_DIR), "file"));
+
         return mavenProject;
     }
 
@@ -79,10 +102,9 @@ public class MojoTestSupport {
 
         Build build = new Build();
 
-        build.setDirectory(BUILD_DIRECTORY);
+        build.setDirectory(BUILD_DIR);
         build.setFinalName(BUILD_FINAL_NAME);
 
         return build;
     }
-
 }
