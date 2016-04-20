@@ -9,9 +9,9 @@ Why should you use this one in preference to other plugins?
 * Focused on building and testing containers.
 * Automatically sets up Boot2Docker port forwarding.
 
-Plugin                                                    | Stars | Forks | Last Updated (as of  Jul 1) |
---------------------------------------------------------- | ----- | ----- | ------------ |
-[https://github.com/rhuss/docker-maven-plugin]            |   156 |    63 |    Jun 16, 2015 
-[https://github.com/spotify/docker-maven-plugin]          |   150 |    59 |    Jun 22, 2015 
-[https://github.com/alexec/docker-maven-plugin]           |    68 |    29 |    Jun 12, 2015 
-[https://github.com/wouterd/docker-maven-plugin]          |    42 |    17 |    Jun 29, 2015 
+Plugin                                                    | Stars | Forks 
+--------------------------------------------------------- | ----- | ----- 
+[https://github.com/spotify/docker-maven-plugin]          |   448 |   141 
+[https://github.com/fabric8io/docker-maven-plugin]        |   345 |   143
+[https://github.com/alexec/docker-maven-plugin]           |    84 |    39
+[https://github.com/wouterd/docker-maven-plugin]          |    67 |    24 
