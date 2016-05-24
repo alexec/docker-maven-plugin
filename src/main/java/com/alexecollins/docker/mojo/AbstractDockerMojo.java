@@ -129,12 +129,6 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private String cfgPath;
 
     /**
-     * Clean container only in clean.
-     */
-    @Parameter(defaultValue = "false", property = "docker.cleanContainerOnly")
-    private boolean cleanContainerOnly;
-
-    /**
      * Do auto detection on the docker version.
      */
     @Parameter(defaultValue = "true", property = "docker.versionAutoDetect")
@@ -286,7 +280,5 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 
     protected abstract void doExecute(DockerOrchestrator orchestrator) throws Exception;
 
-    public boolean isCleanContainerOnly() {
-        return cleanContainerOnly;
-    }
+
 }
