@@ -10,6 +10,7 @@ Goals
 * `deploy` - push containers to Docker repository
 * `copy` - copy resources from a Docker container
 * `save` - save images to file, optionally deploy to Maven repository
+* `log` - save logs.
 
 Pre-requisites
 ---
