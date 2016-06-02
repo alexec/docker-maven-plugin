@@ -111,8 +111,9 @@ Add the following to the `pom.xml` plugins section.
         <!-- out of the box, you shoud not need to have these, as they'll use sensible defaults -->
         <!-- (optional) your installed version -->
         <version>1.13</version>
-        <!-- (optional) if you want to push to a private repo -->
+        <!-- (optional) if you want to push to a private repo, all of these are required if using artifactory -->
         <username>alexec</username>
+        <password>password</password>
         <email>alex.e.c@gmail.com</email>
         <serverAddress>https://index.docker.io/v1/</serverAddress>
         <!-- (optional) change here if you are using another port/host, e.g. 4243 -->
