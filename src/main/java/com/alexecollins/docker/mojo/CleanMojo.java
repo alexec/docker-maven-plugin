@@ -18,12 +18,19 @@ public class CleanMojo extends AbstractDockerMojo {
     @Parameter(defaultValue = "false", property = "docker.cleanContainerOnly")
     private boolean cleanContainerOnly;
 
+    /**
+     * Clean with docker force flag
+     */
+    @Parameter(defaultValue = "false", property = "docker.forceClean")
+    private boolean forceClean;
+
+
     @Override
     protected void doExecute(DockerOrchestrator orchestrator) {
-        if (isCleanContainerOnly()) {
+        if (isCleanContainerOnly(forceClean)) {
             orchestrator.cleanContainers();
         } else {
-            orchestrator.clean();
+            orchestrator.clean(forceClean);
         }
     }
 
