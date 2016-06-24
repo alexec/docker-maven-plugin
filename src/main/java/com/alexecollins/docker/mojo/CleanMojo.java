@@ -27,10 +27,10 @@ public class CleanMojo extends AbstractDockerMojo {
 
     @Override
     protected void doExecute(DockerOrchestrator orchestrator) {
-        if (isCleanContainerOnly(forceClean)) {
-            orchestrator.cleanContainers();
+        if (isCleanContainerOnly()) {
+            orchestrator.cleanContainers(isForceClean());
         } else {
-            orchestrator.clean(forceClean);
+            orchestrator.clean(isForceClean());
         }
     }
 
@@ -40,5 +40,13 @@ public class CleanMojo extends AbstractDockerMojo {
 
     void setCleanContainerOnly(boolean cleanContainerOnly) {
         this.cleanContainerOnly = cleanContainerOnly;
+    }
+
+    boolean isForceClean() {
+        return forceClean;
+    }
+
+    void setForceClean(boolean forceClean) {
+        this.forceClean = forceClean;
     }
 }
