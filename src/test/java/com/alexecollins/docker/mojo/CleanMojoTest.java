@@ -15,6 +15,7 @@ import org.powermock.reflect.Whitebox;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(CleanMojo.class)
@@ -42,8 +43,22 @@ public class CleanMojoTest extends MojoTestSupport {
         // then
         verify(cleanMojo).doExecute(mockDockerOrchestrator);
         verify(mockDockerOrchestrator, never()).cleanContainers();
-        verify(mockDockerOrchestrator).clean();
+        verify(mockDockerOrchestrator).clean(false);
     }
+
+    @Test
+    public void testCleanForce() throws Exception {
+        when(cleanMojo.isForceClean()).thenReturn(Boolean.TRUE);
+
+        // when
+        cleanMojo.execute();
+
+        // then
+        verify(cleanMojo).doExecute(mockDockerOrchestrator);
+        verify(mockDockerOrchestrator, never()).cleanContainers();
+        verify(mockDockerOrchestrator).clean(true);
+    }
+
 
     @Test
     public void testCleanContainers() throws MojoFailureException, MojoExecutionException {
@@ -55,7 +70,7 @@ public class CleanMojoTest extends MojoTestSupport {
 
         // then
         verify(cleanMojo).doExecute(mockDockerOrchestrator);
-        verify(mockDockerOrchestrator).cleanContainers();
+        verify(mockDockerOrchestrator).cleanContainers(false);
         verify(mockDockerOrchestrator, never()).clean();
     }
 }
