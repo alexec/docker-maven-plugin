@@ -87,7 +87,7 @@
         <dependency>
             <groupId>com.alexecollins.docker</groupId>
             <artifactId>docker-java-orchestration-core</artifactId>
-            <version>2.11.17-SNAPSHOT</version>
+            <version>2.11.17</version>
         </dependency>
         <!-- plugin -->
         <dependency>
