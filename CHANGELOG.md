@@ -1,15 +1,37 @@
 # Change Log
 
-## [Unreleased](https://github.com/alexec/docker-maven-plugin/tree/HEAD)
+## [docker-maven-plugin-2.11.17](https://github.com/alexec/docker-maven-plugin/tree/docker-maven-plugin-2.11.17) (2016-08-13)
+[Full Changelog](https://github.com/alexec/docker-maven-plugin/compare/docker-maven-plugin-2.11.16...docker-maven-plugin-2.11.17)
 
-[Full Changelog](https://github.com/alexec/docker-maven-plugin/compare/docker-maven-plugin-2.11.13...HEAD)
+## [docker-maven-plugin-2.11.16](https://github.com/alexec/docker-maven-plugin/tree/docker-maven-plugin-2.11.16) (2016-07-24)
+[Full Changelog](https://github.com/alexec/docker-maven-plugin/compare/docker-maven-plugin-2.11.15...docker-maven-plugin-2.11.16)
+
+**Closed issues:**
+
+- Cannot build after force-delete merged [\#104](https://github.com/alexec/docker-maven-plugin/issues/104)
+
+## [docker-maven-plugin-2.11.15](https://github.com/alexec/docker-maven-plugin/tree/docker-maven-plugin-2.11.15) (2016-07-03)
+[Full Changelog](https://github.com/alexec/docker-maven-plugin/compare/docker-maven-plugin-2.11.14...docker-maven-plugin-2.11.15)
+
+**Merged pull requests:**
+
+- Port to docker-java 3.0.0-SNAPSHOT [\#106](https://github.com/alexec/docker-maven-plugin/pull/106) ([marcust](https://github.com/marcust))
+- Clean flag \(fixees \#104\) [\#105](https://github.com/alexec/docker-maven-plugin/pull/105) ([marcust](https://github.com/marcust))
+
+## [docker-maven-plugin-2.11.14](https://github.com/alexec/docker-maven-plugin/tree/docker-maven-plugin-2.11.14) (2016-06-23)
+[Full Changelog](https://github.com/alexec/docker-maven-plugin/compare/docker-maven-plugin-2.11.13...docker-maven-plugin-2.11.14)
 
 **Fixed bugs:**
 
 - Deletion of Images with Multiple Tags Fails [\#96](https://github.com/alexec/docker-maven-plugin/issues/96)
 
+**Closed issues:**
+
+- small typo in your title... [\#102](https://github.com/alexec/docker-maven-plugin/issues/102)
+
 **Merged pull requests:**
 
+- Make force image delete optional [\#103](https://github.com/alexec/docker-maven-plugin/pull/103) ([marcust](https://github.com/marcust))
 - Update readme with notes regarding artifactory [\#99](https://github.com/alexec/docker-maven-plugin/pull/99) ([lorijoan](https://github.com/lorijoan))
 
 ## [docker-maven-plugin-2.11.13](https://github.com/alexec/docker-maven-plugin/tree/docker-maven-plugin-2.11.13) (2016-05-24)
