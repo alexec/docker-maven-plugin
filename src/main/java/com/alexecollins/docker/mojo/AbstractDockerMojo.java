@@ -10,6 +10,7 @@ import com.github.dockerjava.api.exception.DockerException;
 import com.github.dockerjava.api.model.Version;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -123,7 +124,9 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     private String certificatePath;
 
     /**
-     * Specify the docker configuration path. Defaults to not being set.
+     * Specify the docker configuration path. By default it tries to find the config.json in $HOME/.docker.
+     * If not existent it falls back to the legacy .dockercfg and tries to find it in the $HOME folder.
+     *
      * Will look for a file called .dockercfg (legacy) or a file called config.json in the given path for
      * authentication.
      */
@@ -202,6 +205,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
     }
 
     private DockerClient dockerClient() throws DockerException {
+        final String currentUsersHomeDir = System.getProperty("user.home");
         DefaultDockerClientConfig.Builder builder = DefaultDockerClientConfig.createDefaultConfigBuilder();
         if (host != null) {
             builder = builder.withDockerHost(host);
@@ -226,6 +230,17 @@ abstract class AbstractDockerMojo extends AbstractMojo {
         }
         if (cfgPath != null) {
             builder = builder.withDockerConfig(cfgPath);
+        } else if (StringUtils.isNotBlank(currentUsersHomeDir)) {
+            final File legacyCfgFile = new File(currentUsersHomeDir + "/.dockercfg");
+            final File cfgFile = new File(currentUsersHomeDir + "/.docker/config.json");
+
+            if (cfgFile.exists()) {
+                getLog().info("Using configuration file: " + cfgFile.getAbsolutePath());
+                builder = builder.withDockerConfig(currentUsersHomeDir + "/.docker");
+            } else if (legacyCfgFile.exists()) {
+                getLog().info("Using legacy configuration file: " + legacyCfgFile.getAbsolutePath());
+                builder = builder.withDockerConfig(currentUsersHomeDir);
+            }
         }
 
         if (versionAutoDetect) {
