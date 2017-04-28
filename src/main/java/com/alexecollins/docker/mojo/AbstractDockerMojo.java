@@ -124,7 +124,7 @@ abstract class AbstractDockerMojo extends AbstractMojo {
 
     /**
      * Specify the docker configuration path. Defaults to not being set.
-     * Will look for a file called .dockercfg in the given path for
+     * Will look for a file called .dockercfg (legacy) or a file called config.json in the given path for
      * authentication.
      */
     @Parameter(property = "docker.cfgPath")
