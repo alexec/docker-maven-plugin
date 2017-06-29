@@ -3,6 +3,10 @@
 [![Circle CI](https://circleci.com/gh/alexec/docker-maven-plugin.svg?style=svg)](https://circleci.com/gh/alexec/docker-maven-plugin)
 -->
 
+
+**WARNING!!! This project is no longer actively maintained. Please see [this ticket](https://github.com/alexec/docker-maven-plugin/issues/118) for reasons and alternatives.**
+
+
 Docker Maven Plugin
 ===
 
